@@ -1,0 +1,142 @@
+{
+  "family": {
+    "heading": {
+      "$type": "string",
+      "$value": "Geist"
+    },
+    "body": {
+      "$type": "string",
+      "$value": "Geist"
+    },
+    "caption": {
+      "$type": "string",
+      "$value": "Geist"
+    },
+    "label": {
+      "$type": "string",
+      "$value": "Geist"
+    }
+  },
+  "weight": {
+    "regular": {
+      "$type": "string",
+      "$value": "regular"
+    },
+    "semibold": {
+      "$type": "string",
+      "$value": "semibold"
+    },
+    "bold": {
+      "$type": "string",
+      "$value": "bold"
+    }
+  },
+  "size": {
+    "2xs": {
+      "$type": "number",
+      "$value": 8
+    },
+    "xs": {
+      "$type": "number",
+      "$value": 10
+    },
+    "sm": {
+      "$type": "number",
+      "$value": 12
+    },
+    "md": {
+      "$type": "number",
+      "$value": 14
+    },
+    "lg": {
+      "$type": "number",
+      "$value": 16
+    },
+    "xl": {
+      "$type": "number",
+      "$value": 18
+    },
+    "2xl": {
+      "$type": "number",
+      "$value": 20
+    },
+    "3xl": {
+      "$type": "number",
+      "$value": 24
+    },
+    "4xl": {
+      "$type": "number",
+      "$value": 30
+    },
+    "5xl": {
+      "$type": "number",
+      "$value": 38
+    },
+    "6xl": {
+      "$type": "number",
+      "$value": 48
+    },
+    "7xl": {
+      "$type": "number",
+      "$value": 56
+    },
+    "8xl": {
+      "$type": "number",
+      "$value": 64
+    }
+  },
+  "line-height": {
+    "2xs": {
+      "$type": "number",
+      "$value": 16
+    },
+    "xs": {
+      "$type": "number",
+      "$value": 18
+    },
+    "sm": {
+      "$type": "number",
+      "$value": 20
+    },
+    "md": {
+      "$type": "number",
+      "$value": 22
+    },
+    "lg": {
+      "$type": "number",
+      "$value": 24
+    },
+    "xl": {
+      "$type": "number",
+      "$value": 26
+    },
+    "2xl": {
+      "$type": "number",
+      "$value": 28
+    },
+    "3xl": {
+      "$type": "number",
+      "$value": 32
+    },
+    "4xl": {
+      "$type": "number",
+      "$value": 38
+    },
+    "5xl": {
+      "$type": "number",
+      "$value": 46
+    },
+    "6xl": {
+      "$type": "number",
+      "$value": 56
+    },
+    "7xl": {
+      "$type": "number",
+      "$value": 64
+    },
+    "8xl": {
+      "$type": "number",
+      "$value": 72
+    }
+  }
+}

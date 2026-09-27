@@ -1,0 +1,37 @@
+{
+  "name": "halo-design-system",
+  "private": true,
+  "description": "Halo — an open-source design system for designers and developers.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "pnpm build:tokens && pnpm --filter docs dev",
+    "build": "pnpm -r build",
+    "build:tokens": "pnpm --filter @halo-ds/tokens build",
+    "build:docs": "pnpm build:tokens && pnpm --filter docs build",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "@typescript/typescript6": "^6.0.2",
+    "typescript": "^7.0.2"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0",
+      "onFail": "download"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chidindu06F/Halo-design-system.git"
+  },
+  "homepage": "https://github.com/Chidindu06F/Halo-design-system#readme",
+  "bugs": {
+    "url": "https://github.com/Chidindu06F/Halo-design-system/issues"
+  }
+}

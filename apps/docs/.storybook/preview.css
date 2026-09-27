@@ -1,0 +1,7 @@
+/* Story canvas follows the active Halo theme */
+html,
+body {
+  background: var(--halo-surface-primary);
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+}

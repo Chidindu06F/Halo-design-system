@@ -1,0 +1,52 @@
+# @halo-ds/tokens
+
+Halo's design tokens as CSS variables, JSON and JS — generated from the Halo Figma variables.
+
+```bash
+npm install @halo-ds/tokens
+```
+
+```js
+import '@halo-ds/tokens/css';           // all CSS variables, light + dark
+import { vars, tokens } from '@halo-ds/tokens';
+
+vars['surface-primary'];                // "var(--halo-surface-primary)"
+```
+
+## Themes
+
+| `data-theme` on `<html>` | Result |
+| --- | --- |
+| none / `light` | Light |
+| `dark` | Dark |
+| `system` | Follows the operating system |
+
+## Updating tokens from Figma
+
+The files in `figma/` are exports straight from Figma. To update them:
+
+1. In Figma, open **Local variables**.
+2. For each collection (**Primitives**, **Semantic**, **Typography**), right-click the collection → **Export modes**.
+3. Replace the matching files in `figma/`, keeping the folder-per-collection layout:
+   ```
+   figma/Primitives/Default.tokens.json
+   figma/Semantic/Light.tokens.json
+   figma/Semantic/Dark.tokens.json
+   figma/Typography/Default.tokens.json
+   ```
+   (If Figma names a file `Mode 1.tokens.json`, that's fine — single-mode files work with any name.)
+4. Run `pnpm build:tokens` from the repo root and check Storybook → Foundations.
+
+## Naming
+
+Figma variable → CSS variable:
+
+| Figma | CSS |
+| --- | --- |
+| `surface/primary` | `--halo-surface-primary` |
+| `colours/purple/300` | `--halo-color-purple-300` |
+| `spacing/spacing-md` | `--halo-spacing-md` |
+| `size/md` (Typography) | `--halo-font-size-md` (rem) |
+| `weight/semibold` | `--halo-font-weight-semibold` (600) |
+
+The same names are set as **code syntax** on each Figma variable, so Dev Mode shows the CSS variable.

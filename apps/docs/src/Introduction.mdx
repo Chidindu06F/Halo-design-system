@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Halo Design System
+
+Halo is an open-source design system for designers and developers — a Figma library and a React component library built from the same design tokens.
+
+## Install
+
+```bash
+npm install @halo-ds/react @halo-ds/tokens
+```
+
+```tsx
+import '@halo-ds/tokens/css';
+import { Button } from '@halo-ds/react'; // components are being added — see Components in the sidebar
+```
+
+## Light and dark mode
+
+Set `data-theme` on the `<html>` element:
+
+| Value | Result |
+| --- | --- |
+| *(none)* or `light` | Light mode |
+| `dark` | Dark mode |
+| `system` | Follows the user's operating-system setting |
+
+```html
+<html data-theme="system">
+```
+
+## Using tokens directly
+
+Every token is a CSS variable prefixed with `--halo-`:
+
+```css
+.card {
+  background: var(--halo-surface-primary);
+  color: var(--halo-text-primary);
+  border: 1px solid var(--halo-border-secondary);
+  border-radius: var(--halo-radius-sm);
+  padding: var(--halo-spacing-md);
+}
+```
+
+See **Foundations** in the sidebar for every token, and use the theme switcher in the toolbar to preview light and dark mode.
