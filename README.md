@@ -2,6 +2,8 @@
 
 An open-source design system for designers and developers — a Figma library and a React component library built from the same design tokens, with light and dark mode.
 
+**📖 Docs & component playground: https://chidindu06f.github.io/Halo-design-system/**
+
 > **Status:** early development. Foundations (color, typography, spacing, radius) are in place; components are being added.
 
 ## Packages
