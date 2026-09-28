@@ -74,4 +74,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). The Figma library also includes emojis, icons, flags and brand logos from other open-source projects; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for their licences and required credits.
