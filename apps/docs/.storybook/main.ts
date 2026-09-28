@@ -6,6 +6,7 @@ const config: StorybookConfig = {
     '../src/**/*.stories.@(ts|tsx)',
     '../../../packages/react/src/**/*.stories.@(ts|tsx)',
   ],
+  staticDirs: ['../public'],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: '@storybook/react-vite',
   core: { disableTelemetry: true },

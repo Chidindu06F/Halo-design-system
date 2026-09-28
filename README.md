@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="apps/docs/public/logo-dark.svg">
+  <img alt="Halo Design System" src="apps/docs/public/logo.svg" height="48">
+</picture>
+
 # Halo Design System
 
 An open-source design system for designers and developers — a Figma library and a React component library built from the same design tokens, with light and dark mode.
