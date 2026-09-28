@@ -1,6 +1,6 @@
 # @halo-ds/tokens
 
-Halo's design tokens as CSS variables, JSON and JS — generated from the Halo Figma variables.
+Halo's design tokens as CSS variables, JSON and JS, generated from the Halo Figma variables.
 
 ```bash
 npm install @halo-ds/tokens
@@ -34,7 +34,7 @@ The files in `figma/` are exports straight from Figma. To update them:
    figma/Semantic/Dark.tokens.json
    figma/Typography/Default.tokens.json
    ```
-   (If Figma names a file `Mode 1.tokens.json`, that's fine — single-mode files work with any name.)
+   (If Figma names a file `Mode 1.tokens.json`, that's fine: single-mode files work with any name.)
 4. Run `pnpm build:tokens` from the repo root and check Storybook → Foundations.
 
 ## Naming

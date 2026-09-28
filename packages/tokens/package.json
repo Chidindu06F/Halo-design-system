@@ -1,7 +1,7 @@
 {
   "name": "@halo-ds/tokens",
   "version": "0.0.0",
-  "description": "Design tokens for the Halo design system — CSS variables for light and dark mode, generated from Figma.",
+  "description": "Design tokens for the Halo design system: CSS variables for light and dark mode, generated from Figma.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

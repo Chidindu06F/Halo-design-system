@@ -1,7 +1,7 @@
 {
   "name": "halo-design-system",
   "private": true,
-  "description": "Halo — an open-source design system for designers and developers.",
+  "description": "Halo, an open-source design system for designers and developers.",
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@12.6.0",

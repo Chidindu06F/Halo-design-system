@@ -5,7 +5,7 @@
 
 # Halo Design System
 
-An open-source design system for designers and developers — a Figma library and a React component library built from the same design tokens, with light and dark mode.
+An open-source design system for designers and developers: a Figma library and a React component library built from the same design tokens, with light and dark mode.
 
 **📖 Docs & component playground: https://chidindu06f.github.io/Halo-design-system/**
 
@@ -15,9 +15,9 @@ An open-source design system for designers and developers — a Figma library an
 
 | Package | Description |
 | --- | --- |
-| [`@halo-ds/tokens`](packages/tokens) | Design tokens as CSS variables (light + dark), JSON and JS — generated from Figma |
+| [`@halo-ds/tokens`](packages/tokens) | Design tokens as CSS variables (light + dark), JSON and JS, generated from Figma |
 | [`@halo-ds/react`](packages/react) | React components |
-| [`docs`](apps/docs) | Storybook — live documentation and component playground |
+| [`docs`](apps/docs) | Storybook: live documentation and component playground |
 
 ## Using Halo
 

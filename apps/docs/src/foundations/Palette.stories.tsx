@@ -8,7 +8,7 @@ function Palette() {
   return (
     <Page
       title="Palette"
-      lead="Primitive colors — the raw ramps that semantic tokens point to. Don't use these directly in components; they're hidden from Figma's pickers for the same reason."
+      lead="Primitive colors: the raw ramps that semantic tokens point to. Don't use these directly in components; they're hidden from Figma's pickers for the same reason."
     >
       {[...families].map(([family, ramp]) => (
         <Section key={family} title={family}>

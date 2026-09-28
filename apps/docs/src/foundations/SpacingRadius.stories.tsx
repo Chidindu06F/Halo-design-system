@@ -45,16 +45,16 @@ function SpacingRadius() {
       title="Spacing & Radius"
       lead="Use the semantic sizes (xs–xl) in components. The numbered scale is available when you need a step in between."
     >
-      <Section title="Spacing — semantic">
+      <Section title="Spacing: semantic">
         {pick('Semantic', 'spacing/').map((t) => <SpacingRow key={t.name} t={t} />)}
       </Section>
-      <Section title="Spacing — scale">
+      <Section title="Spacing: scale">
         {pick('Primitives', 'spacing/').map((t) => <SpacingRow key={t.name} t={t} />)}
       </Section>
-      <Section title="Radius — semantic">
+      <Section title="Radius: semantic">
         <RadiusGrid items={pick('Semantic', 'radius/')} />
       </Section>
-      <Section title="Radius — scale">
+      <Section title="Radius: scale">
         <RadiusGrid items={pick('Primitives', 'radius/')} />
       </Section>
     </Page>

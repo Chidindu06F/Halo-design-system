@@ -42,7 +42,7 @@ function Colors() {
   return (
     <Page
       title="Colors"
-      lead="Semantic color tokens. Always use these in components — never raw palette colors — so light and dark mode work automatically. Use the theme switcher in the toolbar to preview each mode."
+      lead="Semantic color tokens. Always use these in components (never raw palette colors) so light and dark mode work automatically. Use the theme switcher in the toolbar to preview each mode."
     >
       {[...groups].map(([group, items]) => (
         <Section key={group} title={group}>

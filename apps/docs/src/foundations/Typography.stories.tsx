@@ -53,7 +53,7 @@ function Typography() {
             <div key={t.name} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
               <span style={{ fontSize: 24, fontWeight: `var(${t.cssVar})` as never, minWidth: 260 }}>The quick brown fox</span>
               <Code>
-                {t.cssVar} — {String(t.values.default)}
+                {t.cssVar}: {String(t.values.default)}
               </Code>
             </div>
           ))}
