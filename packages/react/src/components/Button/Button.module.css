@@ -28,7 +28,11 @@
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 120ms ease, box-shadow 120ms ease;
+  /* Release springs back with a slight overshoot, so the button "bounces" */
+  transition:
+    background-color 120ms ease,
+    box-shadow 180ms ease,
+    transform 320ms cubic-bezier(0.34, 1.8, 0.64, 1);
 }
 
 .label {
@@ -55,6 +59,21 @@
 .button:active:not(:disabled) {
   --outline: transparent;
   background: var(--bg-hover);
+}
+
+/* Press: shrink quickly while held down */
+.button:active:not(:disabled) {
+  transform: scale(0.95);
+  transition-duration: 120ms, 180ms, 90ms;
+  transition-timing-function: ease, ease, ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button:active:not(:disabled) {
+    transform: none;
+    transition: background-color 120ms ease, box-shadow 120ms ease;
+  }
 }
 
 .button:focus-visible {
