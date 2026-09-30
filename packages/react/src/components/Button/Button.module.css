@@ -1,0 +1,147 @@
+/* Values mirror the Button component set in Figma (Button page). */
+
+.button {
+  /* Set per variant and size below */
+  --bg: transparent;
+  --bg-hover: transparent;
+  --fg: var(--halo-text-primary);
+  --icon: var(--halo-icon-primary);
+  --outline: transparent;
+  --ring: var(--halo-border-focus);
+  --pad: var(--halo-spacing-4);
+  --icon-size: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--halo-spacing-2);
+  padding: var(--pad);
+  border: 0;
+  border-radius: var(--halo-radius-xl);
+  background: var(--bg);
+  color: var(--fg);
+  /* Figma "outside" stroke: drawn outside the box, so it doesn't change the size */
+  box-shadow: 0 0 0 1px var(--outline);
+  font-family: var(--halo-font-family-label);
+  font-weight: var(--halo-font-weight-semibold);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.label {
+  padding-inline: var(--halo-spacing-2);
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--icon);
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- States ---------- */
+
+/* Hover and Pressed share one colour */
+.button:hover:not(:disabled),
+.button:active:not(:disabled) {
+  --outline: transparent;
+  background: var(--bg-hover);
+}
+
+.button:focus-visible {
+  outline: none;
+  /* 2px gap in the page colour, then a 2px ring */
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--ring);
+}
+
+.button:disabled {
+  --bg: var(--halo-button-disabled);
+  --fg: var(--halo-text-disabled);
+  --icon: var(--halo-icon-disabled);
+  --outline: transparent;
+  cursor: not-allowed;
+}
+
+/* ---------- Types ---------- */
+
+.primary {
+  --bg: var(--halo-button-primary);
+  --bg-hover: var(--halo-button-primary-hover);
+  --fg: var(--halo-text-on-brand);
+  --icon: var(--halo-icon-on-brand);
+}
+
+.secondary {
+  --bg: var(--halo-button-secondary);
+  --bg-hover: var(--halo-button-secondary-hover);
+  --outline: var(--halo-border-secondary);
+}
+
+.ghost {
+  --bg-hover: var(--halo-button-secondary-hover);
+}
+
+.ghost:focus-visible {
+  background: var(--halo-surface-primary);
+}
+
+.ghost:disabled {
+  --bg: transparent;
+}
+
+.destructive {
+  --bg: var(--halo-button-destructive);
+  --bg-hover: var(--halo-button-destructive-hover);
+  --fg: var(--halo-text-on-negative);
+  --icon: var(--halo-icon-on-negative);
+  --ring: var(--halo-border-focus-destructive);
+}
+
+/* ---------- Sizes ---------- */
+/* Buttons hug their content. Padding is equal on all sides and, like the font, shrinks with each size.
+   Text and icon-only buttons share a height: 28 / 32 / 40 / 48. */
+
+.xs {
+  --pad: var(--halo-spacing-2);
+  --icon-size: 16px;
+  font-size: var(--halo-font-size-sm);
+  line-height: var(--halo-line-height-sm);
+}
+
+.sm {
+  --pad: var(--halo-spacing-3);
+  --icon-size: 16px;
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-sm);
+}
+
+.md {
+  --pad: var(--halo-spacing-4);
+  --icon-size: 20px;
+  font-size: var(--halo-font-size-lg);
+  line-height: var(--halo-line-height-lg);
+}
+
+.lg {
+  --pad: var(--halo-spacing-6);
+  --icon-size: 24px;
+  font-size: var(--halo-font-size-xl);
+  line-height: var(--halo-line-height-lg);
+}
+
+/* Icon-only buttons are circles */
+.iconOnly.xs { --pad: var(--halo-spacing-3); }
+.iconOnly.sm { --pad: var(--halo-spacing-4); }
+.iconOnly.md { --pad: var(--halo-spacing-5); }
+.iconOnly.lg { --pad: var(--halo-spacing-6); }
