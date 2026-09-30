@@ -34,7 +34,14 @@ for (const dir of fs.readdirSync(SRC, { withFileTypes: true })) {
       tokens.get(name).byMode[mode] = parseValue(collection, tok);
     });
   }
-  collections.set(collection, { modes, tokens });
+  // Breakpoint collections (e.g. Layout): modes are screen sizes, ordered by min-width.
+  const bp = tokens.get('breakpoint/min-width');
+  let breakpoints = null;
+  if (bp) {
+    breakpoints = Object.fromEntries(modes.map((m) => [m, bp.byMode[m].raw]));
+    modes.sort((a, b) => breakpoints[a] - breakpoints[b]);
+  }
+  collections.set(collection, { modes, tokens, breakpoints });
 }
 
 function rank(mode) {
@@ -98,6 +105,7 @@ function formatRaw(t, raw, alpha) {
   if (t.type === 'color') return alpha < 1 ? hexAlpha(raw, alpha) : raw;
   if (t.type === 'number') {
     if (raw === 0) return '0';
+    if (/(^|\/)columns$/.test(t.name)) return String(raw);
     const typographic = t.collection === 'Typography' && /^(size|line-height)\//.test(t.name);
     return typographic ? `${round(raw / 16)}rem` : `${raw}px`;
   }
@@ -127,14 +135,20 @@ const block = (selector, lines) => `${selector} {\n${lines.map((l) => `  ${l}`).
 
 const rootLines = ['color-scheme: light;'];
 const themed = []; // [modeName, lines]
+const responsive = []; // [minWidth, lines]
 for (const [, c] of collections) {
   const [base, ...others] = c.modes;
   for (const t of c.tokens.values()) rootLines.push(`${cssVar(t)}: ${cssValue(t, base)};`);
+  let prev = base;
   for (const mode of others) {
+    // Breakpoints build on the previous (smaller) one; themes build on the base mode.
+    const from = c.breakpoints ? prev : base;
     const lines = [...c.tokens.values()]
-      .filter((t) => cssValue(t, mode) !== cssValue(t, base))
+      .filter((t) => cssValue(t, mode) !== cssValue(t, from))
       .map((t) => `${cssVar(t)}: ${cssValue(t, mode)};`);
-    themed.push([mode.toLowerCase(), lines]);
+    if (c.breakpoints) responsive.push([c.breakpoints[mode], lines]);
+    else themed.push([mode.toLowerCase(), lines]);
+    prev = mode;
   }
 }
 
@@ -147,6 +161,10 @@ for (const [mode, lines] of themed) {
     const inner = block('[data-theme="system"]', [...scheme, ...lines]).replace(/^/gm, '  ').trimEnd();
     css += `\n@media (prefers-color-scheme: dark) {\n${inner}\n}\n`;
   }
+}
+for (const [minWidth, lines] of responsive) {
+  const inner = block(':root', lines).replace(/^/gm, '  ').trimEnd();
+  css += `\n@media (min-width: ${minWidth}px) {\n${inner}\n}\n`;
 }
 
 const modesOf = (t) => collections.get(t.collection).modes;

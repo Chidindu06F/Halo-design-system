@@ -18,7 +18,7 @@ const preview: Preview = {
     backgrounds: { disable: true },
     a11y: { test: 'todo' },
     options: {
-      storySort: { order: ['Introduction', 'Foundations', ['Colors', 'Palette', 'Typography', 'Spacing & Radius'], 'Components'] },
+      storySort: { order: ['Introduction', 'Foundations', ['Colors', 'Palette', 'Typography', 'Spacing & Radius', 'Grid & Layout'], 'Components'] },
     },
   },
 };

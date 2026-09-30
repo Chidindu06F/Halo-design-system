@@ -1,0 +1,40 @@
+{
+  "breakpoint": {
+    "min-width": {
+      "$type": "number",
+      "$value": 1440
+    }
+  },
+  "grid": {
+    "columns": {
+      "$type": "number",
+      "$value": 12
+    },
+    "gutter": {
+      "$type": "number",
+      "$value": 24,
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "spacing/spacing-9",
+          "targetVariableSetName": "Primitives"
+        }
+      }
+    },
+    "margin": {
+      "$type": "number",
+      "$value": 80,
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "spacing/spacing-12",
+          "targetVariableSetName": "Primitives"
+        }
+      }
+    }
+  },
+  "container": {
+    "max-width": {
+      "$type": "number",
+      "$value": 1280
+    }
+  }
+}

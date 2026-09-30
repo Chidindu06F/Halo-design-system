@@ -48,5 +48,17 @@ Figma variable → CSS variable:
 | `spacing/spacing-md` | `--halo-spacing-md` |
 | `size/md` (Typography) | `--halo-font-size-md` (rem) |
 | `weight/semibold` | `--halo-font-weight-semibold` (600) |
+| `grid/columns` (Layout) | `--halo-grid-columns` (4, 8 or 12, changes at each breakpoint) |
+
+## Breakpoints
+
+The **Layout** collection has one mode per screen size. Its values start at the Mobile size and are overridden with `@media (min-width: …)` at 600px (Tablet), 1,024px (Desktop) and 1,440px (Wide):
+
+| Token | Mobile | Tablet | Desktop | Wide |
+| --- | --- | --- | --- | --- |
+| `--halo-grid-columns` | 4 | 8 | 12 | 12 |
+| `--halo-grid-gutter` | 16px | 24px | 24px | 24px |
+| `--halo-grid-margin` | 16px | 24px | 40px | 80px |
+| `--halo-container-max-width` | 1280px | 1280px | 1280px | 1280px |
 
 The same names are set as **code syntax** on each Figma variable, so Dev Mode shows the CSS variable.
