@@ -1,0 +1,87 @@
+/* Values mirror the Badge component set in Figma (Badge page). */
+
+.badge {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap);
+  height: var(--h);
+  min-width: var(--h); /* a single digit is a circle */
+  padding: 0 var(--pad);
+  border-radius: var(--halo-radius-10);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--fs);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  /* Only Neutral and Brand set these; reset so they never inherit */
+  --line: initial;
+  --solid-bg: initial;
+  --solid-fg: initial;
+}
+
+.label {
+  line-height: var(--h);
+}
+
+/* ---------- Sizes ---------- */
+
+.xs { --h: 16px; --pad: var(--halo-spacing-2); --gap: var(--halo-spacing-1); --fs: var(--halo-font-size-xs); --icon: 10px; --dot: 4px; }
+.sm { --h: 20px; --pad: var(--halo-spacing-3); --gap: var(--halo-spacing-2); --fs: var(--halo-font-size-sm); --icon: 12px; --dot: 6px; }
+.md { --h: 24px; --pad: var(--halo-spacing-4); --gap: var(--halo-spacing-2); --fs: var(--halo-font-size-sm); --icon: 14px; --dot: 6px; }
+.lg { --h: 28px; --pad: var(--halo-spacing-5); --gap: var(--halo-spacing-3); --fs: var(--halo-font-size-md); --icon: 16px; --dot: 8px; }
+
+/* ---------- Colours ---------- */
+/* --soft-bg and --soft-fg tint the badge, --strong is the solid fill, outline border and dot */
+
+.neutral { --soft-bg: var(--halo-surface-secondary); --soft-fg: var(--halo-text-contrast); --strong: var(--halo-text-contrast); --line: var(--halo-border-secondary); --solid-bg: var(--halo-surface-invert); --solid-fg: var(--halo-text-invert); }
+.brand { --soft-bg: var(--halo-surface-brand-secondary); --soft-fg: var(--halo-text-brand); --strong: var(--halo-button-primary); --line: var(--halo-border-contrast); --solid-bg: var(--halo-button-primary); --solid-fg: var(--halo-text-on-brand); }
+.information { --soft-bg: var(--halo-state-information-secondary); --soft-fg: var(--halo-state-information-contrast); --strong: var(--halo-state-information-primary); }
+.success { --soft-bg: var(--halo-state-success-secondary); --soft-fg: var(--halo-state-success-contrast); --strong: var(--halo-state-success-primary); }
+.warning { --soft-bg: var(--halo-state-warning-secondary); --soft-fg: var(--halo-state-warning-contrast); --strong: var(--halo-state-warning-primary); }
+.error { --soft-bg: var(--halo-state-error-secondary); --soft-fg: var(--halo-state-error-contrast); --strong: var(--halo-state-error-primary); }
+
+/* ---------- Styles ---------- */
+
+.soft { --bg: var(--soft-bg); --fg: var(--soft-fg); --dot-colour: var(--strong); }
+
+.solid {
+  --bg: var(--solid-bg, var(--strong));
+  --fg: var(--solid-fg, var(--halo-text-on-brand));
+  --dot-colour: var(--fg);
+}
+
+.outline {
+  --bg: transparent;
+  --fg: var(--soft-fg);
+  --dot-colour: var(--strong);
+  /* Drawn inside, like the Figma stroke, so it adds no width */
+  box-shadow: inset 0 0 0 1px var(--line, var(--strong));
+}
+
+/* ---------- Dot and icon ---------- */
+
+.dot {
+  flex-shrink: 0;
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  background: var(--dot-colour);
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}

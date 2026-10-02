@@ -9,6 +9,8 @@ export type {
   AvatarStatusProps,
   AvatarStatusType,
 } from './components/Avatar';
+export { Badge } from './components/Badge';
+export type { BadgeColor, BadgeProps, BadgeSize, BadgeVariant } from './components/Badge';
 export { Button } from './components/Button';
 export type { ButtonProps, ButtonSize, ButtonVariant } from './components/Button';
 export { CompactButton } from './components/CompactButton';
