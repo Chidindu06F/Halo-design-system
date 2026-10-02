@@ -1,0 +1,60 @@
+/* Values mirror the Card component set in Figma (Cards page). */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--halo-border-secondary);
+  border-radius: var(--halo-radius-6);
+  background: var(--halo-surface-primary);
+  color: var(--halo-text-primary);
+  text-align: start;
+  text-decoration: none;
+  transition: border-color 120ms ease, box-shadow 180ms ease;
+}
+
+/* Media fills the top at 4:3, like the 320 by 240 slot in Figma */
+.media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--halo-surface-secondary);
+}
+
+.media > img,
+.media > video,
+.media > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--halo-spacing-6);
+  padding: var(--halo-spacing-7);
+}
+
+/* ---------- Clickable cards ---------- */
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  border-color: var(--halo-border-strong);
+}
+
+.clickable:focus-visible {
+  outline: none;
+  /* 2px gap in the page colour, then a 2px ring, the same as Button */
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}

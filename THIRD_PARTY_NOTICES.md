@@ -51,7 +51,7 @@ If you use these three styles in your own product, include this credit somewhere
 
 ## Example images
 
-The Card examples in the Figma library use abstract images from [Unsplash](https://unsplash.com), free under the [Unsplash License](https://unsplash.com/license).
+The Card examples in the Figma library and Storybook (`apps/docs/public/cards`) use abstract images from [Unsplash](https://unsplash.com), free under the [Unsplash License](https://unsplash.com/license).
 
 | Image | Photographer |
 | --- | --- |
