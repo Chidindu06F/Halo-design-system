@@ -6,7 +6,7 @@ import type { TextColor, TextSize, TextWeight } from './Text';
 const sizes: TextSize[] = ['lg', 'md', 'sm'];
 const weights: TextWeight[] = ['regular', 'semibold'];
 const colors: TextColor[] = ['primary', 'contrast', 'secondary'];
-const SAMPLE = 'Halo keeps body text clear and easy to read.';
+const SAMPLE = 'Good typography keeps body text clear and easy to read.';
 
 const stack: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 12 };
 const card: CSSProperties = {

@@ -105,8 +105,8 @@ export const WithIcons: Story = {
       <LinkButton href="#">Forgot password?</LinkButton>
       <LinkButton iconLeft={<DownloadSimple />}>Download report</LinkButton>
       <LinkButton href="#" iconLeft={<ArrowLeft />}>Back to projects</LinkButton>
-      <LinkButton href="https://github.com/Chidindu06F/Halo-design-system" target="_blank" rel="noreferrer" iconRight={<ArrowSquareOut />}>
-        Halo on GitHub (opens in new tab)
+      <LinkButton href="https://example.com" target="_blank" rel="noreferrer" iconRight={<ArrowSquareOut />}>
+        Help centre (opens in new tab)
       </LinkButton>
     </div>
   ),
@@ -119,7 +119,7 @@ export const InUse: Story = {
     <div style={{ ...row, alignItems: 'flex-start' }}>
       <div style={card}>
         <strong style={{ fontSize: 20, lineHeight: '28px' }}>Sign in</strong>
-        <div style={field}>ada@halo.design</div>
+        <div style={field}>ada@example.com</div>
         <div style={field}>••••••••</div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <LinkButton href="#" size="sm">Forgot password?</LinkButton>

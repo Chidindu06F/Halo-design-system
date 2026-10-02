@@ -49,6 +49,16 @@ The Avatar image component in the Figma library holds ready-made faces so design
 
 If you use these three styles in your own product, include this credit somewhere people can find it.
 
+## Example images
+
+The Card examples in the Figma library use abstract images from [Unsplash](https://unsplash.com), free under the [Unsplash License](https://unsplash.com/license).
+
+| Image | Photographer |
+| --- | --- |
+| Orange orb on blue | [@mymind](https://unsplash.com/photos/XUlsF9LYeVk) |
+| Purple and pink waves | [@fakurian](https://unsplash.com/photos/nY14Fs8pxT8) |
+| Blue, purple and orange blend | [@fakurian](https://unsplash.com/photos/E8Ufcyxz514) |
+
 ## Brand logos
 
 Logos are trademarks of their respective owners. They are included only so you can refer to those companies and services (for example, in "Sign in with Google" buttons or payment method lists). Their inclusion does not imply endorsement. Follow each brand's own guidelines when using them.

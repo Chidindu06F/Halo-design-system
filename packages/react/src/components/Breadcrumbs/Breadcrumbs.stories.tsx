@@ -84,7 +84,7 @@ export const Separators: Story = {
         <Breadcrumbs key={sep} separator={sep}>
           <BreadcrumbItem href="#" icon={<House />}>Home</BreadcrumbItem>
           <BreadcrumbItem href="#">Projects</BreadcrumbItem>
-          <BreadcrumbItem href="#">Halo</BreadcrumbItem>
+          <BreadcrumbItem href="#">Mobile app</BreadcrumbItem>
           <BreadcrumbItem>Settings</BreadcrumbItem>
         </Breadcrumbs>
       ))}
@@ -101,7 +101,7 @@ export const LongPath: Story = {
       <BreadcrumbItem href="#">Workspace</BreadcrumbItem>
       <BreadcrumbItem href="#">Projects</BreadcrumbItem>
       <BreadcrumbItem href="#">Design system</BreadcrumbItem>
-      <BreadcrumbItem href="#">Halo</BreadcrumbItem>
+      <BreadcrumbItem href="#">Mobile app</BreadcrumbItem>
       <BreadcrumbItem>Settings</BreadcrumbItem>
     </Breadcrumbs>
   ),
@@ -136,8 +136,8 @@ export const InUse: Story = {
         </Breadcrumbs>
         {[
           [<FolderSimple key="f" />, 'Exports', '12 files'],
-          [<FileSvg key="s" />, 'halo-mark.svg', '4 KB'],
-          [<FilePng key="p" />, 'halo-mark@2x.png', '38 KB'],
+          [<FileSvg key="s" />, 'logo-mark.svg', '4 KB'],
+          [<FilePng key="p" />, 'logo-mark@2x.png', '38 KB'],
         ].map(([icon, name, meta]) => (
           <div key={String(name)} style={{ ...line, padding: '6px 0', color: 'var(--halo-icon-primary)' }}>
             <span style={{ display: 'flex', fontSize: 20 }}>{icon}</span>
