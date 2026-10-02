@@ -1,0 +1,52 @@
+/* Values mirror the Tooltip component set in Figma (Tooltip page). */
+
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  color: var(--halo-surface-invert);
+  pointer-events: auto;
+  animation: in 120ms ease-out;
+}
+
+.bubble {
+  max-width: 240px;
+  padding: var(--halo-spacing-2) var(--halo-spacing-4);
+  border-radius: var(--halo-radius-3);
+  background: var(--halo-surface-invert);
+  color: var(--halo-text-invert);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-sm);
+  font-weight: var(--halo-font-weight-regular);
+  line-height: var(--halo-line-height-sm);
+  overflow-wrap: break-word;
+}
+
+.arrow {
+  flex-shrink: 0;
+}
+
+/* Arrow on the side facing the element */
+.tooltip[data-side='top'] { flex-direction: column; }
+.tooltip[data-side='bottom'] { flex-direction: column-reverse; }
+.tooltip[data-side='left'] { flex-direction: row; }
+.tooltip[data-side='right'] { flex-direction: row-reverse; }
+
+/* Fade in with a 4px slide toward its side */
+.tooltip[data-side='top'] { --slide-y: 4px; }
+.tooltip[data-side='bottom'] { --slide-y: -4px; }
+.tooltip[data-side='left'] { --slide-x: 4px; }
+.tooltip[data-side='right'] { --slide-x: -4px; }
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translate(var(--slide-x, 0), var(--slide-y, 0));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip { animation: fade 120ms ease-out; }
+  @keyframes fade { from { opacity: 0; } }
+}

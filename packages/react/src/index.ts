@@ -11,5 +11,7 @@ export type { SocialButtonProps, SocialButtonVariant, SocialProvider } from './c
 
 export { Text } from './components/Text';
 export type { TextColor, TextProps, TextSize, TextWeight } from './components/Text';
+export { Tooltip } from './components/Tooltip';
+export type { TooltipProps, TooltipSide } from './components/Tooltip';
 
 export type Theme = 'light' | 'dark' | 'system';
