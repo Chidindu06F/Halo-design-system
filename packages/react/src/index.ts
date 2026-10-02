@@ -19,6 +19,8 @@ export { ButtonGroup } from './components/ButtonGroup';
 export type { ButtonGroupProps } from './components/ButtonGroup';
 export { Card } from './components/Card';
 export type { CardProps } from './components/Card';
+export { Checkbox, CheckboxGroup } from './components/Checkbox';
+export type { CheckboxGroupProps, CheckboxProps, CheckboxSize } from './components/Checkbox';
 export { CompactButton } from './components/CompactButton';
 export type { CompactButtonProps, CompactButtonSize, CompactButtonVariant } from './components/CompactButton';
 export { LinkButton } from './components/LinkButton';
