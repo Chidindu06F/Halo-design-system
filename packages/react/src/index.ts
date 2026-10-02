@@ -15,6 +15,8 @@ export { BreadcrumbItem, Breadcrumbs } from './components/Breadcrumbs';
 export type { BreadcrumbItemProps, BreadcrumbsProps, BreadcrumbsSeparator, BreadcrumbsSize } from './components/Breadcrumbs';
 export { Button } from './components/Button';
 export type { ButtonProps, ButtonSize, ButtonVariant } from './components/Button';
+export { ButtonGroup } from './components/ButtonGroup';
+export type { ButtonGroupProps } from './components/ButtonGroup';
 export { CompactButton } from './components/CompactButton';
 export type { CompactButtonProps, CompactButtonSize, CompactButtonVariant } from './components/CompactButton';
 export { LinkButton } from './components/LinkButton';
