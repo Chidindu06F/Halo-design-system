@@ -1,0 +1,107 @@
+/* Values mirror the Accordion item component set in Figma (Accordion page). */
+
+.item {
+  padding-block: var(--halo-spacing-7);
+}
+
+.divider {
+  border-bottom: 1px solid var(--halo-border-secondary);
+}
+
+.heading {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--halo-spacing-md);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-heading);
+  font-size: var(--halo-font-size-lg);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-lg);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 120ms ease;
+}
+
+.title {
+  flex: 1;
+}
+
+/* The plus/minus box, styled like a Ghost Compact button */
+.iconBox {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: var(--halo-spacing-1);
+  border-radius: var(--halo-radius-3);
+  color: var(--halo-icon-primary);
+  transition: background-color 120ms ease;
+}
+
+/* ---------- States ---------- */
+
+/* Hover and keyboard focus look the same */
+.header:hover:not(:disabled),
+.header:focus-visible {
+  color: var(--halo-button-primary);
+  outline: none;
+}
+
+.header:hover:not(:disabled) .iconBox,
+.header:focus-visible .iconBox {
+  background: var(--halo-button-secondary-hover);
+}
+
+.disabled .header {
+  color: var(--halo-text-disabled);
+  cursor: not-allowed;
+}
+
+.disabled .iconBox {
+  color: var(--halo-icon-disabled);
+}
+
+/* Disabled content turns grey, whatever is in the slot */
+.disabled .panel {
+  --halo-text-primary: var(--halo-text-disabled);
+  --halo-text-contrast: var(--halo-text-disabled);
+  --halo-text-secondary: var(--halo-text-disabled);
+}
+
+/* ---------- Opening and closing ---------- */
+
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 160ms ease-in;
+}
+
+.open .panel {
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 200ms ease-out;
+}
+
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panelBody {
+  padding-top: var(--halo-spacing-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .open .panel,
+  .header,
+  .iconBox {
+    transition: none;
+  }
+}

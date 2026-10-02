@@ -1,0 +1,23 @@
+/* Values mirror the Text component set in Figma (Text page). */
+
+.text {
+  margin: 0;
+  font-family: var(--halo-font-family-body);
+}
+
+/* ---------- Sizes ---------- */
+
+.lg { font-size: var(--halo-font-size-lg); line-height: var(--halo-line-height-lg); }
+.md { font-size: var(--halo-font-size-md); line-height: var(--halo-line-height-md); }
+.sm { font-size: var(--halo-font-size-sm); line-height: var(--halo-line-height-sm); }
+
+/* ---------- Weights ---------- */
+
+.regular { font-weight: var(--halo-font-weight-regular); }
+.semibold { font-weight: var(--halo-font-weight-semibold); }
+
+/* ---------- Colours ---------- */
+
+.primary { color: var(--halo-text-primary); }
+.contrast { color: var(--halo-text-contrast); }
+.secondary { color: var(--halo-text-secondary); }
