@@ -1,0 +1,191 @@
+/* Values mirror the Avatar, Avatar status and Avatar group component sets in Figma (Avatar page). */
+
+/* ---------- Sizes ---------- */
+/* --s avatar, --b badge, --d dot, --w badge ring, --pos/--top badge offsets, --overlap in groups */
+
+.xs { --s: 24px; --b: 12px; --d: 6px; --w: 1px; --pos: 14px; --top: -2px; --icon: 14px; --fs: var(--halo-font-size-xs); --nfs: var(--halo-font-size-2xs); --np: 3px; --overlap: -6px; }
+.sm { --s: 32px; --b: 14px; --d: 8px; --w: 1.5px; --pos: 20px; --top: -2px; --icon: 18px; --fs: var(--halo-font-size-sm); --nfs: var(--halo-font-size-2xs); --np: 3px; --overlap: -8px; }
+.md { --s: 40px; --b: 16px; --d: 10px; --w: 2px; --pos: 26px; --top: -2px; --icon: 20px; --fs: var(--halo-font-size-md); --nfs: var(--halo-font-size-xs); --np: 3px; --overlap: -10px; }
+.lg { --s: 48px; --b: 20px; --d: 12px; --w: 2px; --pos: 31px; --top: -3px; --icon: 24px; --fs: var(--halo-font-size-lg); --nfs: var(--halo-font-size-sm); --np: 4px; --overlap: -12px; }
+.xl { --s: 64px; --b: 24px; --d: 14px; --w: 2px; --pos: 43px; --top: -3px; --icon: 32px; --fs: var(--halo-font-size-3xl); --nfs: var(--halo-font-size-md); --np: 5px; --overlap: -16px; }
+
+/* ---------- Avatar ---------- */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: var(--s);
+  height: var(--s);
+  vertical-align: middle;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.neutral { --bg: var(--halo-surface-secondary); --fg: var(--halo-text-contrast); }
+.purple { --bg: var(--halo-surface-brand-secondary); --fg: var(--halo-text-brand); }
+.blue { --bg: var(--halo-state-information-secondary); --fg: var(--halo-state-information-contrast); }
+.green { --bg: var(--halo-state-success-secondary); --fg: var(--halo-state-success-contrast); }
+.orange { --bg: var(--halo-state-warning-secondary); --fg: var(--halo-state-warning-contrast); }
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  font-family: var(--halo-font-family-body);
+  font-size: var(--fs);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: 1;
+  user-select: none;
+}
+
+.icon {
+  display: flex;
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Badges are centred on the circle's edge at 45 degrees: half in, half out. */
+.holder {
+  position: absolute;
+  left: var(--pos);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--b);
+  height: var(--b);
+}
+
+.bottom { top: var(--pos); }
+.top { top: var(--top); }
+
+/* ---------- Avatar status ---------- */
+
+.status {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--b);
+  height: var(--b);
+  --ring: 0 0 0 var(--w) var(--halo-surface-primary);
+}
+
+.dot {
+  width: var(--d);
+  height: var(--d);
+  border-radius: 50%;
+  background: var(--dot);
+  box-shadow: var(--ring);
+}
+
+.status-online { --dot: var(--halo-state-success-primary); }
+.status-offline { --dot: var(--halo-surface-contrast); }
+.status-busy { --dot: var(--halo-state-error-primary); }
+.status-away { --dot: var(--halo-state-warning-primary); }
+
+/* Verified: a seal with a seal-shaped white ring behind it */
+.sealRing {
+  position: absolute;
+  top: calc(-1 * var(--w));
+  left: calc(-1 * var(--w));
+  width: calc(var(--b) + 2 * var(--w));
+  height: calc(var(--b) + 2 * var(--w));
+  fill: var(--halo-surface-primary);
+}
+
+.seal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--halo-state-information-primary);
+}
+
+/* The tick, plus and cross are cut out of the icon, so a circle behind them sets their colour. */
+.cutout { fill: var(--cut, var(--halo-icon-on-brand)); }
+
+.status-add,
+.status-remove,
+.status-pin,
+.status-logo {
+  border-radius: 50%;
+  box-shadow: var(--ring);
+}
+
+.circleIcon {
+  width: 100%;
+  height: 100%;
+  fill: var(--badge);
+}
+
+.status-add { --badge: var(--halo-button-primary); }
+.status-remove { --badge: var(--halo-surface-invert); --cut: var(--halo-icon-invert); }
+
+.status-pin,
+.status-logo { background: var(--halo-surface-primary); }
+
+.pinIcon {
+  width: 100%;
+  height: 100%;
+  fill: var(--halo-icon-primary);
+}
+
+.logo {
+  display: flex;
+  width: 80%;
+  height: 80%;
+}
+
+.logo > * {
+  width: 100%;
+  height: 100%;
+}
+
+.status-notification {
+  box-sizing: border-box;
+  width: auto;
+  min-width: var(--b);
+  padding: 0 var(--np);
+  border-radius: 999px;
+  background: var(--halo-state-error-primary);
+  box-shadow: var(--ring);
+  color: var(--halo-text-on-negative);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--nfs);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--b);
+  white-space: nowrap;
+}
+
+/* ---------- Avatar group ---------- */
+
+.group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.member + .member { margin-left: var(--overlap); }
+
+/* A ring in the page colour separates overlapping avatars */
+.member > .circle { box-shadow: 0 0 0 2px var(--halo-surface-primary); }

@@ -1,0 +1,81 @@
+import { cloneElement, forwardRef, isValidElement, useEffect, useState } from 'react';
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
+import { AvatarStatus } from './AvatarStatus';
+import type { AvatarSize, AvatarStatusProps, AvatarStatusType } from './AvatarStatus';
+import { USER } from './icons';
+import styles from './Avatar.module.css';
+
+export type AvatarColor = 'neutral' | 'purple' | 'blue' | 'green' | 'orange';
+type StatusSlot = AvatarStatusType | ReactElement<AvatarStatusProps>;
+
+export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
+  /** Photo or illustration. If it is missing or fails to load, initials or the icon show instead. Figma: Type=Image. */
+  src?: string;
+  /** The person's name. Read by screen readers and used to make initials. */
+  name?: string;
+  /** Up to two letters. Defaults to the first letters of `name`. Figma: Initials. */
+  initials?: string;
+  /** Replaces the default person icon when there is no image or name. Figma: Type=Icon. */
+  icon?: ReactNode;
+  /** XS 24, S 32, M 40, L 48, XL 64. Figma: Size. */
+  size?: AvatarSize;
+  /** Background for initials and icon avatars. Figma: Colour. */
+  color?: AvatarColor;
+  /** Badge on the bottom right: a status type, or an `AvatarStatus` for a count or logo. Figma: Bottom status. */
+  status?: StatusSlot;
+  /** Badge on the top right. Figma: Top status. */
+  topStatus?: StatusSlot;
+}
+
+function initialsOf(name: string) {
+  const words = name.trim().split(/\s+/).filter(Boolean);
+  const first = words[0] ?? '';
+  const last = words.length > 1 ? (words[words.length - 1] ?? '') : '';
+  return (last ? first.charAt(0) + last.charAt(0) : first.slice(0, 2)).toUpperCase();
+}
+
+function renderStatus(slot: StatusSlot | undefined, size: AvatarSize, position: string | undefined) {
+  if (!slot) return null;
+  const badge = isValidElement(slot) ? cloneElement(slot, { size: slot.props.size ?? size }) : <AvatarStatus type={slot} size={size} />;
+  return <span className={[styles.holder, position].join(' ')}>{badge}</span>;
+}
+
+/** A person or team shown as a photo, initials or an icon, with optional status badges. */
+export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
+  { src, name, initials, icon, size = 'md', color = 'neutral', status, topStatus, className, ...rest },
+  ref,
+) {
+  const [failed, setFailed] = useState(false);
+  useEffect(() => setFailed(false), [src]);
+
+  const letters = initials ?? (name ? initialsOf(name) : '');
+  const showImage = src && !failed;
+  const classes = [styles.avatar, styles[size], className].filter(Boolean).join(' ');
+
+  return (
+    <span ref={ref} className={classes} {...rest}>
+      <span
+        className={`${styles.circle} ${showImage ? '' : styles[color]}`}
+        role={name ? 'img' : undefined}
+        aria-label={name}
+        aria-hidden={name ? undefined : true}
+      >
+        {showImage ? (
+          <img className={styles.image} src={src} alt="" onError={() => setFailed(true)} />
+        ) : letters ? (
+          <span className={styles.initials}>{letters}</span>
+        ) : (
+          <span className={styles.icon}>
+            {icon ?? (
+              <svg viewBox="0 0 256 256" fill="currentColor">
+                <path d={USER} />
+              </svg>
+            )}
+          </span>
+        )}
+      </span>
+      {renderStatus(topStatus, size, styles.top)}
+      {renderStatus(status, size, styles.bottom)}
+    </span>
+  );
+});

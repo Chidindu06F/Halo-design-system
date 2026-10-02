@@ -1,5 +1,14 @@
 export { Accordion, AccordionItem } from './components/Accordion';
 export type { AccordionItemProps, AccordionProps } from './components/Accordion';
+export { Avatar, AvatarGroup, AvatarStatus } from './components/Avatar';
+export type {
+  AvatarColor,
+  AvatarGroupProps,
+  AvatarProps,
+  AvatarSize,
+  AvatarStatusProps,
+  AvatarStatusType,
+} from './components/Avatar';
 export { Button } from './components/Button';
 export type { ButtonProps, ButtonSize, ButtonVariant } from './components/Button';
 export { CompactButton } from './components/CompactButton';
