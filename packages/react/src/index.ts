@@ -11,6 +11,8 @@ export type {
 } from './components/Avatar';
 export { Badge } from './components/Badge';
 export type { BadgeColor, BadgeProps, BadgeSize, BadgeVariant } from './components/Badge';
+export { BreadcrumbItem, Breadcrumbs } from './components/Breadcrumbs';
+export type { BreadcrumbItemProps, BreadcrumbsProps, BreadcrumbsSeparator, BreadcrumbsSize } from './components/Breadcrumbs';
 export { Button } from './components/Button';
 export type { ButtonProps, ButtonSize, ButtonVariant } from './components/Button';
 export { CompactButton } from './components/CompactButton';

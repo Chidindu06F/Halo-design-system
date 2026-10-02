@@ -46,7 +46,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Buttons start an action, like saving, submitting or deleting. Use one **primary** button per view for the most important action, **secondary** for the alternative, **ghost** for low-emphasis actions and **destructive** for actions that delete data. To go to another page, use a link instead.\n\nWhen pressed, a button shrinks very slightly and springs back with a subtle bounce. This is switched off for people who prefer reduced motion.',
+          'Buttons start an action, like saving, submitting or deleting. Use one **primary** button per view for the most important action, **secondary** for the alternative, **ghost** for low-emphasis actions and **destructive** for actions that delete data. To go to another page, use a link instead.\n\nWhen pressed, a button shrinks very slightly and springs back with a subtle bounce. This is switched off for people who prefer reduced motion.\n\nButton text meets WCAG 2.2 AA contrast (at least 4.5:1) in light and dark mode: primary 4.5:1 (5.7:1 on hover), destructive 6.1:1, and secondary and ghost over 15:1.',
       },
     },
   },

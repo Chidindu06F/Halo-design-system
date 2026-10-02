@@ -1,0 +1,103 @@
+/* Values mirror the Breadcrumb item, Breadcrumb separator and Breadcrumbs sets in Figma (Breadcrumbs page). */
+
+.sm { --fs: var(--halo-font-size-sm); --lh: var(--halo-line-height-sm); --gap: var(--halo-spacing-3); --icon: 14px; --box: 20px; }
+.md { --fs: var(--halo-font-size-md); --lh: var(--halo-line-height-md); --gap: var(--halo-spacing-4); --icon: 16px; --box: 24px; }
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--halo-font-family-label);
+  font-size: var(--fs);
+  font-weight: var(--halo-font-weight-regular);
+  line-height: var(--lh);
+  white-space: nowrap;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.link,
+.current {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--halo-spacing-2);
+}
+
+.link {
+  border-radius: var(--halo-radius-2);
+  color: var(--halo-text-secondary);
+  text-decoration: none;
+}
+
+/* Keyboard focus looks the same as hover */
+.link:hover,
+.link:focus-visible {
+  color: var(--halo-text-primary);
+  outline: none;
+}
+
+.link:hover > span:last-child,
+.link:focus-visible > span:last-child {
+  text-decoration: underline;
+}
+
+.current {
+  color: var(--halo-text-primary);
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.icon {
+  display: flex;
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  color: var(--halo-text-disabled);
+  user-select: none;
+}
+
+.separator > svg {
+  width: var(--icon);
+  height: var(--icon);
+  color: var(--halo-icon-disabled);
+}
+
+.overflow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--box);
+  height: var(--box);
+  padding: 0;
+  border: none;
+  border-radius: var(--halo-radius-3);
+  background: transparent;
+  color: var(--halo-text-secondary);
+  cursor: pointer;
+}
+
+.overflow > svg {
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.overflow:hover,
+.overflow:focus-visible {
+  background: var(--halo-surface-secondary);
+  color: var(--halo-text-primary);
+  outline: none;
+}
