@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { EmptyState } from './EmptyState';
 
 const meta = {
-  title: 'Components/EmptyState',
+  title: 'Components/Empty state',
   component: EmptyState,
   tags: ['autodocs'],
   parameters: {

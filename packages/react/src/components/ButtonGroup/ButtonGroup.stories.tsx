@@ -22,7 +22,7 @@ const card: CSSProperties = {
 };
 
 const meta = {
-  title: 'Components/ButtonGroup',
+  title: 'Components/Button group',
   component: ButtonGroup,
   tags: ['autodocs'],
   parameters: {

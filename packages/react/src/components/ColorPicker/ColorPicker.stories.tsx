@@ -5,7 +5,7 @@ import { ColorField, ColorPicker, ColorSwatch } from './ColorPicker';
 const swatches = ['#CC1DD0', '#3D7BF7', '#1FA971', '#F5A524', '#E5484D', '#111827', '#9CA3AF', '#FFFFFF'];
 
 const meta = {
-  title: 'Components/ColorPicker',
+  title: 'Components/Color picker',
   component: ColorPicker,
   subcomponents: { ColorField, ColorSwatch },
   tags: ['autodocs'],

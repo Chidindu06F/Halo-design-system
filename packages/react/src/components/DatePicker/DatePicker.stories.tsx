@@ -8,7 +8,7 @@ import { addDays, startOfDay } from './dates';
 const today = startOfDay(new Date());
 
 const meta = {
-  title: 'Components/DatePicker',
+  title: 'Components/Date picker',
   component: DatePickerField,
   subcomponents: { Calendar, DateRangePickerField },
   tags: ['autodocs'],

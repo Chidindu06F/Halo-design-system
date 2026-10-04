@@ -6,7 +6,7 @@ const sample =
   '<h2>Release notes</h2><p>This update makes sharing <b>faster</b> and <i>simpler</i>.</p><ul><li>Share a link with anyone</li><li>See who opened it</li></ul>';
 
 const meta = {
-  title: 'Components/RichTextEditor',
+  title: 'Components/Rich text editor',
   component: RichTextEditor,
   subcomponents: { RichTextEditorField },
   tags: ['autodocs'],
