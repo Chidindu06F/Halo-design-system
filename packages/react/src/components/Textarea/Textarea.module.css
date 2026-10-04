@@ -5,6 +5,7 @@
 .lg { --pad: var(--halo-spacing-7); --text-size: var(--halo-font-size-md); --text-height: var(--halo-line-height-md); }
 
 .textarea {
+  box-sizing: border-box;
   --line: var(--halo-border-strong);
   display: block;
   width: 100%;

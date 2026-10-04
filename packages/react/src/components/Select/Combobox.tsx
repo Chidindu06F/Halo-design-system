@@ -1,0 +1,230 @@
+import { forwardRef, useEffect, useId, useMemo, useRef, useState } from 'react';
+import type { KeyboardEvent } from 'react';
+import { cx } from '../../internal/cx';
+import { mergeRefs, Portal, useDismiss, useFloating } from '../../internal/floating';
+import { Icon } from '../../internal/Icon';
+import { useControllable } from '../../internal/useControllable';
+import { Field } from '../Field';
+import type { FieldProps } from '../Field';
+import inputStyles from '../Input/Input.module.css';
+import menuStyles from '../Menu/Menu.module.css';
+import { Tag } from '../Tag';
+import styles from './Select.module.css';
+import type { SelectOption } from './Select';
+
+interface ComboboxBase {
+  options: SelectOption[];
+  placeholder?: string;
+  size?: 'sm' | 'md' | 'lg';
+  invalid?: boolean;
+  disabled?: boolean;
+  /** Lets people add what they typed as a new option. Called with the text. */
+  onCreate?: (text: string) => void;
+  /** Shown when nothing matches. */
+  emptyText?: string;
+  id?: string;
+  'aria-label'?: string;
+  'aria-describedby'?: string;
+  'aria-invalid'?: true;
+  required?: boolean;
+  className?: string;
+}
+
+export interface ComboboxProps extends ComboboxBase {
+  /** One value, or several shown as Tags. Figma: Type. */
+  multiple?: false;
+  value?: string | null;
+  defaultValue?: string | null;
+  onValueChange?: (value: string | null) => void;
+}
+
+export interface MultiComboboxProps extends ComboboxBase {
+  multiple: true;
+  value?: string[];
+  defaultValue?: string[];
+  onValueChange?: (value: string[]) => void;
+}
+
+/**
+ * Type to search a list, choose one or several options, or add a new one.
+ * Use a Select when people just pick from a short known list. Figma: Combobox.
+ */
+export const Combobox = forwardRef<HTMLInputElement, ComboboxProps | MultiComboboxProps>(function Combobox(props, ref) {
+  const { options, placeholder = 'Search', size = 'md', invalid, disabled, onCreate, emptyText = 'No matches', id, className, required } = props;
+  const listId = useId();
+  const multiple = props.multiple === true;
+  const [values, setValues] = useControllable<string[]>(
+    multiple ? (props as MultiComboboxProps).value : props.value === undefined ? undefined : props.value ? [props.value] : [],
+    multiple ? ((props as MultiComboboxProps).defaultValue ?? []) : props.defaultValue ? [props.defaultValue] : [],
+    (next) => (multiple ? (props as MultiComboboxProps).onValueChange?.(next) : (props as ComboboxProps).onValueChange?.(next[0] ?? null)),
+  );
+  const labelOf = (v: string) => options.find((o) => o.value === v)?.label ?? v;
+  const [query, setQuery] = useState(!multiple && values[0] ? labelOf(values[0]) : '');
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const box = useRef<HTMLDivElement | null>(null);
+  const input = useRef<HTMLInputElement | null>(null);
+  const { floating, style } = useFloating(box, open, { matchWidth: true });
+  useDismiss(open, () => setOpen(false), [box, floating]);
+
+  const searching = multiple || !values[0] || query !== labelOf(values[0]);
+  const shown = useMemo(
+    () => (searching && query ? options.filter((o) => o.label.toLowerCase().includes(query.trim().toLowerCase())) : options),
+    [options, query, searching],
+  );
+  const canCreate = Boolean(onCreate && query.trim() && !options.some((o) => o.label.toLowerCase() === query.trim().toLowerCase()));
+  const count = shown.length + (canCreate ? 1 : 0);
+
+  useEffect(() => setActive(0), [query]);
+  useEffect(() => {
+    if (open) floating.current?.querySelector(`[data-index="${active}"]`)?.scrollIntoView({ block: 'nearest' });
+  }, [open, active, floating]);
+
+  const pick = (i: number) => {
+    if (i === shown.length && canCreate) {
+      onCreate?.(query.trim());
+      setQuery('');
+      return;
+    }
+    const o = shown[i];
+    if (!o || o.disabled) return;
+    if (multiple) {
+      setValues(values.includes(o.value) ? values.filter((x) => x !== o.value) : [...values, o.value]);
+      setQuery('');
+    } else {
+      setValues([o.value]);
+      setQuery(o.label);
+      setOpen(false);
+    }
+  };
+
+  const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!open) setOpen(true);
+      else setActive((active + 1) % Math.max(count, 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive((active - 1 + count) % Math.max(count, 1));
+    } else if (e.key === 'Enter' && open) {
+      e.preventDefault();
+      pick(active);
+    } else if (e.key === 'Escape') {
+      setOpen(false);
+    } else if (e.key === 'Backspace' && multiple && !query && values.length) {
+      setValues(values.slice(0, -1));
+    }
+  };
+
+  return (
+    <>
+      <div
+        ref={box}
+        className={cx(
+          inputStyles.box,
+          inputStyles[size],
+          styles.combobox,
+          multiple && styles.multiple,
+          (invalid || props['aria-invalid']) && inputStyles.invalid,
+          disabled && inputStyles.disabled,
+          className,
+        )}
+        onClick={() => input.current?.focus()}
+      >
+        {!multiple && <Icon name="MagnifyingGlass" className={cx(inputStyles.icon, styles.caret)} />}
+        <div className={styles.values}>
+          {multiple &&
+            values.map((v) => (
+              <Tag key={v} size={size === 'sm' ? 'sm' : 'md'} disabled={disabled} onRemove={() => setValues(values.filter((x) => x !== v))}>
+                {labelOf(v)}
+              </Tag>
+            ))}
+          <input
+            ref={mergeRefs(ref, input)}
+            id={id}
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded={open}
+            aria-controls={open ? listId : undefined}
+            aria-activedescendant={open && count ? `${listId}-${active}` : undefined}
+            aria-label={props['aria-label']}
+            aria-describedby={props['aria-describedby']}
+            aria-invalid={invalid || props['aria-invalid'] || undefined}
+            aria-required={required || undefined}
+            className={styles.comboInput}
+            placeholder={multiple && values.length ? '' : placeholder}
+            disabled={disabled}
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setOpen(true);
+            }}
+            onFocus={() => setOpen(true)}
+            onKeyDown={onKey}
+          />
+        </div>
+        <Icon name="CaretDown" className={cx(styles.caret, open && styles.caretOpen)} />
+      </div>
+      {open && (
+        <Portal>
+          <div ref={floating} id={listId} role="listbox" aria-multiselectable={multiple || undefined} className={menuStyles.menu} style={style}>
+            {shown.map((o, i) => {
+              const on = values.includes(o.value);
+              return (
+                <div
+                  key={o.value}
+                  id={`${listId}-${i}`}
+                  data-index={i}
+                  role="option"
+                  aria-selected={on}
+                  aria-disabled={o.disabled || undefined}
+                  data-active={i === active}
+                  className={menuStyles.item}
+                  onPointerEnter={() => setActive(i)}
+                  onPointerDown={(e) => e.preventDefault()}
+                  onClick={() => pick(i)}
+                >
+                  {o.icon && <span className={menuStyles.icon} aria-hidden="true">{o.icon}</span>}
+                  <span className={menuStyles.itemLabel}>{o.label}</span>
+                  {on && <Icon name="Check" className={menuStyles.check} />}
+                </div>
+              );
+            })}
+            {canCreate && (
+              <div
+                id={`${listId}-${shown.length}`}
+                data-index={shown.length}
+                role="option"
+                aria-selected={false}
+                data-active={active === shown.length}
+                className={menuStyles.item}
+                onPointerEnter={() => setActive(shown.length)}
+                onPointerDown={(e) => e.preventDefault()}
+                onClick={() => pick(shown.length)}
+              >
+                <Icon name="Plus" className={menuStyles.icon} />
+                <span className={menuStyles.itemLabel}>Add "{query.trim()}"</span>
+              </div>
+            )}
+            {count === 0 && <div className={menuStyles.empty}>{emptyText}</div>}
+          </div>
+        </Portal>
+      )}
+    </>
+  );
+});
+
+type FieldBits = Pick<FieldProps, 'label' | 'hint' | 'error' | 'optional' | 'info'> & { fieldClassName?: string };
+export type ComboboxFieldProps = (Omit<ComboboxProps, 'aria-describedby' | 'aria-invalid'> | Omit<MultiComboboxProps, 'aria-describedby' | 'aria-invalid'>) & FieldBits;
+
+/** A Combobox with a label and hint. */
+export const ComboboxField = forwardRef<HTMLInputElement, ComboboxFieldProps>(function ComboboxField(
+  { label, hint, error, optional, info, required, id, fieldClassName, ...rest },
+  ref,
+) {
+  return (
+    <Field label={label} hint={hint} error={error} required={required} optional={optional} info={info} controlId={id} className={fieldClassName}>
+      {(c) => <Combobox ref={ref} {...(rest as ComboboxProps)} {...c} />}
+    </Field>
+  );
+});

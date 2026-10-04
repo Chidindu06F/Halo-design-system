@@ -26,6 +26,7 @@
 }
 
 .box {
+  box-sizing: border-box;
   --line: var(--halo-border-strong);
   display: flex;
   align-items: center;

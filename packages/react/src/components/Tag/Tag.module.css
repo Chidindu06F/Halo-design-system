@@ -1,0 +1,45 @@
+/* Values mirror the Tag set in Figma (Tags page). */
+
+.sm { --h: 24px; --icon: 12px; --text-size: var(--halo-font-size-xs); --text-height: var(--halo-line-height-xs); }
+.md { --h: 28px; --icon: 16px; --text-size: var(--halo-font-size-sm); --text-height: var(--halo-line-height-sm); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--halo-spacing-2);
+  max-width: 100%;
+  height: var(--h);
+  padding: 0 var(--halo-spacing-3);
+  border-radius: var(--halo-radius-xl);
+  background: var(--halo-surface-secondary);
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+  white-space: nowrap;
+}
+.avatar { display: inline-flex; margin-left: calc(var(--halo-spacing-1) * -1); }
+.icon { display: inline-flex; width: var(--icon); height: var(--icon); color: var(--halo-icon-primary); }
+.icon > svg { width: 100%; height: 100%; }
+.label { overflow: hidden; text-overflow: ellipsis; }
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon);
+  height: var(--icon);
+  padding: 0;
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: transparent;
+  color: var(--halo-icon-primary);
+  cursor: pointer;
+}
+.remove > svg { width: 100%; height: 100%; }
+.remove:hover:not(:disabled) { background: var(--halo-button-secondary-hover); }
+.remove:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--halo-border-focus); }
+
+.disabled { background: var(--halo-surface-minimal); color: var(--halo-text-disabled); }
+.disabled .icon,
+.disabled .remove { color: var(--halo-icon-disabled); cursor: not-allowed; }
