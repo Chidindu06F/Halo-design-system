@@ -1,0 +1,8 @@
+/* The value sits centred between the minus and plus buttons (Figma: Number input). */
+.number input {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The left icon slot is decorative in Input, but here it holds a real button */
+.step { display: inline-flex; }

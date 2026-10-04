@@ -1,0 +1,116 @@
+/* Values mirror the Input, Input field and Input affix sets in Figma (Input field page). */
+
+.sm {
+  --height: 32px;
+  --pad: var(--halo-spacing-5);
+  --gap: var(--halo-spacing-3);
+  --icon: 16px;
+  --text-size: var(--halo-font-size-sm);
+  --text-height: var(--halo-line-height-sm);
+}
+.md {
+  --height: 40px;
+  --pad: var(--halo-spacing-6);
+  --gap: var(--halo-spacing-4);
+  --icon: 20px;
+  --text-size: var(--halo-font-size-md);
+  --text-height: var(--halo-line-height-md);
+}
+.lg {
+  --height: 48px;
+  --pad: var(--halo-spacing-7);
+  --gap: var(--halo-spacing-4);
+  --icon: 20px;
+  --text-size: var(--halo-font-size-md);
+  --text-height: var(--halo-line-height-md);
+}
+
+.box {
+  --line: var(--halo-border-strong);
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  min-width: 0;
+  height: var(--height);
+  padding: 0 var(--pad);
+  border-radius: var(--halo-radius-xl);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--halo-text-primary);
+  transition: box-shadow 120ms ease;
+}
+
+.box:hover:not(.disabled) { --line: var(--halo-border-contrast); }
+
+.box:focus-within {
+  --line: var(--halo-surface-brand-contrast);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+.invalid,
+.invalid:hover:not(.disabled),
+.invalid:focus-within { --line: var(--halo-state-error-primary); }
+
+.disabled {
+  --line: var(--halo-border-secondary);
+  background: var(--halo-surface-minimal);
+  color: var(--halo-text-disabled);
+  cursor: not-allowed;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-family: var(--halo-font-family-body);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+  text-overflow: ellipsis;
+}
+.input::placeholder { color: var(--halo-text-secondary); opacity: 1; }
+.input:disabled { cursor: not-allowed; }
+.disabled .input::placeholder { color: var(--halo-text-disabled); }
+
+.icon,
+.end {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: var(--halo-icon-primary);
+}
+.icon > svg,
+.end > svg { width: var(--icon); height: var(--icon); }
+.disabled .icon,
+.disabled .end { color: var(--halo-icon-disabled); }
+
+.affix {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--halo-spacing-4);
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+  white-space: nowrap;
+}
+/* The line between the affix and the value */
+.prefix::after,
+.suffix::before {
+  content: '';
+  width: 1px;
+  height: var(--icon);
+  background: var(--halo-border-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box { transition: none; }
+}

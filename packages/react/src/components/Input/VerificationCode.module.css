@@ -1,0 +1,41 @@
+/* Values mirror the Code digit and Verification code sets in Figma (Input field page). */
+
+.code {
+  display: flex;
+  gap: var(--halo-spacing-4);
+}
+.sm { --box: 40px; --text-size: var(--halo-font-size-md); }
+.md { --box: 48px; --text-size: var(--halo-font-size-lg); }
+
+.digit {
+  --line: var(--halo-border-strong);
+  width: var(--box);
+  height: var(--box);
+  padding: 0;
+  border: 0;
+  border-radius: var(--halo-radius-xl);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--text-size);
+  font-weight: var(--halo-font-weight-semibold);
+  text-align: center;
+  outline: none;
+  caret-color: var(--halo-surface-brand-contrast);
+}
+.digit:hover:not(:disabled) { --line: var(--halo-border-contrast); }
+.digit:focus {
+  --line: var(--halo-surface-brand-contrast);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+.digit[aria-invalid='true'] { --line: var(--halo-state-error-primary); }
+.digit:disabled {
+  --line: var(--halo-border-secondary);
+  background: var(--halo-surface-minimal);
+  color: var(--halo-text-disabled);
+  cursor: not-allowed;
+}
