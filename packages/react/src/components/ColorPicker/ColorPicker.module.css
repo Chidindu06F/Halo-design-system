@@ -1,0 +1,121 @@
+/* Values mirror the Color swatch, Color field and Color picker sets in Figma (Color picker page). */
+
+/* ---------- Swatch ---------- */
+
+.swatch {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--halo-radius-2);
+  /* The colour sits over a checkerboard so see-through colours read correctly. */
+  background:
+    linear-gradient(var(--swatch), var(--swatch)),
+    repeating-conic-gradient(#d9d9d9 0 25%, #ffffff 0 50%) 0 0 / 8px 8px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  cursor: pointer;
+}
+.sm { --size: 20px; }
+.md { --size: 24px; }
+.circle { border-radius: var(--halo-radius-10); }
+.swatch:disabled { cursor: not-allowed; opacity: 0.5; }
+.selected { box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12), 0 0 0 2px var(--halo-surface-primary), 0 0 0 3px var(--halo-surface-brand-contrast); }
+.swatch:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px rgb(0 0 0 / 0.12),
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+/* ---------- Picker ---------- */
+
+.popover { z-index: 1000; animation: in 120ms ease-out; }
+
+.picker {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-7);
+  width: 340px;
+  max-width: 100%;
+  padding: var(--halo-spacing-7);
+  border-radius: var(--halo-radius-5);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+}
+
+.area {
+  position: relative;
+  height: 160px;
+  border-radius: var(--halo-radius-3);
+  background:
+    linear-gradient(to top, #000, transparent),
+    linear-gradient(to right, #fff, transparent),
+    var(--hue);
+  cursor: crosshair;
+  touch-action: none;
+  outline: none;
+}
+.area:focus-visible { box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus); }
+.thumb {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--halo-radius-10);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgb(0 0 0 / 0.2);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.sliders { display: flex; align-items: center; gap: var(--halo-spacing-6); }
+.tracks { display: flex; flex: 1; flex-direction: column; gap: var(--halo-spacing-4); }
+
+.track {
+  width: 100%;
+  height: 12px;
+  margin: 0;
+  border-radius: var(--halo-radius-3);
+  appearance: none;
+  cursor: pointer;
+}
+.hue { background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%); }
+.alpha {
+  background:
+    linear-gradient(to right, transparent, var(--solid)),
+    repeating-conic-gradient(#d9d9d9 0 25%, #ffffff 0 50%) 0 0 / 8px 8px;
+}
+.track::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgb(0 0 0 / 0.2);
+  appearance: none;
+}
+.track::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgb(0 0 0 / 0.2);
+}
+.track:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus); }
+
+.values { display: flex; align-items: center; gap: var(--halo-spacing-2); }
+.format { width: 80px; flex-shrink: 0; }
+.fields { display: flex; flex: 1; gap: var(--halo-spacing-2); min-width: 0; }
+.hexField { flex: 1; }
+.numberField { flex: 1; min-width: 0; }
+.opacityField { width: 64px; flex-shrink: 0; }
+
+.swatches { display: flex; flex-wrap: wrap; gap: var(--halo-spacing-6); }
+
+@keyframes in { from { opacity: 0; transform: translateY(-2px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .popover { animation: none; }
+}

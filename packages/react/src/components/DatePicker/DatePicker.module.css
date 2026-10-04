@@ -1,0 +1,125 @@
+/* Values mirror the Calendar day and Calendar sets in Figma (Date picker page). */
+
+.popover { z-index: 1000; animation: in 120ms ease-out; }
+
+.calendar {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-4);
+  padding: var(--halo-spacing-6);
+  border-radius: var(--halo-radius-5);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+}
+
+.body { display: flex; gap: var(--halo-spacing-6); }
+.months { display: flex; flex-direction: column; gap: var(--halo-spacing-4); }
+
+.header { display: flex; align-items: center; gap: var(--halo-spacing-4); }
+.titles { display: flex; flex: 1; justify-content: space-around; gap: var(--halo-spacing-9); }
+.monthTitle {
+  font-size: var(--halo-font-size-md);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-md);
+}
+
+.monthRow { display: flex; gap: var(--halo-spacing-9); }
+.grid { border-collapse: collapse; }
+.weekday {
+  width: 40px;
+  height: 24px;
+  padding: 0;
+  color: var(--halo-text-secondary);
+  font-size: var(--halo-font-size-sm);
+  font-weight: var(--halo-font-weight-regular);
+  line-height: var(--halo-line-height-sm);
+}
+.grid tbody tr + tr .cell { border-top: 2px solid transparent; background-clip: padding-box; }
+
+.cell { width: 40px; height: 36px; padding: 0; text-align: center; }
+.inRange { background: var(--halo-surface-brand); }
+.rangeStart { border-radius: var(--halo-radius-10) 0 0 var(--halo-radius-10); }
+.rangeEnd { border-radius: 0 var(--halo-radius-10) var(--halo-radius-10) 0; }
+
+.day {
+  box-sizing: border-box;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: transparent;
+  color: var(--halo-text-primary);
+  font: inherit;
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.day:hover:not(:disabled) { background: var(--halo-button-secondary-hover); }
+.day:focus-visible {
+  outline: none;
+  background: var(--halo-surface-primary);
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+.today { box-shadow: inset 0 0 0 1px var(--halo-surface-brand-contrast); font-weight: var(--halo-font-weight-semibold); }
+.outside { color: var(--halo-text-secondary); }
+.day:disabled { color: var(--halo-text-disabled); cursor: not-allowed; }
+.selected,
+.selected:hover:not(:disabled),
+.selected:focus-visible { background: var(--halo-surface-brand-contrast); color: var(--halo-text-on-brand); font-weight: var(--halo-font-weight-semibold); }
+
+.presets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-1);
+  width: 168px;
+  padding-right: var(--halo-spacing-6);
+  box-shadow: inset -1px 0 0 var(--halo-border-secondary);
+}
+.preset {
+  box-sizing: border-box;
+  height: 36px;
+  padding: 0 var(--halo-spacing-6);
+  border: 0;
+  border-radius: var(--halo-radius-4);
+  background: transparent;
+  color: var(--halo-text-primary);
+  font: inherit;
+  font-size: var(--halo-font-size-md);
+  text-align: left;
+  cursor: pointer;
+}
+.preset:hover { background: var(--halo-button-secondary-hover); }
+.preset:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus); }
+.presetOn { background: var(--halo-surface-secondary); font-weight: var(--halo-font-weight-semibold); }
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--halo-spacing-6);
+  padding-top: var(--halo-spacing-4);
+  border-top: 1px solid var(--halo-border-secondary);
+}
+.rangeText { color: var(--halo-text-secondary); font-size: var(--halo-font-size-md); line-height: var(--halo-line-height-md); }
+.footerActions { display: flex; gap: var(--halo-spacing-2); }
+
+@keyframes in { from { opacity: 0; transform: translateY(-2px); } }
+
+@media (max-width: 860px) {
+  .body { flex-direction: column; }
+  /* One month at a time on narrow screens; the arrows still move through every month. */
+  .monthRow > :nth-child(n + 2),
+  .titles > :nth-child(n + 2) { display: none; }
+  .presets { width: auto; flex-direction: row; flex-wrap: wrap; padding: 0 0 var(--halo-spacing-4); box-shadow: inset 0 -1px 0 var(--halo-border-secondary); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popover { animation: none; }
+}

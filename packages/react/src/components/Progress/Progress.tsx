@@ -17,7 +17,7 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'sm' | 'md';
   /** What is in progress, shown above the bar. Figma: Label. */
   label?: ReactNode;
-  /** The value shown on the right, like "60%" or "7.2 of 10 GB". Defaults to the percentage. Figma: Value. */
+  /** The value shown on the right, like "60%" or "7.2 of 10 GB". Defaults to the percentage; false hides it. Figma: Value. */
   valueLabel?: ReactNode;
   /** What is happening or what to do next. Figma: Hint. */
   hint?: ReactNode;
@@ -27,13 +27,13 @@ const clamp = (v: number, max: number) => Math.min(Math.max(v, 0), max);
 
 /** Shows how far along something is, like an upload. Indeterminate when `value` is left out. */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function ProgressBar(
-  { value, max = 100, status = 'default', size = 'sm', label, valueLabel, hint, className, ...rest },
+  { value, max = 100, status = 'default', size = 'sm', label, valueLabel, hint, className, 'aria-label': ariaLabel, ...rest },
   ref,
 ) {
   const id = useId();
   const indeterminate = value === undefined;
   const pct = indeterminate ? 0 : (clamp(value, max) / max) * 100;
-  const shownValue = valueLabel ?? (indeterminate ? null : `${Math.round(pct)}%`);
+  const shownValue = valueLabel === false ? null : (valueLabel ?? (indeterminate ? null : `${Math.round(pct)}%`));
   const bar = (
     <div
       role="progressbar"
@@ -41,6 +41,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
       aria-valuemax={max}
       aria-valuenow={indeterminate ? undefined : clamp(value, max)}
       aria-valuetext={typeof valueLabel === 'string' ? valueLabel : undefined}
+      aria-label={label ? undefined : ariaLabel}
       aria-labelledby={label ? `${id}-label` : undefined}
       aria-describedby={hint ? `${id}-hint` : undefined}
       className={cx(styles.track, styles[size], styles[status], indeterminate && styles.indeterminate)}

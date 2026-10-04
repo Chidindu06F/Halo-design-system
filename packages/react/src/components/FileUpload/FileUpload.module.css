@@ -1,0 +1,104 @@
+/* Values mirror the File upload and File item sets in Figma (File upload page). */
+
+.drop {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--halo-spacing-6);
+  width: 100%;
+  padding: var(--halo-spacing-9);
+  border: 1px dashed var(--halo-border-strong);
+  border-radius: var(--halo-radius-5);
+  background: var(--halo-surface-primary);
+  text-align: center;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.over { border-color: var(--halo-surface-brand-contrast); background: var(--halo-surface-brand); }
+.error { border-color: var(--halo-state-error-primary); }
+.disabled { border-color: var(--halo-border-secondary); background: var(--halo-surface-minimal); }
+.disabled .title, .disabled .description { color: var(--halo-text-disabled); }
+.disabled .iconWrap { color: var(--halo-icon-disabled); }
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--halo-radius-10);
+  background: var(--halo-surface-secondary);
+  color: var(--halo-icon-primary);
+}
+.iconWrap > svg { width: 24px; height: 24px; }
+
+.text { display: flex; flex-direction: column; gap: var(--halo-spacing-1); }
+.title {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-md);
+}
+.description {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-sm);
+  line-height: var(--halo-line-height-sm);
+}
+.errorText { color: var(--halo-state-error-contrast); }
+
+/* ---------- File item ---------- */
+
+.item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--halo-spacing-6);
+  width: 100%;
+  padding: var(--halo-spacing-6);
+  border-radius: var(--halo-radius-5);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+}
+.itemError { box-shadow: inset 0 0 0 1px var(--halo-state-error-primary); }
+
+.fileIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--halo-radius-4);
+  background: var(--halo-surface-secondary);
+  color: var(--halo-icon-primary);
+}
+.fileIcon > svg { width: 24px; height: 24px; }
+
+.body { display: flex; flex: 1; flex-direction: column; gap: var(--halo-spacing-2); min-width: 0; }
+.name {
+  overflow: hidden;
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-md);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.meta { display: flex; align-items: center; gap: var(--halo-spacing-2); }
+.details {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-sm);
+  line-height: var(--halo-line-height-sm);
+}
+.statusIcon { width: 16px; height: 16px; flex-shrink: 0; }
+.positive { color: var(--halo-state-success-primary); }
+.negative { color: var(--halo-state-error-primary); }
+.actions { display: flex; gap: var(--halo-spacing-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .drop { transition: none; }
+}

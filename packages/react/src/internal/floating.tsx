@@ -40,7 +40,8 @@ export function useFloating(
     if (s === 'top' || s === 'bottom') {
       top = s === 'top' ? r.top - h - gap : r.bottom + gap;
       left = align === 'start' ? r.left : align === 'end' ? r.right - w : r.left + r.width / 2 - w / 2;
-      left = Math.min(Math.max(8, left), window.innerWidth - w - 8);
+      // Keep the start edge on screen when the panel is wider than the viewport.
+      left = Math.max(8, Math.min(left, window.innerWidth - w - 8));
     } else {
       left = s === 'left' ? r.left - w - gap : r.right + gap;
       top = align === 'start' ? r.top : align === 'end' ? r.bottom - h : r.top + r.height / 2 - h / 2;

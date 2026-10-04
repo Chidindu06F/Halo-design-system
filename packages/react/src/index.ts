@@ -82,6 +82,14 @@ export { DataTable, Table, TableBody, TableCell, TableFooter, TableHead, TableHe
 export type { DataTableColumn, DataTableProps, SortDirection, TableCellProps, TableFooterProps, TableHeaderCellProps, TableProps, TableRowProps, TableToolbarProps } from './components/Table';
 export { Tab, TabList, TabPanel, Tabs } from './components/Tabs';
 export type { TabListProps, TabPanelProps, TabProps, TabsProps } from './components/Tabs';
+export { ColorField, ColorInput, ColorPicker, ColorSwatch } from './components/ColorPicker';
+export type { ColorFieldProps, ColorFieldWithLabelProps, ColorFormat, ColorPickerProps, ColorSwatchProps } from './components/ColorPicker';
+export { Calendar, DatePicker, DatePickerField, DateRangePicker, DateRangePickerField } from './components/DatePicker';
+export type { CalendarPreset, CalendarProps, DatePickerFieldProps, DatePickerProps, DateRange, DateRangePickerFieldProps, DateRangePickerProps, RangeCalendarProps, SingleCalendarProps } from './components/DatePicker';
+export { FileItem, FileUpload, formatBytes } from './components/FileUpload';
+export type { FileItemProps, FileUploadProps } from './components/FileUpload';
+export { RichTextEditor, RichTextEditorField } from './components/RichTextEditor';
+export type { RichTextEditorFieldProps, RichTextEditorHandle, RichTextEditorProps } from './components/RichTextEditor';
 export { Text } from './components/Text';
 export type { TextColor, TextProps, TextSize, TextWeight } from './components/Text';
 export { Tooltip } from './components/Tooltip';
