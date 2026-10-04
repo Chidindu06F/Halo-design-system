@@ -1,0 +1,51 @@
+/* Values mirror the Page item and Pagination sets in Figma (Pagination page). */
+
+.pagination { display: flex; align-items: center; gap: var(--halo-spacing-6); }
+.md { --size: 40px; --text-size: var(--halo-font-size-md); --text-height: var(--halo-line-height-md); }
+.sm { --size: 32px; --text-size: var(--halo-font-size-sm); --text-height: var(--halo-line-height-sm); }
+
+.pages { display: flex; gap: var(--halo-spacing-2); margin: 0; padding: 0; list-style: none; }
+
+.page {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size);
+  height: var(--size);
+  padding: 0 var(--halo-spacing-4);
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: transparent;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.page:hover { background: var(--halo-surface-minimal); color: var(--halo-text-primary); }
+.page:focus-visible {
+  outline: none;
+  background: var(--halo-surface-primary);
+  color: var(--halo-text-primary);
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+.selected,
+.selected:hover {
+  background: var(--halo-surface-brand-contrast);
+  color: var(--halo-text-on-brand);
+  font-weight: var(--halo-font-weight-semibold);
+}
+.ellipsis { cursor: default; }
+.ellipsis:hover { background: transparent; color: var(--halo-text-secondary); }
+
+.count {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+  white-space: nowrap;
+}

@@ -1,0 +1,90 @@
+/* Values mirror the Step and Stepper sets in Figma (Stepper page). */
+
+.stepper { display: flex; margin: 0; padding: 0; list-style: none; }
+.horizontal { gap: var(--halo-spacing-4); }
+.vertical { flex-direction: column; }
+
+.step { display: flex; gap: var(--halo-spacing-4); min-width: 0; }
+.horizontal .step { flex: 1; }
+.horizontal .step:last-child { flex: 0 0 auto; }
+.vertical .step { gap: var(--halo-spacing-6); }
+
+.indicator {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--halo-radius-10);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--halo-font-size-sm);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-sm);
+}
+.indicator > svg { width: 14px; height: 14px; }
+.indicator.complete { background: var(--halo-button-primary); color: var(--halo-icon-on-brand); }
+.indicator.current { background: var(--halo-surface-primary); box-shadow: inset 0 0 0 2px var(--halo-button-primary); color: var(--halo-text-brand); }
+.indicator.upcoming { background: var(--halo-surface-primary); box-shadow: inset 0 0 0 1px var(--halo-border-strong); color: var(--halo-text-secondary); }
+.indicator.error { background: var(--halo-state-error-primary); color: var(--halo-icon-on-negative); }
+
+.text { display: flex; flex-direction: column; gap: var(--halo-spacing-1); min-width: 0; }
+.vertical .text { padding: var(--halo-spacing-1) 0 var(--halo-spacing-8); }
+.vertical .step:last-child .text { padding-bottom: 0; }
+.title {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+  white-space: nowrap;
+}
+.step.current .title { font-weight: var(--halo-font-weight-semibold); }
+.step.upcoming .title { color: var(--halo-text-secondary); }
+.step.error .title { color: var(--halo-state-error-contrast); }
+.description {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-sm);
+  line-height: var(--halo-line-height-sm);
+}
+
+.connector { display: block; border-radius: var(--halo-radius-10); background: var(--halo-border-secondary); }
+.connectorDone { background: var(--halo-button-primary); }
+.connectorWrap { display: flex; flex: 1; align-items: center; min-width: 24px; height: 24px; }
+.horizontal .connector { flex: 1; height: 2px; }
+
+.rail { display: flex; flex-direction: column; align-items: center; gap: var(--halo-spacing-2); }
+.vertical .connector { flex: 1; width: 2px; min-height: 16px; margin-bottom: var(--halo-spacing-2); }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Compact ---------- */
+
+.compact { display: flex; flex-direction: column; gap: var(--halo-spacing-6); }
+.compactHeader { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--halo-spacing-6); }
+.compactCurrent { display: flex; flex-direction: column; gap: var(--halo-spacing-1); }
+.count {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-sm);
+  line-height: var(--halo-line-height-sm);
+}
+.compactTitle {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-lg);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-lg);
+}
+.segments { display: flex; gap: var(--halo-spacing-2); }
+.segment { flex: 1; height: 4px; border-radius: var(--halo-radius-10); background: var(--halo-surface-secondary); }
+.segmentDone { background: var(--halo-button-primary); }
+.segmentError { background: var(--halo-state-error-primary); }

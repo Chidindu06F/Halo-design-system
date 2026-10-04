@@ -1,0 +1,109 @@
+/* Values mirror the Nav item, Sidebar and Top bar sets in Figma (Navigation page). */
+
+/* ---------- Nav item ---------- */
+
+.item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--halo-spacing-4);
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--halo-spacing-6);
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: transparent;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.item:hover:not(.disabled) { background: var(--halo-surface-minimal); color: var(--halo-text-primary); }
+.item:focus-visible {
+  outline: none;
+  background: var(--halo-surface-primary);
+  color: var(--halo-text-primary);
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+.selected,
+.selected:hover:not(.disabled) { background: var(--halo-surface-secondary); color: var(--halo-text-primary); font-weight: var(--halo-font-weight-semibold); }
+.disabled { color: var(--halo-text-disabled); cursor: not-allowed; }
+
+.typeCollapsed { justify-content: center; width: 40px; padding: 0; }
+.typeTop { width: auto; height: 36px; }
+
+.icon { display: inline-flex; flex-shrink: 0; width: 20px; height: 20px; }
+.icon > svg { width: 100%; height: 100%; }
+.selected .icon { color: var(--halo-icon-primary); }
+.label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.typeTop .label { flex: none; }
+.chevron { width: 16px; height: 16px; flex-shrink: 0; transition: transform 160ms ease; }
+.chevronOpen { transform: rotate(180deg); }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-6);
+  width: 260px;
+  height: 100%;
+  padding: var(--halo-spacing-7);
+  background: var(--halo-surface-primary);
+  box-shadow: inset -1px 0 0 var(--halo-border-secondary);
+  transition: width 160ms ease;
+}
+.isCollapsed { width: 72px; align-items: center; }
+
+.sidebarHeader { display: flex; align-items: center; gap: var(--halo-spacing-4); min-height: 32px; width: 100%; }
+.isCollapsed .sidebarHeader { justify-content: center; }
+.brand { display: flex; flex: 1; align-items: center; gap: var(--halo-spacing-4); min-width: 0; }
+
+.items { display: flex; flex-direction: column; gap: var(--halo-spacing-1); width: 100%; }
+.isCollapsed .items { align-items: center; }
+.spacer { flex: 1; }
+.divider { width: 100%; height: 1px; margin: 0; border: 0; background: var(--halo-border-secondary); }
+.user { display: flex; align-items: center; gap: var(--halo-spacing-4); width: 100%; min-width: 0; }
+.isCollapsed .user { justify-content: center; }
+
+/* ---------- Top bar ---------- */
+
+.topBar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--halo-spacing-8);
+  height: 64px;
+  padding: 0 var(--halo-spacing-9);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 -1px 0 var(--halo-border-secondary);
+}
+.topBar .brand { flex: none; }
+.links { display: flex; align-items: center; gap: var(--halo-spacing-1); }
+.actions { display: flex; align-items: center; gap: var(--halo-spacing-4); }
+.menuButton { display: none; }
+
+@media (max-width: 767px) {
+  .topBar { padding: 0 var(--halo-spacing-7); }
+  .links { display: none; }
+  .menuButton { display: inline-flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .chevron { transition: none; }
+}

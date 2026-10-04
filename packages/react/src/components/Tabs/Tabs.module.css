@@ -1,0 +1,71 @@
+/* Values mirror the Tab and Tabs sets in Figma (Tabs page). */
+
+.tabs { display: flex; flex-direction: column; gap: var(--halo-spacing-7); }
+.vertical { flex-direction: row; align-items: flex-start; }
+
+.md { --h: 40px; --pad: var(--halo-spacing-6); --text-size: var(--halo-font-size-md); --text-height: var(--halo-line-height-md); }
+.sm { --h: 32px; --pad: var(--halo-spacing-5); --text-size: var(--halo-font-size-sm); --text-height: var(--halo-line-height-sm); }
+
+.list { display: flex; gap: var(--halo-spacing-2); }
+.line .list { box-shadow: inset 0 -1px 0 var(--halo-border-secondary); }
+.vertical .list { flex-direction: column; flex-shrink: 0; width: 200px; gap: var(--halo-spacing-1); }
+.vertical.line .list { box-shadow: inset 1px 0 0 var(--halo-border-secondary); }
+.pill .list { gap: var(--halo-spacing-2); }
+.fullWidth .tab { flex: 1; }
+
+.tab {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: var(--h);
+  padding: 0;
+  border: 0;
+  border-radius: var(--halo-radius-2);
+  background: transparent;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--text-size);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--text-height);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tab:hover:not(:disabled),
+.selected { color: var(--halo-text-primary); }
+.tab:disabled { color: var(--halo-text-disabled); cursor: not-allowed; }
+.tab:focus-visible {
+  outline: none;
+  background: var(--halo-surface-primary);
+  color: var(--halo-text-primary);
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: var(--halo-spacing-3);
+  padding: 0 var(--pad);
+}
+.vertical .content { justify-content: flex-start; }
+.label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.icon { display: inline-flex; width: 16px; height: 16px; flex-shrink: 0; }
+.icon > svg { width: 100%; height: 100%; }
+
+/* Line: a 2px indicator under the tab, or on its left when vertical. */
+.line .tab { box-shadow: inset 0 -2px 0 var(--indicator, transparent); }
+.line.vertical .tab { width: 100%; box-shadow: inset 2px 0 0 var(--indicator, transparent); }
+.line .selected { --indicator: var(--halo-button-primary); }
+.line .tab:focus-visible { box-shadow: inset 0 -2px 0 var(--indicator, transparent), 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus); }
+.line.vertical .tab:focus-visible { box-shadow: inset 2px 0 0 var(--indicator, transparent), 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus); }
+
+/* Pill: a grey pill behind the selected tab. */
+.pill .tab { border-radius: var(--halo-radius-10); }
+.pill.vertical .tab { width: 100%; }
+.pill .selected { background: var(--halo-surface-minimal); }
+
+.panel { flex: 1; min-width: 0; outline: none; }
+.panel:focus-visible { border-radius: var(--halo-radius-2); box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus); }
