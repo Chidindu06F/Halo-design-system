@@ -1,5 +1,6 @@
 import { Children, forwardRef, isValidElement, useEffect, useRef, useState } from 'react';
 import type { AnchorHTMLAttributes, HTMLAttributes, ReactElement, ReactNode } from 'react';
+import { CompactButton } from '../CompactButton';
 import { CARET_RIGHT, DOTS_THREE } from './icons';
 import styles from './Breadcrumbs.module.css';
 
@@ -97,14 +98,14 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(function Br
         parts.push(<Separator key="sep-overflow" type={separator} />);
         parts.push(
           <li key="overflow" className={styles.item}>
-            <button
-              type="button"
-              className={styles.overflow}
+            <CompactButton
+              variant="ghost"
+              size={size === 'sm' ? 'md' : 'lg'}
               aria-label={`Show ${hiddenCount} hidden ${hiddenCount === 1 ? 'page' : 'pages'}`}
               onClick={() => setExpanded(true)}
             >
-              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d={DOTS_THREE} /></svg>
-            </button>
+              <svg viewBox="0 0 256 256" fill="currentColor"><path d={DOTS_THREE} /></svg>
+            </CompactButton>
           </li>,
         );
       }

@@ -1,7 +1,7 @@
 /* Values mirror the Breadcrumb item, Breadcrumb separator and Breadcrumbs sets in Figma (Breadcrumbs page). */
 
-.sm { --fs: var(--halo-font-size-sm); --lh: var(--halo-line-height-sm); --gap: var(--halo-spacing-3); --icon: 14px; --box: 20px; }
-.md { --fs: var(--halo-font-size-md); --lh: var(--halo-line-height-md); --gap: var(--halo-spacing-4); --icon: 16px; --box: 24px; }
+.sm { --fs: var(--halo-font-size-sm); --lh: var(--halo-line-height-sm); --gap: var(--halo-spacing-3); --icon: 14px; }
+.md { --fs: var(--halo-font-size-md); --lh: var(--halo-line-height-md); --gap: var(--halo-spacing-4); --icon: 16px; }
 
 .list {
   display: flex;
@@ -74,30 +74,4 @@
   width: var(--icon);
   height: var(--icon);
   color: var(--halo-icon-disabled);
-}
-
-.overflow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--box);
-  height: var(--box);
-  padding: 0;
-  border: none;
-  border-radius: var(--halo-radius-3);
-  background: transparent;
-  color: var(--halo-text-secondary);
-  cursor: pointer;
-}
-
-.overflow > svg {
-  width: var(--icon);
-  height: var(--icon);
-}
-
-.overflow:hover,
-.overflow:focus-visible {
-  background: var(--halo-surface-secondary);
-  color: var(--halo-text-primary);
-  outline: none;
 }
