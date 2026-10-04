@@ -1,0 +1,89 @@
+/* Values mirror the Drawer set in Figma (Drawer page). No shadow: the Overlay separates it. */
+
+.drawer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 2 * var(--halo-spacing-4));
+  border-radius: var(--halo-radius-6);
+  background: var(--halo-surface-primary);
+  outline: none;
+  overflow: hidden;
+}
+
+/* Side drawers float a little in from the edge, matching their rounded corners in Figma. */
+.right,
+.left { height: calc(100% - 2 * var(--halo-spacing-4)); margin: var(--halo-spacing-4); }
+.right { animation: from-right 200ms ease-out; }
+.left { animation: from-left 200ms ease-out; }
+.sm { width: 320px; }
+.md { width: 400px; }
+.lg { width: 560px; }
+
+.bottom {
+  width: 100%;
+  max-width: none;
+  max-height: 90%;
+  border-radius: var(--halo-radius-6) var(--halo-radius-6) 0 0;
+  animation: from-bottom 200ms ease-out;
+}
+
+.handle { display: flex; justify-content: center; padding-top: var(--halo-spacing-4); }
+.grip { width: 36px; height: 4px; border-radius: var(--halo-radius-10); background: var(--halo-border-strong); }
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--halo-spacing-6);
+  padding: var(--halo-spacing-9);
+  border-bottom: 1px solid var(--halo-border-secondary);
+}
+.bottom .header { padding-top: var(--halo-spacing-6); }
+.text { display: flex; flex: 1; flex-direction: column; gap: var(--halo-spacing-3); min-width: 0; }
+.title {
+  margin: 0;
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-xl);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-xl);
+}
+.description {
+  margin: 0;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--halo-spacing-7);
+  overflow-y: auto;
+  padding: var(--halo-spacing-9);
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--halo-spacing-4);
+  padding: var(--halo-spacing-9);
+  border-top: 1px solid var(--halo-border-secondary);
+}
+/* Stacked, the main action (last in a row) goes on top. */
+.bottom .footer { flex-direction: column-reverse; }
+.bottom .footer > * { width: 100%; }
+
+@keyframes from-right { from { transform: translateX(24px); opacity: 0; } }
+@keyframes from-left { from { transform: translateX(-24px); opacity: 0; } }
+@keyframes from-bottom { from { transform: translateY(24px); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer { animation: none; }
+}

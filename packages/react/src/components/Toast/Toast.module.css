@@ -1,0 +1,92 @@
+/* Values mirror the Toast set in Figma (Toast page). No shadow: a border keeps it clear. */
+
+.toast {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--halo-spacing-6);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--halo-spacing-7);
+  border-radius: var(--halo-radius-5);
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.default { --bg: var(--halo-surface-primary); --line: var(--halo-border-secondary); --title-color: var(--halo-text-primary); --desc-color: var(--halo-text-secondary); --tone: var(--halo-icon-primary); }
+.inverse { --bg: var(--halo-surface-invert); --line: var(--halo-surface-invert); --title-color: var(--halo-text-invert); --desc-color: var(--halo-text-invert); --tone: var(--halo-icon-invert); }
+.inverse .close { --icon-color: var(--halo-icon-invert); }
+
+.information { --tone: var(--halo-state-information-primary); }
+.success { --tone: var(--halo-state-success-primary); }
+.warning { --tone: var(--halo-state-warning-primary); }
+.error { --tone: var(--halo-state-error-primary); }
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--tone);
+}
+.icon > svg { width: 100%; height: 100%; }
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--halo-spacing-4);
+  min-width: 0;
+}
+.text { display: flex; flex-direction: column; gap: var(--halo-spacing-1); }
+.title {
+  color: var(--title-color);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--halo-font-size-md);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-md);
+}
+.description {
+  color: var(--desc-color);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+}
+.actions { display: flex; flex-wrap: wrap; gap: var(--halo-spacing-4); }
+.close { flex-shrink: 0; }
+
+/* ---------- Region ---------- */
+
+.region {
+  position: fixed;
+  z-index: 1100;
+  display: flex;
+  width: min(400px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-4);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item { pointer-events: auto; animation: in 160ms ease-out; }
+
+.bottom-right { right: var(--halo-spacing-9); bottom: var(--halo-spacing-9); }
+.bottom-left { left: var(--halo-spacing-9); bottom: var(--halo-spacing-9); }
+.bottom-center { left: 50%; bottom: var(--halo-spacing-9); transform: translateX(-50%); }
+.top-right { right: var(--halo-spacing-9); top: var(--halo-spacing-9); }
+.top-left { left: var(--halo-spacing-9); top: var(--halo-spacing-9); }
+.top-center { left: 50%; top: var(--halo-spacing-9); transform: translateX(-50%); }
+.top-right .list, .top-left .list, .top-center .list { flex-direction: column-reverse; }
+
+@keyframes in { from { opacity: 0; transform: translateY(4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .item { animation: none; }
+}

@@ -1,0 +1,43 @@
+/* Values mirror the Empty state set in Figma (Empty state page). */
+
+.empty {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  max-width: var(--width);
+  margin-inline: auto;
+  padding: var(--pad);
+  text-align: center;
+}
+.lg { --width: 400px; --pad: var(--halo-spacing-9); --gap: var(--halo-spacing-7); --circle: 56px; --glyph: 24px; --title-size: var(--halo-font-size-lg); --title-height: var(--halo-line-height-lg); --desc-size: var(--halo-font-size-md); --desc-height: var(--halo-line-height-md); }
+.sm { --width: 320px; --pad: var(--halo-spacing-7); --gap: var(--halo-spacing-6); --circle: 40px; --glyph: 20px; --title-size: var(--halo-font-size-md); --title-height: var(--halo-line-height-md); --desc-size: var(--halo-font-size-sm); --desc-height: var(--halo-line-height-sm); }
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--circle);
+  height: var(--circle);
+  border-radius: var(--halo-radius-10);
+  background: var(--halo-surface-secondary);
+  color: var(--halo-icon-primary);
+}
+.icon > svg { width: var(--glyph); height: var(--glyph); }
+
+.text { display: flex; flex-direction: column; gap: var(--halo-spacing-3); }
+.title {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--title-size);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--title-height);
+}
+.description {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--desc-size);
+  line-height: var(--desc-height);
+}
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--halo-spacing-4); }

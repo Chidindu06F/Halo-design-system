@@ -1,0 +1,69 @@
+/* Values mirror the Modal set in Figma (Modal page). No shadow: the Overlay and a border separate it. */
+
+.modal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-7);
+  width: 440px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: var(--halo-spacing-9);
+  border-radius: var(--halo-radius-6);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+  outline: none;
+  animation: in 160ms ease-out;
+}
+.stacked { width: 340px; }
+
+.default { --icon-bg: var(--halo-surface-brand-secondary); --icon-color: var(--halo-text-brand); }
+.destructive { --icon-bg: var(--halo-state-error-secondary); --icon-color: var(--halo-state-error-contrast); }
+
+.header { display: flex; align-items: flex-start; justify-content: space-between; }
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--halo-radius-7);
+  background: var(--icon-bg);
+  color: var(--icon-color);
+}
+.icon > svg { width: 20px; height: 20px; }
+.close { margin-left: auto; }
+
+.text { display: flex; flex-direction: column; gap: var(--halo-spacing-3); }
+.title {
+  margin: 0;
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-xl);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-xl);
+}
+.description {
+  margin: 0;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+}
+.content {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+}
+
+.actions { display: flex; justify-content: flex-end; gap: var(--halo-spacing-4); }
+.stacked .actions { flex-direction: column; }
+.stacked .actions > * { width: 100%; }
+
+@keyframes in { from { opacity: 0; transform: translateY(4px) scale(0.99); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .modal { animation: none; }
+}
