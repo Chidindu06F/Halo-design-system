@@ -44,6 +44,14 @@ export { Input, InputField, NumberInput, PasswordInput, VerificationCode } from 
 export type { InputFieldProps, InputProps, InputSize, NumberInputProps, PasswordInputProps, VerificationCodeProps } from './components/Input';
 export { Textarea, TextareaField } from './components/Textarea';
 export type { TextareaFieldProps, TextareaProps } from './components/Textarea';
+export { Radio, RadioGroup } from './components/Radio';
+export type { RadioGroupProps, RadioProps, RadioSize } from './components/Radio';
+export { SegmentedControl } from './components/SegmentedControl';
+export type { SegmentedControlProps, SegmentedOption } from './components/SegmentedControl';
+export { RangeSlider, Slider } from './components/Slider';
+export type { RangeSliderProps, SliderProps } from './components/Slider';
+export { Switch } from './components/Switch';
+export type { SwitchProps } from './components/Switch';
 export { Text } from './components/Text';
 export type { TextColor, TextProps, TextSize, TextWeight } from './components/Text';
 export { Tooltip } from './components/Tooltip';

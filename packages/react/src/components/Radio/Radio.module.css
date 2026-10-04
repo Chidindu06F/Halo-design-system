@@ -1,0 +1,129 @@
+/* Values mirror the Radio, Radio field and Radio group sets in Figma (Radio page). */
+
+.sm {
+  --box: 16px;
+  --dot: 6px;
+  --line-width: 1px;
+  --nudge: 2px;
+  --gap: var(--halo-spacing-3);
+  --label-size: var(--halo-font-size-sm);
+  --label-height: var(--halo-line-height-sm);
+  --desc-size: var(--halo-font-size-xs);
+  --desc-height: var(--halo-line-height-xs);
+}
+.md {
+  --box: 20px;
+  --dot: 8px;
+  --line-width: 1.5px;
+  --nudge: 1px;
+  --gap: var(--halo-spacing-4);
+  --label-size: var(--halo-font-size-md);
+  --label-height: var(--halo-line-height-md);
+  --desc-size: var(--halo-font-size-sm);
+  --desc-height: var(--halo-line-height-sm);
+}
+
+.field {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--gap);
+  font-family: var(--halo-font-family-label);
+  cursor: pointer;
+}
+.control { display: inline-flex; flex-shrink: 0; padding-top: var(--nudge); }
+.text { display: flex; flex-direction: column; }
+.label { color: var(--halo-text-primary); font-size: var(--label-size); line-height: var(--label-height); }
+.description {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--desc-size);
+  line-height: var(--desc-height);
+}
+
+.input {
+  --line: var(--halo-border-strong);
+  --fill: var(--halo-surface-primary);
+  --dot-color: transparent;
+  appearance: none;
+  display: grid;
+  place-content: center;
+  width: var(--box);
+  height: var(--box);
+  margin: 0;
+  border-radius: var(--halo-radius-10);
+  background: var(--fill);
+  box-shadow: inset 0 0 0 var(--line-width) var(--line);
+  cursor: pointer;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+.input::before {
+  content: '';
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  background: var(--dot-color);
+}
+
+.field:hover .input:not(:disabled) { --line: var(--halo-border-contrast); }
+.input:checked { --fill: var(--halo-button-primary); --line: transparent; --dot-color: var(--halo-icon-on-brand); }
+.field:hover .input:checked:not(:disabled) { --fill: var(--halo-button-primary-hover); }
+
+.input:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 var(--line-width) var(--line),
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+.input[aria-invalid='true'],
+.field:hover .input[aria-invalid='true']:not(:disabled) { --line: var(--halo-state-error-primary); }
+.input[aria-invalid='true']:checked,
+.field:hover .input[aria-invalid='true']:checked { --fill: var(--halo-state-error-primary); --line: transparent; --dot-color: var(--halo-icon-on-negative); }
+
+.input:disabled { --fill: var(--halo-button-disabled); --line: var(--halo-border-secondary); cursor: not-allowed; }
+.input:disabled:checked { --line: transparent; --dot-color: var(--halo-icon-disabled); }
+.disabled { cursor: not-allowed; }
+.disabled .label,
+.disabled .description { color: var(--halo-text-disabled); }
+
+/* ---------- Group ---------- */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-3);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.legend { float: left; width: 100%; padding: 0; }
+.options { display: flex; clear: both; }
+.vertical { flex-direction: column; align-items: flex-start; gap: var(--halo-spacing-6); }
+.horizontal { flex-wrap: wrap; gap: var(--halo-spacing-8); }
+
+.hint {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--halo-spacing-2);
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-xs);
+  line-height: var(--halo-line-height-xs);
+}
+.error { color: var(--halo-state-error-contrast); }
+.hintIcon { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--halo-icon-negative); }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input { transition: none; }
+}

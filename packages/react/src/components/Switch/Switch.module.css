@@ -1,0 +1,65 @@
+/* Values mirror the Switch and Switch field sets in Figma (Switch page). */
+
+.sm {
+  --w: 28px; --h: 16px; --thumb: 12px; --nudge: 2px;
+  --gap: var(--halo-spacing-3);
+  --label-size: var(--halo-font-size-sm); --label-height: var(--halo-line-height-sm);
+  --desc-size: var(--halo-font-size-xs); --desc-height: var(--halo-line-height-xs);
+}
+.md {
+  --w: 36px; --h: 20px; --thumb: 16px; --nudge: 1px;
+  --gap: var(--halo-spacing-4);
+  --label-size: var(--halo-font-size-md); --label-height: var(--halo-line-height-md);
+  --desc-size: var(--halo-font-size-sm); --desc-height: var(--halo-line-height-sm);
+}
+
+.track {
+  --bg: var(--halo-surface-contrast);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: var(--w);
+  height: var(--h);
+  padding: var(--halo-spacing-1);
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: var(--bg);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.track:hover:not(:disabled) { --bg: var(--halo-surface-heavy-contrast); }
+.track[aria-checked='true'] { --bg: var(--halo-button-primary); }
+.track[aria-checked='true']:hover:not(:disabled) { --bg: var(--halo-button-primary-hover); }
+.track:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus);
+}
+.track:disabled { --bg: var(--halo-button-disabled); cursor: not-allowed; }
+
+.thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  background: var(--halo-icon-on-brand);
+  transition: transform 160ms cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+.track[aria-checked='true'] .thumb { transform: translateX(calc(var(--w) - var(--thumb) - 4px)); }
+.track:disabled .thumb { background: var(--halo-surface-primary); }
+
+.field {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--gap);
+  font-family: var(--halo-font-family-label);
+}
+.end { display: flex; width: 100%; flex-direction: row-reverse; justify-content: space-between; gap: var(--halo-spacing-7); }
+.control { display: inline-flex; padding-top: var(--nudge); }
+.text { display: flex; flex-direction: column; }
+.label { color: var(--halo-text-primary); font-size: var(--label-size); line-height: var(--label-height); cursor: pointer; }
+.description { color: var(--halo-text-secondary); font-family: var(--halo-font-family-body); font-size: var(--desc-size); line-height: var(--desc-height); }
+.disabled .label,
+.disabled .description { color: var(--halo-text-disabled); cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .track, .thumb { transition: none; }
+}

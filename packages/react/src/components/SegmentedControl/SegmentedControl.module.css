@@ -1,0 +1,54 @@
+/* Values mirror the Segment and Segmented control sets in Figma (Segmented control page). */
+
+.sm { --h: 28px; --pad: var(--halo-spacing-5); --text-size: var(--halo-font-size-xs); --text-height: var(--halo-line-height-xs); }
+.md { --h: 36px; --pad: var(--halo-spacing-6); --text-size: var(--halo-font-size-sm); --text-height: var(--halo-line-height-sm); }
+
+.track {
+  display: inline-flex;
+  gap: var(--halo-spacing-1);
+  padding: var(--halo-spacing-1);
+  border-radius: var(--halo-radius-10);
+  background: var(--halo-surface-minimal);
+}
+.full { display: flex; width: 100%; }
+.full .segment { flex: 1; }
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--halo-spacing-3);
+  height: var(--h);
+  padding: 0 var(--pad);
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: transparent;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+.iconOnly { width: var(--h); padding: 0; }
+.icon { display: inline-flex; width: 16px; height: 16px; }
+.icon > svg { width: 100%; height: 100%; }
+
+.segment:hover:not(:disabled) { color: var(--halo-text-primary); }
+.segment[aria-checked='true'] {
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+  color: var(--halo-text-primary);
+  font-weight: var(--halo-font-weight-semibold);
+}
+.segment:focus-visible {
+  outline: none;
+  background: var(--halo-surface-primary);
+  box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus);
+}
+.segment:disabled { color: var(--halo-text-disabled); cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .segment { transition: none; }
+}

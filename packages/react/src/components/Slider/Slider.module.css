@@ -1,0 +1,114 @@
+/* Values mirror the Slider and Slider field sets in Figma (Slider page). */
+
+.sm { --track-h: 4px; --thumb: 16px; }
+.md { --track-h: 6px; --thumb: 20px; }
+
+.field {
+  --fill: var(--halo-button-primary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--halo-spacing-3);
+  width: 100%;
+}
+.field:has(.range:disabled) { --fill: var(--halo-text-disabled); }
+
+.header { display: flex; justify-content: space-between; align-items: center; gap: var(--halo-spacing-4); }
+.label {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-label);
+  font-size: var(--halo-font-size-sm);
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: var(--halo-line-height-sm);
+}
+.value {
+  color: var(--halo-text-primary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-md);
+  line-height: var(--halo-line-height-md);
+  font-variant-numeric: tabular-nums;
+}
+.ends {
+  display: flex;
+  justify-content: space-between;
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-xs);
+  line-height: var(--halo-line-height-xs);
+}
+
+/* The track is drawn behind the input; the input only draws the handle */
+.track {
+  position: relative;
+  height: var(--thumb);
+  margin: 0 calc(var(--thumb) / 2);
+}
+/* Grey track, full width with round ends */
+.track::before,
+.track::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: var(--track-h);
+  border-radius: var(--halo-radius-10);
+  transform: translateY(-50%);
+}
+.track::before {
+  left: calc(var(--thumb) / -2);
+  right: calc(var(--thumb) / -2);
+  background: var(--halo-surface-secondary);
+}
+/* Purple fill from the start (or the first handle) to the handle */
+.track::after {
+  left: calc(var(--thumb) / -2);
+  right: calc(100% - var(--to));
+  background: var(--fill);
+}
+.dual::after { left: var(--from); }
+.track:has(.range:disabled)::before { background: var(--halo-button-disabled); }
+
+.range {
+  position: absolute;
+  z-index: 1;
+  inset: 0 calc(var(--thumb) / -2);
+  width: calc(100% + var(--thumb));
+  height: var(--thumb);
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+.range:disabled { cursor: not-allowed; }
+.range::-webkit-slider-runnable-track { height: var(--thumb); background: transparent; }
+.range::-moz-range-track { background: transparent; }
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 2px var(--fill);
+}
+.range::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border: 0;
+  border-radius: 50%;
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 2px var(--fill);
+}
+.range:hover:not(:disabled) { --fill: var(--halo-button-primary-hover); }
+.range:focus-visible { outline: none; }
+.range:focus-visible::-webkit-slider-thumb {
+  box-shadow: inset 0 0 0 2px var(--fill), 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus);
+}
+.range:focus-visible::-moz-range-thumb {
+  box-shadow: inset 0 0 0 2px var(--fill), 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus);
+}
+.range:disabled::-webkit-slider-thumb { box-shadow: inset 0 0 0 2px var(--halo-border-secondary); }
+.range:disabled::-moz-range-thumb { box-shadow: inset 0 0 0 2px var(--halo-border-secondary); }
+
+/* Two handles: let clicks through the inputs except on the handles */
+.dual .range { pointer-events: none; }
+.dual .range::-webkit-slider-thumb { pointer-events: auto; }
+.dual .range::-moz-range-thumb { pointer-events: auto; }
