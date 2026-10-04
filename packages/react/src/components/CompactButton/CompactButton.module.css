@@ -77,9 +77,10 @@
 }
 
 .selected {
-  --bg: var(--halo-button-primary);
-  --bg-hover: var(--halo-button-primary-hover);
-  --icon-color: var(--halo-icon-on-brand);
+  /* Neutral grey, the same as hover, so active tools stay calm (Figma: State=Selected) */
+  --bg: var(--halo-surface-secondary);
+  --bg-hover: var(--halo-surface-secondary);
+  --icon-color: var(--halo-icon-primary);
   --outline: transparent;
 }
 

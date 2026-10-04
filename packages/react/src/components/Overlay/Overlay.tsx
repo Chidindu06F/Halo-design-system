@@ -1,0 +1,19 @@
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
+import { cx } from '../../internal/cx';
+import styles from './Overlay.module.css';
+
+export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
+  /** dim darkens the page; blur also blurs it. Figma: Style. */
+  variant?: 'dim' | 'blur';
+  /** Where the content sits. Figma: Position. */
+  position?: 'center' | 'left' | 'right' | 'bottom';
+}
+
+/** Covers the page behind a Modal or Drawer. Fixed to the viewport. */
+export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(function Overlay(
+  { variant = 'dim', position = 'center', className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={cx(styles.overlay, styles[variant], styles[position], className)} {...rest} />;
+});

@@ -1,0 +1,33 @@
+/* Values mirror the Spinner and Loading indicator sets in Figma (Spinner page). */
+
+.spinner {
+  --arc: var(--halo-button-primary);
+  --track: var(--halo-surface-secondary);
+  --track-opacity: 1;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.neutral { --arc: var(--halo-icon-primary); }
+.onBrand { --arc: var(--halo-icon-on-brand); --track: var(--halo-icon-on-brand); --track-opacity: 0.3; }
+
+.spinner svg { animation: spin 1s linear infinite; }
+.track { stroke: var(--track); opacity: var(--track-opacity); }
+.arc { stroke: var(--arc); transform: rotate(-90deg); transform-origin: center; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Reduced motion: slower, but still moving so people know it is working */
+@media (prefers-reduced-motion: reduce) {
+  .spinner svg { animation-duration: 3s; }
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--halo-spacing-4);
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-sm);
+  line-height: var(--halo-line-height-sm);
+}
+.stacked { flex-direction: column; gap: var(--halo-spacing-6); }

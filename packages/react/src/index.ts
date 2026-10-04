@@ -28,6 +28,16 @@ export type { LinkButtonProps, LinkButtonSize, LinkButtonVariant } from './compo
 export { SocialButton } from './components/SocialButton';
 export type { SocialButtonProps, SocialButtonVariant, SocialProvider } from './components/SocialButton';
 
+export { Divider } from './components/Divider';
+export type { DividerProps } from './components/Divider';
+export { LoadingIndicator, Spinner } from './components/Spinner';
+export type { LoadingIndicatorProps, SpinnerColor, SpinnerProps, SpinnerSize } from './components/Spinner';
+export { Overlay } from './components/Overlay';
+export type { OverlayProps } from './components/Overlay';
+export { ProgressBar, ProgressCircle } from './components/Progress';
+export type { ProgressBarProps, ProgressCircleProps, ProgressStatus } from './components/Progress';
+export { Skeleton } from './components/Skeleton';
+export type { SkeletonProps } from './components/Skeleton';
 export { Text } from './components/Text';
 export type { TextColor, TextProps, TextSize, TextWeight } from './components/Text';
 export { Tooltip } from './components/Tooltip';

@@ -1,0 +1,32 @@
+/* Values mirror the Divider component set in Figma (Divider page). */
+
+.divider {
+  --line: var(--halo-border-secondary);
+  --style: solid;
+  flex-shrink: 0;
+}
+.strong { --line: var(--halo-border-strong); }
+.dashed { --style: dashed; }
+
+.horizontal:not(.labelled) { width: 100%; border-top: 1px var(--style) var(--line); }
+.vertical:not(.labelled) { align-self: stretch; min-height: 1em; border-left: 1px var(--style) var(--line); }
+
+.labelled {
+  display: flex;
+  align-items: center;
+  gap: var(--halo-spacing-6);
+}
+.labelled.vertical { flex-direction: column; align-self: stretch; }
+
+.line { flex: 1; }
+.horizontal .line { border-top: 1px var(--style) var(--line); }
+.vertical .line { border-left: 1px var(--style) var(--line); min-height: 1em; }
+.horizontal.start .line:first-child { flex: 0 0 var(--halo-spacing-9); }
+
+.label {
+  color: var(--halo-text-secondary);
+  font-family: var(--halo-font-family-body);
+  font-size: var(--halo-font-size-xs);
+  line-height: var(--halo-line-height-xs);
+  white-space: nowrap;
+}
