@@ -21,22 +21,24 @@
 .default { --icon-bg: var(--halo-surface-brand-secondary); --icon-color: var(--halo-text-brand); }
 .destructive { --icon-bg: var(--halo-state-error-secondary); --icon-color: var(--halo-state-error-contrast); }
 
-.header { display: flex; align-items: flex-start; justify-content: space-between; }
+.header { display: flex; align-items: center; gap: var(--halo-spacing-6); }
 .icon {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--halo-radius-7);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--halo-radius-6);
   background: var(--icon-bg);
   color: var(--icon-color);
 }
-.icon > svg { width: 20px; height: 20px; }
-.close { margin-left: auto; }
+.icon > svg { width: 16px; height: 16px; }
+.close { flex-shrink: 0; }
 
-.text { display: flex; flex-direction: column; gap: var(--halo-spacing-3); }
 .title {
+  flex: 1;
+  min-width: 0;
   margin: 0;
   color: var(--halo-text-primary);
   font-family: var(--halo-font-family-body);

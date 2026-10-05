@@ -78,20 +78,16 @@ export function Modal({
           tabIndex={-1}
           className={cx(styles.modal, styles[type], styles[layout], className)}
         >
-          {(shownIcon || showClose) && (
-            <div className={styles.header}>
-              {shownIcon && <span className={styles.icon} aria-hidden="true">{shownIcon}</span>}
-              {showClose && (
-                <CompactButton variant="ghost" aria-label="Close" className={styles.close} onClick={onClose}>
-                  <Icon name="X" />
-                </CompactButton>
-              )}
-            </div>
-          )}
-          <div className={styles.text}>
+          <div className={styles.header}>
+            {shownIcon && <span className={styles.icon} aria-hidden="true">{shownIcon}</span>}
             <h2 id={`${id}-title`} className={styles.title}>{title}</h2>
-            {description && <p id={`${id}-desc`} className={styles.description}>{description}</p>}
+            {showClose && (
+              <CompactButton variant="ghost" aria-label="Close" className={styles.close} onClick={onClose}>
+                <Icon name="X" />
+              </CompactButton>
+            )}
           </div>
+          {description && <p id={`${id}-desc`} className={styles.description}>{description}</p>}
           {children && <div className={styles.content}>{children}</div>}
           {actions && <div className={styles.actions}>{actions}</div>}
         </div>
