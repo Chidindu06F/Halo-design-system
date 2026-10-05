@@ -12,6 +12,15 @@ const sparkle = (x: number, y: number, s: number, c: 'A' | 'K') =>
 const bar = (x: number, y: number, w: number, h: number, c: 'D' | 'H' | 'A' | 'K') =>
   `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${Math.min(h, w) / 2}" fill="@${c}"/>`;
 
+const star = (cx: number, cy: number, r: number, c: 'A' | 'K' | 'D' | 'H') => {
+  const pts = Array.from({ length: 10 }, (_, i) => {
+    const a = (Math.PI / 5) * i - Math.PI / 2;
+    const rr = i % 2 ? r * 0.45 : r;
+    return `${(cx + rr * Math.cos(a)).toFixed(2)} ${(cy + rr * Math.sin(a)).toFixed(2)}`;
+  });
+  return `<path d="M${pts.join('L')}Z" fill="@${c}" stroke="@${c}" stroke-width="1.5" stroke-linejoin="round"/>`;
+};
+
 function gear(cx: number, cy: number, r: number, teeth: number, body: string, hole: string, ring = '') {
   const t = r * 0.42;
   let s = '';
@@ -93,6 +102,181 @@ ${bar(66, 70, 28, 4, 'D')}${bar(66, 78, 18, 4, 'D')}
 <circle cx="114" cy="84" r="16" fill="@A" stroke="@S" stroke-width="3"/>
 <circle cx="114" cy="84" r="9.5" fill="none" stroke="@K" stroke-width="2"/>
 ${dot(30, 32, 3, 'A')}${dot(130, 34, 2.5, 'D')}${dot(26, 96, 2, 'D')}`,
+
+  'no-integrations': `${backdrop}
+<circle cx="76" cy="62" r="7" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="34" y="44" width="38" height="36" rx="6" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="90" y="44" width="38" height="36" rx="6" fill="@A"/>
+<circle cx="90" cy="62" r="7.5" fill="@B"/>
+${bar(42, 54, 20, 4, 'D')}${bar(42, 62, 14, 4, 'D')}${bar(102, 66, 18, 4, 'K')}
+${dot(36, 34, 3, 'A')}${sparkle(122, 32, 5, 'A')}${dot(130, 94, 2, 'D')}${dot(32, 92, 2, 'D')}`,
+
+  'no-history': `${backdrop}
+<path d="M54 42a32 32 0 1 1-6 28" fill="none" stroke="@H" stroke-width="4" stroke-linecap="round"/>
+<path d="M46 34l2 12 11-5Z" fill="@H" stroke="@H" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="80" cy="62" r="25" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="78.5" y="45" width="3" height="18.5" rx="1.5" fill="@H"/>
+<rect x="78.5" y="60.5" width="14" height="3" rx="1.5" fill="@H"/>
+<circle cx="80" cy="62" r="5" fill="@A"/><circle cx="80" cy="62" r="2" fill="@K"/>
+${dot(126, 36, 3, 'A')}${sparkle(124, 90, 5, 'A')}${dot(32, 92, 2, 'D')}`,
+
+  /* ---------- Money ---------- */
+
+  'no-transactions': `${backdrop}
+<path d="M50 26h60v70l-6 4-6-4-6 4-6-4-6 4-6-4-6 4-6-4-6 4-6-4V26Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+${bar(58, 36, 24, 5, 'H')}
+${[50, 60, 70].map((y) => bar(58, y, 30, 4, 'D') + bar(94, y, 8, 4, 'D')).join('')}
+${bar(58, 80, 44, 1.5, 'D')}${bar(58, 86, 20, 5, 'H')}${bar(90, 86, 12, 5, 'A')}
+${sparkle(126, 36, 6, 'A')}${dot(34, 40, 3, 'A')}${dot(130, 84, 2, 'D')}`,
+
+  'no-savings': `${backdrop}
+<rect x="52" y="44" width="56" height="58" rx="14" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="56" y="36" width="48" height="12" rx="4" fill="@H"/>
+<rect x="72" y="40.5" width="16" height="3" rx="1.5" fill="@D"/>
+<rect x="64" y="64" width="32" height="18" rx="5" fill="@D"/>
+<circle cx="80" cy="22" r="9" fill="@A" stroke="@S" stroke-width="3"/>
+<circle cx="80" cy="22" r="4.5" fill="none" stroke="@K" stroke-width="1.5"/>
+${dot(36, 44, 3, 'A')}${sparkle(124, 50, 5, 'A')}${dot(126, 90, 2, 'D')}`,
+
+  'no-cards': `${backdrop}
+<rect x="48" y="30" width="58" height="34" rx="5" fill="@A"/>${bar(56, 38, 22, 4, 'K')}
+<rect x="36" y="46" width="88" height="52" rx="10" fill="@S" stroke="@O" stroke-width="1.5"/>
+<path d="M124 62h-22a8 8 0 0 0 0 16h22" fill="@D" stroke="@O" stroke-width="1.5"/>
+<circle cx="104" cy="70" r="3" fill="@H"/>
+${bar(46, 84, 30, 5, 'D')}
+${dot(30, 36, 3, 'A')}${sparkle(132, 34, 5, 'A')}${dot(28, 86, 2, 'D')}`,
+
+  'no-invoices': `${backdrop}
+<rect x="46" y="24" width="58" height="76" rx="6" fill="@S" stroke="@O" stroke-width="1.5"/>
+${bar(54, 34, 22, 5, 'H')}${bar(84, 34, 12, 5, 'D')}
+${bar(54, 48, 42, 4, 'D')}${bar(54, 57, 34, 4, 'D')}${bar(54, 66, 38, 4, 'D')}${bar(54, 82, 18, 5, 'H')}
+<circle cx="104" cy="84" r="16" fill="@A" stroke="@S" stroke-width="3"/>
+<circle cx="104" cy="84" r="9.5" fill="none" stroke="@K" stroke-width="1.5" stroke-dasharray="3 2.5"/>
+${dot(34, 36, 3, 'A')}${dot(130, 40, 2.5, 'D')}${sparkle(30, 84, 5, 'A')}`,
+
+  /* ---------- Health ---------- */
+
+  'no-appointments': `${backdrop}
+<circle cx="76" cy="64" r="32" fill="@S" stroke="@O" stroke-width="1.5"/>
+${[0, 90, 180, 270].map((a) => `<rect x="74.5" y="36" width="3" height="7" rx="1.5" fill="@D" transform="rotate(${a} 76 64)"/>`).join('')}
+<rect x="74.5" y="44" width="3" height="21.5" rx="1.5" fill="@H"/>
+<rect x="74.5" y="62.5" width="17" height="3" rx="1.5" fill="@H"/>
+<circle cx="76" cy="64" r="3.5" fill="@H"/>
+<circle cx="108" cy="36" r="12" fill="@A" stroke="@S" stroke-width="3"/>
+<rect x="106.5" y="29.5" width="3" height="13" rx="1.5" fill="@K"/><rect x="101.5" y="34.5" width="13" height="3" rx="1.5" fill="@K"/>
+${dot(34, 40, 3, 'A')}${dot(132, 82, 2, 'D')}${sparkle(126, 96, 5, 'A')}`,
+
+  'no-prescriptions': `${backdrop}
+<rect x="54" y="40" width="48" height="60" rx="8" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="58" y="28" width="40" height="14" rx="3" fill="@H"/>
+<rect x="54.75" y="56" width="46.5" height="26" fill="@A"/>
+${bar(62, 62, 26, 4, 'K')}${bar(62, 71, 16, 4, 'K')}
+<g transform="rotate(-35 120 86)"><rect x="106" y="80" width="28" height="12" rx="6" fill="@S" stroke="@O" stroke-width="1.5"/><path d="M120 80.75h8a5.25 5.25 0 0 1 0 10.5h-8Z" fill="@A"/></g>
+${dot(34, 38, 3, 'A')}${sparkle(124, 40, 5, 'A')}${dot(30, 88, 2, 'D')}`,
+
+  'no-health-records': `${backdrop}
+<rect x="46" y="30" width="68" height="72" rx="8" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="64" y="24" width="32" height="12" rx="4" fill="@H"/>
+<rect x="54" y="46" width="52" height="30" rx="6" fill="@A"/>
+<path d="M58 62h11l4-9 6 17 4-8h19" fill="none" stroke="@K" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+${bar(54, 84, 40, 4, 'D')}${bar(54, 92, 26, 4, 'D')}
+${dot(32, 40, 3, 'A')}${sparkle(130, 36, 5, 'A')}${dot(132, 92, 2, 'D')}`,
+
+  /* ---------- Learning ---------- */
+
+  'no-courses': `${backdrop}
+<path d="M80 56c-12-7-26-8-38-5v40c12-3 26-2 38 5Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M80 56c12-7 26-8 38-5v40c-12-3-26-2-38 5Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+${bar(50, 62, 22, 3.5, 'D')}${bar(50, 70, 22, 3.5, 'D')}${bar(50, 78, 16, 3.5, 'D')}
+${bar(88, 62, 22, 3.5, 'D')}${bar(88, 70, 22, 3.5, 'D')}${bar(88, 78, 16, 3.5, 'D')}
+<path d="M66 37v8c8 5 20 5 28 0v-8l-14 6Z" fill="@A" stroke="@S" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M80 18l28 11-28 11-28-11Z" fill="@A" stroke="@S" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M106 30v12" fill="none" stroke="@K" stroke-width="2" stroke-linecap="round"/><circle cx="106" cy="44" r="2.5" fill="@K"/>
+${dot(34, 44, 3, 'A')}${dot(130, 50, 2.5, 'D')}${sparkle(32, 92, 5, 'A')}`,
+
+  'no-assignments': `${backdrop}
+<rect x="46" y="30" width="68" height="72" rx="8" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="64" y="24" width="32" height="12" rx="4" fill="@H"/>
+<rect x="55" y="46" width="10" height="10" rx="2.5" fill="@A"/>
+<path d="M57.5 51l2 2 3.5-4" fill="none" stroke="@K" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+${bar(71, 48.5, 32, 5, 'H')}
+${[64, 82].map((y) => `<rect x="55" y="${y}" width="10" height="10" rx="2.5" fill="@S" stroke="@H" stroke-width="1.5"/>${bar(71, y + 2.5, 28, 5, 'D')}`).join('')}
+${dot(32, 40, 3, 'A')}${sparkle(130, 38, 5, 'A')}${dot(132, 90, 2, 'D')}`,
+
+  'no-certificates': `${backdrop}
+<rect x="34" y="30" width="84" height="60" rx="6" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="40" y="36" width="72" height="48" rx="3" fill="none" stroke="@D" stroke-width="1.5"/>
+${bar(56, 46, 40, 5, 'H')}${bar(50, 57, 52, 4, 'D')}${bar(58, 65, 36, 4, 'D')}
+<path d="M104 88l-4 17 6-3 3 6 3-17Z" fill="@A"/><path d="M116 88l4 17-6-3-3 6-3-17Z" fill="@A"/>
+<circle cx="110" cy="84" r="12" fill="@A" stroke="@S" stroke-width="3"/>
+<circle cx="110" cy="84" r="5.5" fill="@K"/>
+${dot(28, 38, 3, 'A')}${sparkle(132, 30, 5, 'A')}${dot(30, 96, 2, 'D')}`,
+
+  /* ---------- Play ---------- */
+
+  'no-games': `${backdrop}
+<path d="M54 46h52a18 18 0 0 1 17.6 21.8l-3.4 15.4a9.5 9.5 0 0 1-16.5 4.2L97 80H63l-6.7 7.4a9.5 9.5 0 0 1-16.5-4.2l-3.4-15.4A18 18 0 0 1 54 46Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="49" y="60" width="16" height="5" rx="2" fill="@H"/><rect x="54.5" y="54.5" width="5" height="16" rx="2" fill="@H"/>
+<circle cx="104" cy="56" r="4" fill="@A"/><circle cx="112" cy="63" r="4" fill="@K"/><circle cx="104" cy="70" r="4" fill="@D"/><circle cx="96" cy="63" r="4" fill="@D"/>
+${bar(74, 54, 12, 4, 'D')}
+${dot(32, 36, 3, 'A')}${sparkle(124, 30, 6, 'A')}${dot(130, 96, 2, 'D')}`,
+
+  'no-achievements': `${backdrop}
+<path d="M60 36h-8a10 10 0 0 0 9 14" fill="none" stroke="@H" stroke-width="4" stroke-linecap="round"/>
+<path d="M100 36h8a10 10 0 0 1-9 14" fill="none" stroke="@H" stroke-width="4" stroke-linecap="round"/>
+<path d="M58 28h44v22a22 22 0 0 1-44 0Z" fill="@A"/>
+${sparkle(80, 47, 7, 'K')}
+<rect x="76" y="70" width="8" height="14" rx="2" fill="@H"/>
+<rect x="62" y="82" width="36" height="14" rx="4" fill="@S" stroke="@O" stroke-width="1.5"/>
+${bar(72, 87, 16, 4, 'D')}
+${dot(34, 42, 3, 'A')}${sparkle(126, 30, 5, 'A')}${dot(130, 86, 2.5, 'D')}${dot(30, 86, 2, 'D')}`,
+
+  /* ---------- Saved and media ---------- */
+
+  'no-favorites': `${backdrop}
+<rect x="40" y="30" width="80" height="64" rx="8" fill="@S" stroke="@O" stroke-width="1.5"/>
+<path d="M80 82C66 73 58 65 58 56a11 11 0 0 1 22-4a11 11 0 0 1 22 4c0 9-8 17-22 26Z" fill="@A"/>
+<path d="M68 52a5 5 0 0 1 6-3" fill="none" stroke="@S" stroke-width="2.5" stroke-linecap="round"/>
+${dot(30, 40, 3, 'A')}${sparkle(130, 36, 6, 'A')}${sparkle(124, 98, 4, 'K')}${dot(30, 88, 2, 'D')}`,
+
+  'no-bookmarks': `${backdrop}
+<path d="M89 30h26a3 3 0 0 1 3 3v58l-16-10-16 10V33a3 3 0 0 1 3-3Z" fill="@D"/>
+<path d="M50 24h32a3 3 0 0 1 3 3v72l-19-13-19 13V27a3 3 0 0 1 3-3Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="66" cy="50" r="10" fill="@A"/>${sparkle(66, 50, 5, 'K')}
+${bar(57, 68, 18, 4, 'D')}
+${dot(34, 42, 3, 'A')}${dot(132, 96, 2, 'D')}${sparkle(130, 30, 5, 'A')}`,
+
+  'no-photos': `${backdrop}
+<rect x="44" y="28" width="80" height="60" rx="6" fill="@S" stroke="@O" stroke-width="1.5" transform="rotate(8 84 58)"/>
+<rect x="34" y="36" width="84" height="62" rx="6" fill="@S" stroke="@O" stroke-width="1.5"/>
+<rect x="41" y="43" width="70" height="48" rx="3" fill="@D"/>
+<path d="M41 86l20-20 12 12 10-9 28 21a3 3 0 0 1-3 1H44a3 3 0 0 1-3-3Z" fill="@H"/>
+<circle cx="96" cy="56" r="6" fill="@A"/>
+${dot(30, 32, 3, 'A')}${sparkle(134, 96, 5, 'A')}${dot(136, 40, 2, 'D')}`,
+
+  /* ---------- Shopping and places ---------- */
+
+  'no-orders': `${backdrop}
+<path d="M48 50l32 12v38l-32-12Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M80 62l32-12v38l-32 12Z" fill="@D" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M48 50l32-12 32 12-32 12Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M62 44.75l32-12 6 2.25-32 12Z" fill="@A"/>
+<path d="M54 72l14 5.25v9l-14-5.25Z" fill="@A"/>
+${dot(32, 40, 3, 'A')}${sparkle(128, 34, 6, 'A')}${dot(130, 92, 2, 'D')}`,
+
+  'no-location': `${backdrop}
+<path d="M36 44l28-8 32 8 28-8v56l-28 8-32-8-28 8Z" fill="@S" stroke="@O" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M64 36v56M96 44v56" fill="none" stroke="@O" stroke-width="1.5"/>
+<path d="M46 84c10-12 22-14 30-8s18 4 26-10" fill="none" stroke="@H" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 4"/>
+<path d="M102 24a13 13 0 0 1 13 13c0 10-13 24-13 24s-13-14-13-24a13 13 0 0 1 13-13Z" fill="@A" stroke="@S" stroke-width="2.5"/>
+<circle cx="102" cy="37" r="4.5" fill="@K"/>
+${dot(30, 36, 3, 'A')}${dot(134, 96, 2, 'D')}${sparkle(30, 98, 4, 'A')}`,
+
+  'no-reviews': `${backdrop}
+<rect x="34" y="36" width="92" height="56" rx="8" fill="@S" stroke="@O" stroke-width="1.5"/>
+<circle cx="50" cy="52" r="7" fill="@D"/>${bar(62, 47, 34, 5, 'H')}${bar(62, 56, 22, 4, 'D')}
+${[0, 1, 2, 3, 4].map((i) => star(50 + i * 15, 76, 6, i === 0 ? 'A' : 'D')).join('')}
+${dot(28, 34, 3, 'A')}${sparkle(132, 30, 5, 'A')}${dot(134, 96, 2, 'D')}`,
 
   /* ---------- Search and filter ---------- */
 
@@ -196,8 +380,22 @@ ${dot(32, 36, 3, 'A')}${dot(132, 88, 2.5, 'D')}${sparkle(124, 72, 5, 'A')}`,
 
 export type IllustrationName = keyof typeof ART;
 
-/** Every illustration name, in the order they are listed in Storybook and Figma. */
-export const illustrationNames = Object.keys(ART) as IllustrationName[];
+/** Illustrations grouped by the kind of product space they suit, in display order. */
+export const illustrationGroups: Record<string, IllustrationName[]> = {
+  'First use': ['no-projects', 'no-files', 'no-messages', 'no-team', 'no-contacts', 'no-events', 'no-data', 'no-integrations', 'no-history'],
+  Money: ['no-payments', 'no-transactions', 'no-savings', 'no-cards', 'no-invoices'],
+  Health: ['no-appointments', 'no-prescriptions', 'no-health-records'],
+  Learning: ['no-courses', 'no-assignments', 'no-certificates'],
+  Play: ['no-games', 'no-achievements'],
+  'Saved and media': ['no-favorites', 'no-bookmarks', 'no-photos'],
+  'Shopping and places': ['empty-cart', 'no-orders', 'no-location', 'no-reviews'],
+  'Search and filter': ['no-results', 'no-filter-matches', 'nothing-selected'],
+  Cleared: ['all-caught-up', 'no-notifications', 'empty-trash'],
+  Problems: ['error', 'offline', 'no-access', 'not-found', 'maintenance'],
+};
+
+/** Every illustration name, in display order. */
+export const illustrationNames = Object.values(illustrationGroups).flat();
 
 const SLOTS: Record<string, string> = {
   B: 'backdrop',

@@ -90,7 +90,7 @@ export { FileItem, FileUpload, formatBytes } from './components/FileUpload';
 export type { FileItemProps, FileUploadProps } from './components/FileUpload';
 export { RichTextEditor, RichTextEditorField } from './components/RichTextEditor';
 export type { RichTextEditorFieldProps, RichTextEditorHandle, RichTextEditorProps } from './components/RichTextEditor';
-export { Illustration, illustrationNames } from './components/Illustration';
+export { Illustration, illustrationGroups, illustrationNames } from './components/Illustration';
 export type { IllustrationName, IllustrationProps } from './components/Illustration';
 export { Text } from './components/Text';
 export type { TextColor, TextProps, TextSize, TextWeight } from './components/Text';
