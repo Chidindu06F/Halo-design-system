@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Illustration, illustrationGroups } from '@halo-ds/react';
-import { Code, Page, Section, styles } from './shared';
+import { Code, Page, Section } from './shared';
 
 const label = (n: string) => n.charAt(0).toUpperCase() + n.slice(1).replace(/-/g, ' ');
 
@@ -21,12 +21,7 @@ function Illustrations() {
             {names.map((n) => (
               <figure key={n} style={{ margin: 0, display: 'grid', justifyItems: 'center', gap: 6 }}>
                 <Illustration name={n} />
-                <figcaption style={{ textAlign: 'center' }}>
-                  <div>{label(n)}</div>
-                  <div style={styles.muted}>
-                    <Code>{n}</Code>
-                  </div>
-                </figcaption>
+                <figcaption style={{ textAlign: 'center' }}>{label(n)}</figcaption>
               </figure>
             ))}
           </div>
