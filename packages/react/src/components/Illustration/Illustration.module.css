@@ -1,0 +1,8 @@
+/* Colours come from the --halo-illustration-* tokens. Override them here or on any parent to recolour. */
+
+.illustration {
+  display: block;
+  flex-shrink: 0;
+  max-width: 100%;
+  height: auto;
+}
