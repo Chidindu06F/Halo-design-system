@@ -34,7 +34,8 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   award?: AwardName | ReactElement<AwardProps>;
 }
 
-const AWARD_SIZE: Record<AvatarSize, number> = { xs: 14, sm: 16, md: 20, lg: 24, xl: 32 };
+// The same size as the status badges once the ring is added.
+const AWARD_SIZE: Record<AvatarSize, number> = { xs: 10, sm: 12, md: 14, lg: 16, xl: 20 };
 
 function renderAward(award: AvatarProps['award'], size: AvatarSize) {
   if (!award) return null;

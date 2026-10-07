@@ -78,11 +78,11 @@
 .bottom { top: var(--pos); }
 .top { top: var(--top); }
 
-/* An award sits on the bottom right in a ring of the page colour, a little past the edge. */
+/* An award sits where the bottom status would, in a ring of the page colour. */
 .award {
   position: absolute;
-  right: -4px;
-  bottom: -4px;
+  right: calc(var(--s) - var(--pos) - var(--b));
+  bottom: calc(var(--s) - var(--pos) - var(--b));
   display: flex;
   padding: var(--halo-spacing-1);
   border-radius: var(--halo-radius-10);
