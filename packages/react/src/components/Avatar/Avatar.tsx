@@ -2,6 +2,8 @@ import { cloneElement, forwardRef, isValidElement, useEffect, useState } from 'r
 import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
 import { AvatarStatus } from './AvatarStatus';
 import type { AvatarSize, AvatarStatusProps, AvatarStatusType } from './AvatarStatus';
+import { Award } from '../Award';
+import type { AwardName, AwardProps } from '../Award';
 import { USER } from './icons';
 import styles from './Avatar.module.css';
 
@@ -25,6 +27,20 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   status?: StatusSlot;
   /** Badge on the top right. Figma: Top status. */
   topStatus?: StatusSlot;
+  /**
+   * An award on the bottom right, as a name like "champion" or an `Award` element. It takes the bottom corner,
+   * so a bottom `status` moves to the top when the top is free. Figma: Award, Change award.
+   */
+  award?: AwardName | ReactElement<AwardProps>;
+}
+
+const AWARD_SIZE: Record<AvatarSize, number> = { xs: 14, sm: 16, md: 20, lg: 24, xl: 32 };
+
+function renderAward(award: AvatarProps['award'], size: AvatarSize) {
+  if (!award) return null;
+  const px = AWARD_SIZE[size];
+  const element = isValidElement(award) ? cloneElement(award, { size: award.props.size ?? px }) : <Award name={award} size={px} />;
+  return <span className={styles.award}>{element}</span>;
 }
 
 function initialsOf(name: string) {
@@ -40,9 +56,9 @@ function renderStatus(slot: StatusSlot | undefined, size: AvatarSize, position: 
   return <span className={[styles.holder, position].join(' ')}>{badge}</span>;
 }
 
-/** A person or team shown as a photo, initials or an icon, with optional status badges. */
+/** A person or team shown as a photo, initials or an icon, with optional status badges and an award. */
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
-  { src, name, initials, icon, size = 'md', color = 'neutral', status, topStatus, className, ...rest },
+  { src, name, initials, icon, size = 'md', color = 'neutral', status, topStatus, award, className, ...rest },
   ref,
 ) {
   const [failed, setFailed] = useState(false);
@@ -74,8 +90,8 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
           </span>
         )}
       </span>
-      {renderStatus(topStatus, size, styles.top)}
-      {renderStatus(status, size, styles.bottom)}
+      {renderStatus(topStatus ?? (award ? status : undefined), size, styles.top)}
+      {award ? renderAward(award, size) : renderStatus(status, size, styles.bottom)}
     </span>
   );
 });

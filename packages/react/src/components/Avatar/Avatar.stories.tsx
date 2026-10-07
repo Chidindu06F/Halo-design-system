@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DotsThree, UsersThree } from '@phosphor-icons/react';
+import { Award } from '../Award';
 import { Button } from '../Button';
 import { CompactButton } from '../CompactButton';
 import { GitHubLogo } from '../SocialButton/logos';
@@ -134,6 +135,20 @@ export const TwoBadges: Story = {
       <Avatar size="xl" src={photo(5)} name="Zainab Bello" status="online" topStatus={badge('logo')} />
       <Avatar size="xl" src={photo(6)} name="Kemi Ade" status="busy" topStatus="verified" />
       <Avatar size="xl" name="Ada Okafor" color="orange" status={badge('notification')} topStatus="pin" />
+    </div>
+  ),
+};
+
+/** An award on the bottom right, sized to the avatar. Any bottom status moves to the top. */
+export const WithAward: Story = {
+  name: 'Award',
+  render: () => (
+    <div style={row}>
+      <Avatar size="xs" name="Ada Okafor" color="purple" award="champion" />
+      <Avatar size="sm" src={photo(2)} name="Kemi Ade" award="on-fire" />
+      <Avatar size="md" name="Tunde Ola" color="blue" award="lift-off" />
+      <Avatar size="lg" src={photo(5)} name="Zainab Bello" award={<Award name="legend" colors={3} />} />
+      <Avatar size="xl" src={photo(6)} name="Kemi Ade" status="online" award="most-loved" />
     </div>
   ),
 };
