@@ -9,6 +9,8 @@ export type {
   AvatarStatusProps,
   AvatarStatusType,
 } from './components/Avatar';
+export { Award, awardLabel, awardNames } from './components/Award';
+export type { AwardColors, AwardName, AwardProps } from './components/Award';
 export { Badge } from './components/Badge';
 export type { BadgeColor, BadgeProps, BadgeSize, BadgeVariant } from './components/Badge';
 export { BreadcrumbItem, Breadcrumbs } from './components/Breadcrumbs';
