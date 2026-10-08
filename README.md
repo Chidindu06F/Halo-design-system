@@ -9,7 +9,7 @@ An open-source design system for designers and developers: a Figma library and a
 
 **📖 Docs & component playground: https://chidindu06f.github.io/Halo-design-system/**
 
-> **Status:** early development. Foundations (color, typography, spacing, radius) are in place; components are being added.
+> **Status:** early development. Foundations, 44 components, 40 illustrations and 20 awards are in place, in Figma and React. Not yet published to npm.
 
 ## Packages
 
@@ -21,15 +21,27 @@ An open-source design system for designers and developers: a Figma library and a
 
 ## Using Halo
 
+> Halo is not on npm yet. The first release, 0.1.0, is being prepared; until then, clone this repository and run Storybook to explore it.
+
 ```bash
-npm install @halo-ds/react @halo-ds/tokens
+npm install @halo-ds/react @halo-ds/tokens @fontsource/geist
 ```
+
+Load the tokens, the component styles and the font once, at the top of your app:
 
 ```tsx
 import '@halo-ds/tokens/css';
+import '@halo-ds/react/styles.css';
+import '@fontsource/geist/400.css';
+import '@fontsource/geist/600.css';
+import '@fontsource/geist/700.css';
+
+import { Button } from '@halo-ds/react';
 ```
 
 Switch themes with the `data-theme` attribute on `<html>`: `light` (default), `dark`, or `system` (follows the OS).
+
+Every token is a CSS variable starting with `--halo-`, so your own styles can use them too:
 
 ```css
 .card {
@@ -39,6 +51,13 @@ Switch themes with the `data-theme` attribute on `<html>`: `light` (default), `d
   border-radius: var(--halo-radius-sm);
 }
 ```
+
+### Make it yours
+
+- **Quick:** override a few brand variables in your own CSS, loaded after Halo's. No rebuild needed.
+- **Full:** change the variables in your copy of the Figma file, export them, and rebuild the tokens so design and code match.
+
+The **Theming** page in [Storybook](https://chidindu06f.github.io/Halo-design-system/) walks through both, with a live example.
 
 ## Working on Halo
 

@@ -4,6 +4,8 @@ import '@fontsource/geist/400.css';
 import '@fontsource/geist/600.css';
 import '@fontsource/geist/700.css';
 import '@halo-ds/tokens/css';
+// Styles for docs pages that use the built package, like Theming.
+import '@halo-ds/react/styles.css';
 import './preview.css';
 
 const preview: Preview = {
@@ -18,7 +20,7 @@ const preview: Preview = {
     backgrounds: { disable: true },
     a11y: { test: 'todo' },
     options: {
-      storySort: { order: ['Introduction', 'Foundations', ['Colors', 'Palette', 'Typography', 'Spacing & Radius', 'Grid & Layout'], 'Components'] },
+      storySort: { order: ['Introduction', 'Theming', 'Foundations', ['Colors', 'Palette', 'Typography', 'Spacing & Radius', 'Grid & Layout', 'Illustrations', 'Awards'], 'Components'] },
     },
   },
 };

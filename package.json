@@ -13,7 +13,9 @@
     "build": "pnpm -r build",
     "build:tokens": "pnpm --filter @halo-ds/tokens build",
     "build:docs": "pnpm build:tokens && pnpm --filter docs build",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "release:check": "pnpm build && pnpm typecheck && pnpm -r --filter \"./packages/*\" publish --dry-run --no-git-checks",
+    "release": "pnpm build && pnpm typecheck && pnpm -r --filter \"./packages/*\" publish"
   },
   "devDependencies": {
     "@typescript/typescript6": "^6.0.2",

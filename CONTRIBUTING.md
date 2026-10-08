@@ -37,3 +37,33 @@ Then export it from `packages/react/src/index.ts`.
 ## Updating tokens from Figma
 
 See [packages/tokens/README.md](packages/tokens/README.md).
+
+## Releasing to npm
+
+Halo publishes two packages, `@halo-ds/tokens` and `@halo-ds/react`, under the `halo-ds` npm organisation.
+
+One-time setup:
+
+1. Create an npm account at [npmjs.com](https://www.npmjs.com) and turn on two-factor authentication.
+2. Create a free organisation named `halo-ds` (Add Organization in your npm profile). The `@halo-ds/` names only work once you own it.
+3. Sign in from the terminal: `npm login`.
+
+Each release:
+
+1. Set the same new version in `packages/tokens/package.json` and `packages/react/package.json` (for example `0.1.0`, then `0.1.1` for fixes and `0.2.0` for new components).
+2. Check what would be published, without publishing:
+
+   ```bash
+   pnpm release:check
+   ```
+
+3. Publish both packages:
+
+   ```bash
+   pnpm release
+   ```
+
+   pnpm swaps the internal `workspace:*` link for the real version number, so `@halo-ds/react` depends on the matching `@halo-ds/tokens`.
+
+4. Tag the release in git: `git tag v0.1.0 && git push --tags`.
+

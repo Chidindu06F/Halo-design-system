@@ -12,20 +12,51 @@ Halo is an open-source design system for designers and developers: a Figma libra
 npm install @halo-ds/react @halo-ds/tokens
 ```
 
+Load the tokens and the component styles once, at the top of your app (for example `main.tsx` or your root layout):
+
 ```tsx
-import '@halo-ds/tokens/css';
-import { Button } from '@halo-ds/react'; // components are being added, see Components in the sidebar
+import '@halo-ds/tokens/css';      // colours, spacing, type and radius as CSS variables
+import '@halo-ds/react/styles.css'; // styles for every component
 ```
+
+Halo uses the **Geist** font. Load it yourself, for example with Fontsource:
+
+```bash
+npm install @fontsource/geist
+```
+
+```tsx
+import '@fontsource/geist/400.css';
+import '@fontsource/geist/600.css';
+import '@fontsource/geist/700.css';
+```
+
+Then use the components:
+
+```tsx
+import { Button } from '@halo-ds/react';
+
+export function Save() {
+  return <Button>Save changes</Button>;
+}
+```
+
+To use your own colours and fonts, see **Theming** in the sidebar.
 
 ## Light and dark mode
 
 Set `data-theme` on the `<html>` element:
 
-| Value | Result |
-| --- | --- |
-| *(none)* or `light` | Light mode |
-| `dark` | Dark mode |
-| `system` | Follows the user's operating-system setting |
+<table>
+  <thead>
+    <tr><th>Value</th><th>Result</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><em>(none)</em> or <code>light</code></td><td>Light mode</td></tr>
+    <tr><td><code>dark</code></td><td>Dark mode</td></tr>
+    <tr><td><code>system</code></td><td>Follows the user's operating-system setting</td></tr>
+  </tbody>
+</table>
 
 ```html
 <html data-theme="system">
