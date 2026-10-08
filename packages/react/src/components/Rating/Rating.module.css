@@ -1,0 +1,47 @@
+/* Values mirror the Rating set in Figma (Rating page). */
+
+.rating {
+  --star: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--halo-spacing-1);
+  border-radius: var(--halo-radius-2);
+}
+.sm { --star: 16px; }
+.md { --star: 20px; }
+.lg { --star: 28px; gap: var(--halo-spacing-2); }
+
+.star {
+  position: relative;
+  display: inline-flex;
+  width: var(--star);
+  height: var(--star);
+  flex-shrink: 0;
+}
+.star svg {
+  width: var(--star);
+  height: var(--star);
+}
+.empty { color: var(--halo-icon-rating-empty); }
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+  color: var(--halo-icon-rating);
+}
+
+.interactive { cursor: pointer; }
+.interactive .star { transition: transform 120ms ease; }
+.interactive .star:hover { transform: scale(1.12); }
+.rating:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+.disabled { opacity: 0.4; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive .star { transition: none; }
+}

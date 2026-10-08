@@ -1,0 +1,82 @@
+/* Values mirror the Carousel set in Figma (Carousel page). */
+
+.carousel {
+  --gap: var(--halo-spacing-7);
+  display: grid;
+  gap: var(--halo-spacing-6);
+  min-width: 0;
+}
+
+.viewport {
+  position: relative;
+  min-width: 0;
+}
+
+.track {
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--halo-radius-6);
+  outline: none;
+}
+.track::-webkit-scrollbar { display: none; }
+.track:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+.slide {
+  flex: 0 0 calc((100% - var(--gap) * (var(--per-view) - 1)) / var(--per-view));
+  min-width: 0;
+  scroll-snap-align: start;
+}
+.content {
+  display: grid;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--halo-radius-6);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.prev { left: var(--halo-spacing-6); }
+.next { right: var(--halo-spacing-6); }
+.arrow:disabled { visibility: hidden; }
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--halo-spacing-3);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--halo-radius-10);
+  background: var(--halo-surface-secondary);
+  cursor: pointer;
+  transition: width 160ms ease, background-color 160ms ease;
+}
+.dot:hover { background: var(--halo-border-strong); }
+.dot[aria-current='true'] {
+  width: 20px;
+  background: var(--halo-button-primary);
+}
+.dot:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--halo-surface-primary),
+    0 0 0 4px var(--halo-border-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot { transition: none; }
+}

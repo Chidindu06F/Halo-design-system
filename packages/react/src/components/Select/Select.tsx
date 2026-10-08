@@ -24,6 +24,8 @@ export interface SelectProps {
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   placeholder?: string;
+  /** Icon at the start of the box, shown when the chosen option has none. Figma: L icon. */
+  icon?: ReactNode;
   /** 32, 40 or 48px. Figma: Size. */
   size?: 'sm' | 'md' | 'lg';
   invalid?: boolean;
@@ -40,7 +42,7 @@ export interface SelectProps {
 
 /** Picks one option from a known list. Typing jumps to a match. Figma: Select. */
 export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select(
-  { options, value, defaultValue, onValueChange, placeholder = 'Select an option', size = 'md', invalid, disabled, name, id, className, required, ...aria },
+  { options, value, defaultValue, onValueChange, placeholder = 'Select an option', icon, size = 'md', invalid, disabled, name, id, className, required, ...aria },
   ref,
 ) {
   const listId = useId();
@@ -123,7 +125,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
         onClick={() => setOpen(!open)}
         onKeyDown={onKey}
       >
-        {selected?.icon && <span className={inputStyles.icon} aria-hidden="true">{selected.icon}</span>}
+        {(selected?.icon ?? icon) && <span className={inputStyles.icon} aria-hidden="true">{selected?.icon ?? icon}</span>}
         <span className={cx(styles.value, !selected && styles.placeholder)}>{selected?.label ?? placeholder}</span>
         <Icon name="CaretDown" className={cx(styles.caret, open && styles.caretOpen)} />
       </button>

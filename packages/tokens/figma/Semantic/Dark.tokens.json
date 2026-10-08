@@ -592,6 +592,44 @@
           "targetVariableSetName": "Primitives"
         }
       }
+    },
+    "rating": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9647058823529412,
+          0.7098039215686275,
+          0.11764705882352941
+        ],
+        "alpha": 1,
+        "hex": "#F6B51E"
+      },
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "colours/yellow/300",
+          "targetVariableSetName": "Primitives"
+        }
+      }
+    },
+    "rating-empty": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2,
+          0.2,
+          0.2
+        ],
+        "alpha": 1,
+        "hex": "#333333"
+      },
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "colours/black/200",
+          "targetVariableSetName": "Primitives"
+        }
+      }
     }
   },
   "text": {

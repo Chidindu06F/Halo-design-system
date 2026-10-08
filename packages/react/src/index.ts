@@ -21,6 +21,8 @@ export { ButtonGroup } from './components/ButtonGroup';
 export type { ButtonGroupProps } from './components/ButtonGroup';
 export { Card } from './components/Card';
 export type { CardProps } from './components/Card';
+export { Carousel, CarouselSlide } from './components/Carousel';
+export type { CarouselProps, CarouselSlideProps } from './components/Carousel';
 export { Checkbox, CheckboxGroup } from './components/Checkbox';
 export type { CheckboxGroupProps, CheckboxProps, CheckboxSize } from './components/Checkbox';
 export { CompactButton } from './components/CompactButton';
@@ -38,6 +40,8 @@ export { Overlay } from './components/Overlay';
 export type { OverlayProps } from './components/Overlay';
 export { ProgressBar, ProgressCircle } from './components/Progress';
 export type { ProgressBarProps, ProgressCircleProps, ProgressStatus } from './components/Progress';
+export { Rating } from './components/Rating';
+export type { RatingProps, RatingSize } from './components/Rating';
 export { Skeleton } from './components/Skeleton';
 export type { SkeletonProps } from './components/Skeleton';
 export { Field, FieldLabel } from './components/Field';
@@ -96,6 +100,8 @@ export { Illustration, illustrationGroups, illustrationNames } from './component
 export type { IllustrationName, IllustrationProps } from './components/Illustration';
 export { Text } from './components/Text';
 export type { TextColor, TextProps, TextSize, TextWeight } from './components/Text';
+export { formatTime, TimePicker, TimePickerField } from './components/TimePicker';
+export type { TimePickerFieldProps, TimePickerProps } from './components/TimePicker';
 export { Tooltip } from './components/Tooltip';
 export type { TooltipProps, TooltipSide } from './components/Tooltip';
 
