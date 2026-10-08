@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArrowRight, CaretLeft, CaretRight, DownloadSimple, Gear, Plus, Trash, X } from '@phosphor-icons/react';
@@ -115,6 +116,29 @@ export const States: Story = {
       ])}
     />
   ),
+};
+
+/** A spinner while an action runs. The button keeps its width and ignores clicks. Press one to try it. */
+export const Loading: Story = {
+  render: function Render() {
+    const [busy, setBusy] = useState<string | null>(null);
+    const run = (v: string) => {
+      setBusy(v);
+      setTimeout(() => setBusy(null), 1500);
+    };
+    return (
+      <Grid
+        columns={['Loading', 'Try it']}
+        rows={variants.map((v) => [
+          title(v),
+          [
+            <Button key="l" variant={v} loading>Save changes</Button>,
+            <Button key="t" variant={v} loading={busy === v} onClick={() => run(v)}>Save changes</Button>,
+          ],
+        ])}
+      />
+    );
+  },
 };
 
 /** A leading icon describes the action; a trailing icon shows direction. Any icon works. */

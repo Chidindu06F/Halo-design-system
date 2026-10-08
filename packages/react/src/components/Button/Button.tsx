@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { Spinner } from '../Spinner';
 import styles from './Button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
@@ -10,6 +11,11 @@ interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   /** Height, padding, label and icon size. Figma: Size. */
   size?: ButtonSize;
+  /**
+   * Shows a spinner while an action runs, like saving. The button keeps its width and its name,
+   * and ignores clicks until loading ends. Figma: State=Loading.
+   */
+  loading?: boolean;
 }
 
 interface ButtonWithLabelProps extends ButtonBaseProps {
@@ -36,15 +42,25 @@ interface ButtonIconOnlyProps extends ButtonBaseProps {
 export type ButtonProps = ButtonWithLabelProps | ButtonIconOnlyProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = 'primary', size = 'md', iconOnly = false, iconLeft, iconRight, children, className, type = 'button', ...rest },
+  { variant = 'primary', size = 'md', iconOnly = false, iconLeft, iconRight, loading = false, children, className, type = 'button', onClick, ...rest },
   ref,
 ) {
-  const classes = [styles.button, styles[variant], styles[size], iconOnly && styles.iconOnly, className]
+  const classes = [styles.button, styles[variant], styles[size], iconOnly && styles.iconOnly, loading && styles.loading, className]
     .filter(Boolean)
     .join(' ');
+  const spinnerColor = variant === 'primary' || variant === 'destructive' ? 'onBrand' : 'neutral';
 
   return (
-    <button ref={ref} type={type} className={classes} {...rest}>
+    <button
+      ref={ref}
+      type={type}
+      className={classes}
+      aria-busy={loading || undefined}
+      aria-disabled={loading || rest['aria-disabled'] || undefined}
+      onClick={loading ? (e) => e.preventDefault() : onClick}
+      {...rest}
+    >
+      {loading && <Spinner className={styles.spinner} size={size === 'xs' || size === 'sm' ? 'xs' : 'sm'} color={spinnerColor} label="" />}
       {iconOnly ? (
         <span className={styles.icon} aria-hidden="true">{children}</span>
       ) : (

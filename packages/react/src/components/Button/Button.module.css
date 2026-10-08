@@ -164,3 +164,16 @@
 .iconOnly.sm { --pad: var(--halo-spacing-4); }
 .iconOnly.md { --pad: var(--halo-spacing-5); }
 .iconOnly.lg { --pad: var(--halo-spacing-6); }
+
+/* Loading: the content stays in place (keeping the width and the accessible name) but goes invisible under a spinner. */
+.loading {
+  position: relative;
+  cursor: progress;
+}
+.loading > :not(.spinner) { opacity: 0; }
+.spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
