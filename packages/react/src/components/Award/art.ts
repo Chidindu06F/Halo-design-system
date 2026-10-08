@@ -147,7 +147,6 @@ export function awardMarkup(name: AwardName, colors: AwardColors, id: string) {
     `<linearGradient id="${shine}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.45"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>`,
     `<clipPath id="${clip}"><path d="${d}"/></clipPath>`,
     '</defs>',
-    '<ellipse cx="48" cy="99" rx="28" ry="4" fill="#000000" fill-opacity="0.12"/>',
     `<path d="${d}" fill="url(#${side})" stroke="url(#${side})" stroke-width="7" stroke-linejoin="round" transform="translate(0 7)"/>`,
     `<path d="${d}" fill="url(#${side})" stroke="url(#${side})" stroke-width="7" stroke-linejoin="round" transform="translate(0 3.5)"/>`,
     `<path d="${d}" fill="${faceFill}" stroke="${faceFill}" stroke-width="7" stroke-linejoin="round"/>`,
