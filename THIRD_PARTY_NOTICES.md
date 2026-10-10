@@ -59,6 +59,17 @@ The Card examples in the Figma library and Storybook (`apps/docs/public/cards`) 
 | Purple and pink waves | [@fakurian](https://unsplash.com/photos/nY14Fs8pxT8) |
 | Blue, purple and orange blend | [@fakurian](https://unsplash.com/photos/E8Ufcyxz514) |
 
+The example product pages in the Figma file (SaaS, Banking, Tax, Creators, Healthcare, Payroll) use these photos on their sign-up screens, also from Unsplash under the Unsplash License.
+
+| Image | Used on | Photographer |
+| --- | --- | --- |
+| Purple and blue waves | SaaS | [Milad Fakurian](https://unsplash.com/photos/E8Ufcyxz514) |
+| White stairs and wall | Banking | [Rubén García](https://unsplash.com/photos/R-wQExeiGrc) |
+| White curved building | Tax | [Kimon Maritz](https://unsplash.com/photos/mQiZnKwGXW0) |
+| Singer with headphones | Creators | [Shoham Avisrur](https://unsplash.com/photos/-rHgkZDFegM) |
+| Doctor in a white coat | Healthcare | [Ato Aikins](https://unsplash.com/photos/TPT4pevJEmQ) |
+| Teal abstract shapes | Payroll | [Pawel Czerwinski](https://unsplash.com/photos/ERcQ81KaX9g) |
+
 ## Brand logos
 
 Logos are trademarks of their respective owners. They are included only so you can refer to those companies and services (for example, in "Sign in with Google" buttons or payment method lists). Their inclusion does not imply endorsement. Follow each brand's own guidelines when using them.
