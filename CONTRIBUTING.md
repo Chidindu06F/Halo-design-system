@@ -48,16 +48,19 @@ One-time setup:
 2. Create a free organisation named `halo-ds` (Add Organization in your npm profile). The `@halo-ds/` names only work once you own it.
 3. Sign in from the terminal: `npm login`.
 
+Releases are batched. Pushing to `main` only updates Storybook; nothing goes to npm until someone runs `pnpm release`. Add each change to the **Unreleased** section of [CHANGELOG.md](CHANGELOG.md) as you make it, and release when there is a worthwhile batch, such as a few new components, a breaking change, or a fix people are waiting for.
+
 Each release:
 
-1. Set the same new version in `packages/tokens/package.json` and `packages/react/package.json` (for example `0.1.0`, then `0.1.1` for fixes and `0.2.0` for new components).
-2. Check what would be published, without publishing:
+1. In `CHANGELOG.md`, rename **Unreleased** to the new version and add a fresh empty **Unreleased** section above it.
+2. Set the same new version in `packages/tokens/package.json` and `packages/react/package.json` (for example `0.1.0`, then `0.1.1` for fixes and `0.2.0` for new components).
+3. Check what would be published, without publishing:
 
    ```bash
    pnpm release:check
    ```
 
-3. Publish both packages:
+4. Publish both packages:
 
    ```bash
    pnpm release
@@ -65,5 +68,5 @@ Each release:
 
    pnpm swaps the internal `workspace:*` link for the real version number, so `@halo-ds/react` depends on the matching `@halo-ds/tokens`.
 
-4. Tag the release in git: `git tag v0.1.0 && git push --tags`.
+5. Tag the release in git: `git tag v0.1.0 && git push --tags`.
 
