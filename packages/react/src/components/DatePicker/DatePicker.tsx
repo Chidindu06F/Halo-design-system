@@ -49,12 +49,20 @@ function usePicker() {
   return { open, setOpen, anchor, floating, style, close };
 }
 
-type TriggerProps = PickerBase & { open: boolean; text?: string; onToggle: () => void; dialogId: string };
+type TriggerProps = PickerBase & {
+  open: boolean;
+  text?: string;
+  /** Range boxes show two slots with a dash between: start and end, each with its own placeholder. */
+  range?: { start?: string; end?: string; startPlaceholder: string; endPlaceholder: string };
+  onToggle: () => void;
+  dialogId: string;
+};
 
 const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(function Trigger(
   {
     open,
     text,
+    range,
     placeholder,
     size = 'md',
     invalid,
@@ -89,7 +97,15 @@ const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(function Trigger(
       }}
     >
       <Icon name="CalendarBlank" className={cx(inputStyles.icon, selectStyles.caret)} />
-      <span className={cx(selectStyles.value, !text && selectStyles.placeholder)}>{text ?? placeholder}</span>
+      {range ? (
+        <span className={styles.rangeValue}>
+          <span className={cx(styles.rangePart, !range.start && selectStyles.placeholder)}>{range.start ?? range.startPlaceholder}</span>
+          <span className={styles.rangeDash} aria-hidden="true">–</span>
+          <span className={cx(styles.rangePart, !range.end && selectStyles.placeholder)}>{range.end ?? range.endPlaceholder}</span>
+        </span>
+      ) : (
+        <span className={cx(selectStyles.value, !text && selectStyles.placeholder)}>{text ?? placeholder}</span>
+      )}
     </button>
   );
 });
@@ -138,7 +154,11 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
 
 /* ---------- Range ---------- */
 
-export interface DateRangePickerProps extends PickerBase {
+export interface DateRangePickerProps extends Omit<PickerBase, 'placeholder'> {
+  /** Shown in the first slot before a range is picked. Figma: Start text. */
+  startPlaceholder?: string;
+  /** Shown in the second slot before a range is picked. Figma: End text. */
+  endPlaceholder?: string;
   value?: DateRange | null;
   defaultValue?: DateRange | null;
   onValueChange?: (range: DateRange | null) => void;
@@ -148,7 +168,7 @@ export interface DateRangePickerProps extends PickerBase {
 
 /** A box that opens a two-month Calendar to pick a start and end day, then Apply. */
 export const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProps>(function DateRangePicker(
-  { value, defaultValue = null, onValueChange, placeholder = 'Pick dates', locale, format, presets, min, max, isDateDisabled, weekStartsOn, ...rest },
+  { value, defaultValue = null, onValueChange, startPlaceholder = 'Start date', endPlaceholder = 'End date', locale, format, presets, min, max, isDateDisabled, weekStartsOn, ...rest },
   ref,
 ) {
   const dialogId = useId();
@@ -162,8 +182,7 @@ export const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProp
       <Trigger
         ref={mergeRefs(ref, p.anchor)}
         open={p.open}
-        text={text(range)}
-        placeholder={placeholder}
+        range={{ start: range ? show(range[0]) : undefined, end: range ? show(range[1]) : undefined, startPlaceholder, endPlaceholder }}
         dialogId={dialogId}
         onToggle={() => {
           setDraft(range);

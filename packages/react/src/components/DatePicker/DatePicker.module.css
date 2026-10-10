@@ -123,3 +123,25 @@
 @media (prefers-reduced-motion: reduce) {
   .popover { animation: none; }
 }
+
+/* ---------- Range box: start – end ---------- */
+
+.rangeValue {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--halo-spacing-3);
+  min-width: 0;
+  font-family: var(--halo-font-family-body);
+  font-size: var(--text-size);
+  line-height: var(--text-height);
+}
+.rangePart {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rangeDash {
+  flex-shrink: 0;
+  color: var(--halo-text-secondary);
+}
