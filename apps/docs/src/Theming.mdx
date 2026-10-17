@@ -11,6 +11,8 @@ export const blue = {
   '--halo-button-primary': '#2F6BFF',
   '--halo-button-primary-hover': '#1F5FE0',
   '--halo-button-primary-pressed': '#1F5FE0',
+  '--halo-fill-brand': '#2F6BFF',
+  '--halo-fill-brand-hover': '#1F5FE0',
   '--halo-text-brand': '#1A4CC2',
   '--halo-border-contrast': '#2F6BFF',
   '--halo-border-focus': '#C9DAFF',
@@ -70,7 +72,7 @@ There are two ways to do it.
 
 ## See it
 
-The same components, with Halo's purple on the left and a blue brand on the right. The right side only changes the twelve brand variables listed below.
+The same components, with Halo's purple on the left and a blue brand on the right. The right side only changes the fourteen brand variables listed below.
 
 <div className="sb-unstyled" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24, margin: '24px 0' }}>
   <Sample title="Halo" />
@@ -85,9 +87,11 @@ Load your own CSS after Halo's, and set the brand variables on `:root`. Set them
 /* brand.css, loaded after '@halo-ds/tokens/css' */
 :root,
 [data-theme='light'] {
-  --halo-button-primary: #2f6bff;           /* primary buttons, switches, checkboxes, tab underline */
+  --halo-button-primary: #2f6bff;           /* primary buttons */
   --halo-button-primary-hover: #1f5fe0;
   --halo-button-primary-pressed: #1f5fe0;
+  --halo-fill-brand: #2f6bff;               /* checkboxes, switches, sliders, progress, tab underline */
+  --halo-fill-brand-hover: #1f5fe0;
   --halo-surface-brand: #eaf1ff;            /* soft brand backgrounds, selected rows */
   --halo-surface-brand-secondary: #c9daff;  /* icon circles, tinted areas */
   --halo-surface-brand-contrast: #1f5fe0;   /* selected page, active outlines */
@@ -101,6 +105,7 @@ Load your own CSS after Halo's, and set the brand variables on `:root`. Set them
 
 [data-theme='dark'] {
   --halo-button-primary: #4d8bff;
+  --halo-fill-brand: #4d8bff;
   --halo-surface-brand: #10275c;
   --halo-surface-brand-secondary: #183a85;
   --halo-text-brand: #a9c4ff;

@@ -81,13 +81,13 @@
 
 .input:checked,
 .input:indeterminate {
-  --fill: var(--halo-button-primary);
+  --fill: var(--halo-fill-brand);
   --line: transparent;
 }
 
 .field:hover .input:checked:not(:disabled),
 .field:hover .input:indeterminate:not(:disabled) {
-  --fill: var(--halo-button-primary-hover);
+  --fill: var(--halo-fill-brand-hover);
   --line: transparent;
 }
 
@@ -114,7 +114,7 @@
 .input:disabled,
 .input:disabled:checked,
 .input:disabled:indeterminate {
-  --fill: var(--halo-button-disabled);
+  --fill: var(--halo-fill-disabled);
   --line: var(--halo-border-secondary);
   cursor: not-allowed;
 }

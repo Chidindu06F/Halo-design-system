@@ -20,8 +20,8 @@ const tile: CSSProperties = {
   width: 24,
   height: 24,
   borderRadius: 4,
-  background: 'var(--halo-button-primary)',
-  color: 'var(--halo-icon-on-brand)',
+  background: 'var(--halo-surface-secondary)',
+  color: 'var(--halo-icon-primary)',
   fontSize: 16,
 };
 

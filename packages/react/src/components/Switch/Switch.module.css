@@ -28,13 +28,13 @@
   transition: background-color 120ms ease;
 }
 .track:hover:not(:disabled) { --bg: var(--halo-surface-heavy-contrast); }
-.track[aria-checked='true'] { --bg: var(--halo-button-primary); }
-.track[aria-checked='true']:hover:not(:disabled) { --bg: var(--halo-button-primary-hover); }
+.track[aria-checked='true'] { --bg: var(--halo-fill-brand); }
+.track[aria-checked='true']:hover:not(:disabled) { --bg: var(--halo-fill-brand-hover); }
 .track:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--halo-surface-primary), 0 0 0 4px var(--halo-border-focus);
 }
-.track:disabled { --bg: var(--halo-button-disabled); cursor: not-allowed; }
+.track:disabled { --bg: var(--halo-fill-disabled); cursor: not-allowed; }
 
 .thumb {
   width: var(--thumb);

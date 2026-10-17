@@ -65,8 +65,8 @@
 }
 
 .field:hover .input:not(:disabled) { --line: var(--halo-border-contrast); }
-.input:checked { --fill: var(--halo-button-primary); --line: transparent; --dot-color: var(--halo-icon-on-brand); }
-.field:hover .input:checked:not(:disabled) { --fill: var(--halo-button-primary-hover); }
+.input:checked { --fill: var(--halo-fill-brand); --line: transparent; --dot-color: var(--halo-icon-on-brand); }
+.field:hover .input:checked:not(:disabled) { --fill: var(--halo-fill-brand-hover); }
 
 .input:focus-visible {
   outline: none;
@@ -81,7 +81,7 @@
 .input[aria-invalid='true']:checked,
 .field:hover .input[aria-invalid='true']:checked { --fill: var(--halo-state-error-primary); --line: transparent; --dot-color: var(--halo-icon-on-negative); }
 
-.input:disabled { --fill: var(--halo-button-disabled); --line: var(--halo-border-secondary); cursor: not-allowed; }
+.input:disabled { --fill: var(--halo-fill-disabled); --line: var(--halo-border-secondary); cursor: not-allowed; }
 .input:disabled:checked { --line: transparent; --dot-color: var(--halo-icon-disabled); }
 .disabled { cursor: not-allowed; }
 .disabled .label,

@@ -24,6 +24,7 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### Tokens
 
+- New `fill/brand`, `fill/brand-hover` and `fill/disabled` (`--halo-fill-*`) for solid fills that aren't buttons: checkboxes, radios, switches, sliders, progress, spinners, the stepper, the active tab line and brand badges. These components no longer read the `button/*` tokens, so restyling buttons leaves them alone; to rebrand both, set `--halo-fill-brand` too (see Theming). Hover backgrounds in menus, lists, calendars and trees now read `surface/secondary`, and the Accordion's hover text reads `text/brand`.
 - `button/premium-start`, `button/premium-middle` and `button/premium-end` set the Premium gradient (`--halo-button-premium-*`).
 
 ## 0.2.0
