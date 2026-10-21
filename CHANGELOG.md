@@ -8,6 +8,7 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### New components
 
+- **Nav group**: `NavGroup` holds NavItems under a parent, like Reports with Sales and Traffic inside. In a Sidebar they show indented below and open with the parent; the group opens by itself when one of its pages is selected, and a closed group holding the current page reads as active. In a collapsed Sidebar the icon opens them in a panel, and in a TopBar they open as a dropdown.
 - **Form**: `Form`, `FormSection`, `FormRow` and `FormActions`. A form that checks itself: fields with a `name` show the form's errors, `required` fields are checked for you, and `validate` adds your own rules. Errors show after the first submit, focus moves to the first problem, and errors update as people fix them. `errors` shows messages from the server. `layout="horizontal"` puts labels beside fields, and they move above on phones.
 - **Tree**: nested items people open and close, like folders, categories or permissions. Pick one row, or turn on `checkable` for checkboxes that cascade: checking a branch checks everything inside it, and a branch shows a dash when partly checked. Full keyboard support (arrow keys, Home, End, Enter, Space), icons per row, two sizes.
 - **Tree select**: `TreeSelect` and `TreeSelectField`. A Select-style box that opens a Tree, for picking from nested options. Single, or `multiple` with checkboxes and tags in the box, with optional `search`.
@@ -17,6 +18,7 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### Changes
 
+- **Next.js**: the React package now starts with `'use client'`, so Halo components work in Next.js App Router pages without errors.
 - **Fields in forms**: Combobox, the date pickers and the colour input take a `name` and submit their values with the form, like the other fields. Date pickers send YYYY-MM-DD.
 - **Table extras**: `stickyHeader` with `maxHeight` keeps the header in view while rows scroll, and `stickyFirstColumn` keeps the first column in view on wide tables. `TableHeaderCell` takes a `filter` that opens from a funnel button. New `TableExpandToggle` and `TableExpandedRow` for rows that open to show details. `DataTable` wires these up: column `filters` (with an optional `onFilter`) and `expandable` with `rowExpandable`.
 - **Stepper on small screens**: a horizontal Stepper now switches to the compact version by itself when it has less than 600px, like on a phone. Change the width with `compactBelow`, or pass `false` to keep it horizontal.

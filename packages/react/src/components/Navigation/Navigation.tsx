@@ -1,9 +1,11 @@
-import { createContext, forwardRef, useContext } from 'react';
+import { Children, createContext, forwardRef, isValidElement, useContext, useId, useState } from 'react';
 import type { AnchorHTMLAttributes, HTMLAttributes, MouseEventHandler, ReactNode, Ref } from 'react';
+import { cx } from '../../internal/cx';
 import { Icon } from '../../internal/Icon';
 import { useControllable } from '../../internal/useControllable';
 import { Badge } from '../Badge';
 import { CompactButton } from '../CompactButton';
+import { Popover } from '../Popover';
 import { Tooltip } from '../Tooltip';
 import { parts } from '../../internal/parts';
 import type { PartsProps } from '../../internal/parts';
@@ -11,6 +13,8 @@ import styles from './Navigation.module.css';
 
 type NavType = 'sidebar' | 'collapsed' | 'top';
 const NavCtx = createContext<NavType>('sidebar');
+/** True for items inside an open NavGroup, which sit indented under the group. */
+const SubCtx = createContext(false);
 
 /** Parts you can style with `classNames` and `styles` on NavItem. */
 export type NavItemPart = 'root' | 'icon' | 'label' | 'chevron';
@@ -38,6 +42,7 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
 ) {
   const part = parts<NavItemPart>('nav-item', { classNames, styles: partStyles });
   const type = useContext(NavCtx);
+  const sub = useContext(SubCtx);
   const collapsed = type === 'collapsed';
   const body = (
     <>
@@ -48,7 +53,7 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
     </>
   );
   const common = {
-    ...part('root', [styles.item, type === 'collapsed' && styles.typeCollapsed, type === 'top' && styles.typeTop, selected && styles.selected, disabled && styles.disabled, className], rest.style),
+    ...part('root', [styles.item, type === 'collapsed' && styles.typeCollapsed, type === 'top' && styles.typeTop, sub && styles.sub, selected && styles.selected, disabled && styles.disabled, className], rest.style),
     'aria-current': selected ? ('page' as const) : undefined,
     'aria-expanded': expanded,
   };
@@ -58,7 +63,7 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
         {body}
       </a>
     ) : (
-      <button ref={ref as Ref<HTMLButtonElement>} type="button" disabled={disabled} onClick={onClick} {...common}>
+      <button ref={ref as Ref<HTMLButtonElement>} type="button" disabled={disabled} onClick={onClick} {...(rest as object)} {...common}>
         {body}
       </button>
     );
@@ -70,6 +75,67 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(function NavItem(
     el
   );
 });
+
+/* ---------- Group ---------- */
+
+export interface NavGroupProps {
+  /** Figma: Label. */
+  label: ReactNode;
+  /** Figma: L icon. Needed in a collapsed Sidebar. */
+  icon?: ReactNode;
+  /** NavItems inside the group. */
+  children: ReactNode;
+  /** Whether the items show. Opens by itself when one of them is selected. */
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  className?: string;
+}
+
+const hasSelected = (children: ReactNode) =>
+  Children.toArray(children).some((c) => isValidElement<{ selected?: boolean }>(c) && c.props.selected);
+
+/**
+ * A nav item that opens to show more items, like Reports with Sales and Traffic inside.
+ * In a Sidebar the items show indented below; in a collapsed Sidebar or a TopBar they open in a panel.
+ */
+export function NavGroup({ label, icon, children, open, defaultOpen, onOpenChange, className }: NavGroupProps) {
+  const type = useContext(NavCtx);
+  const active = hasSelected(children);
+  const [isOpen, setOpen] = useControllable(open, defaultOpen ?? active, onOpenChange);
+  const [panel, setPanel] = useState(false);
+  const id = useId();
+
+  if (type === 'collapsed' || type === 'top') {
+    const trigger = (
+      <NavItem icon={icon} expanded={type === 'top' ? panel : undefined} className={cx(active && styles.groupActive, className)}>
+        {label}
+      </NavItem>
+    );
+    return (
+      <Popover trigger={trigger} side={type === 'top' ? 'bottom' : 'right'} align="start" arrow={false} open={panel} onOpenChange={setPanel}>
+        <NavCtx.Provider value="sidebar">
+          <div role="group" aria-label={typeof label === 'string' ? label : undefined} className={styles.groupPanel} onClick={() => setPanel(false)}>
+            {children}
+          </div>
+        </NavCtx.Provider>
+      </Popover>
+    );
+  }
+
+  return (
+    <div className={cx(styles.group, className)}>
+      <NavItem icon={icon} expanded={isOpen} aria-controls={id} className={cx(active && !isOpen && styles.groupActive)} onClick={() => setOpen(!isOpen)}>
+        {label}
+      </NavItem>
+      {isOpen && (
+        <div id={id} role="group" className={styles.groupItems}>
+          <SubCtx.Provider value={true}>{children}</SubCtx.Provider>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* ---------- Sidebar ---------- */
 

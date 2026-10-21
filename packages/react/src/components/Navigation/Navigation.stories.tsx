@@ -6,12 +6,12 @@ import { CompactButton } from '../CompactButton';
 import { Drawer } from '../Drawer';
 import { Input } from '../Input';
 import { Text } from '../Text';
-import { NavItem, Sidebar, TopBar } from './Navigation';
+import { NavGroup, NavItem, Sidebar, TopBar } from './Navigation';
 
 const meta = {
   title: 'Components/Navigation',
   component: Sidebar,
-  subcomponents: { NavItem, TopBar },
+  subcomponents: { NavItem, NavGroup, TopBar },
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -75,11 +75,18 @@ export const SidebarStory: Story = {
             </>
           }
         >
-          {pages.map((p) => (
+          {pages.filter((p) => p.id !== 'reports').map((p) => (
             <NavItem key={p.id} icon={p.icon} badge={p.badge} selected={page === p.id} onClick={() => setPage(p.id)}>
               {p.label}
             </NavItem>
           ))}
+          <NavGroup label="Reports" icon={<ChartBar />}>
+            {['Sales', 'Traffic', 'Retention'].map((r) => (
+              <NavItem key={r} selected={page === r} onClick={() => setPage(r)}>
+                {r}
+              </NavItem>
+            ))}
+          </NavGroup>
         </Sidebar>
       </div>
     );
@@ -135,6 +142,10 @@ export const TopBarStory: Story = {
           }
         >
           {links()}
+          <NavGroup label="More">
+            <NavItem onClick={() => setPage('billing')} selected={page === 'billing'}>Billing</NavItem>
+            <NavItem onClick={() => setPage('settings')} selected={page === 'settings'}>Settings</NavItem>
+          </NavGroup>
         </TopBar>
         <Drawer
           open={menuOpen}

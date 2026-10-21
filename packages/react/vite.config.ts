@@ -12,6 +12,8 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime', /^@halo-ds\//],
+      // Halo components use state and effects, so Next.js and other server-component setups need this marker
+      output: { banner: "'use client';" },
     },
     cssCodeSplit: false,
   },
