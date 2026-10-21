@@ -18,6 +18,7 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### Changes
 
+- **Card**: anything in `media` now fills the 4:3 box, not only images, videos and SVGs. Before, a gradient or your own block left an empty band under it.
 - **Badge**: solid Information, Success and Warning badges now have dark text, and solid Error sits on a deeper red, so their labels are readable. White text on those bright fills was too faint.
 - **Link button**: now reads `text/link` and `text/link-destructive`, which turn lighter in dark mode. Before, purple and red links were hard to read on dark backgrounds.
 - **Calendar and DatePicker**: the month and year picker is now on by default. Click the month name to jump to any month, or the year to jump to any year, as well as using the arrows. Set `header="arrows"` (or `calendarHeader="arrows"` on DatePicker) to keep the old plain title. Calendars showing two months side by side still use arrows.

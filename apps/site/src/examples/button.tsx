@@ -1,5 +1,5 @@
 import { Button } from '@halo-ds/react';
-import { ArrowRight, Plus, Sparkle } from '@phosphor-icons/react';
+import { ArrowRight, Plus } from '@phosphor-icons/react';
 
 export default function Example() {
   return (
@@ -8,7 +8,6 @@ export default function Example() {
       <Button variant="secondary">Cancel</Button>
       <Button variant="ghost" iconRight={<ArrowRight />}>Learn more</Button>
       <Button variant="destructive">Delete</Button>
-      <Button variant="premium" iconLeft={<Sparkle weight="fill" />}>Upgrade to Pro</Button>
     </div>
   );
 }

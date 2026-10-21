@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Badge, Input, SegmentedControl, Tab, TabList, TabPanel, Tabs } from '@halo-ds/react';
-import { ArrowLeft, ArrowRight, MagnifyingGlass } from '@phosphor-icons/react';
+import { Badge, Input, LinkButton, SegmentedControl, Tab, TabList, TabPanel, Tabs } from '@halo-ds/react';
+import { ArrowLeft, ArrowRight, Code, MagnifyingGlass } from '@phosphor-icons/react';
 import { CodeBlock } from '../CodeBlock';
-import { all, exampleFor, groups } from '../registry';
-import type { Entry } from '../registry';
+import { all, demosFor, exampleFor, groups } from '../registry';
+import type { Demo, Entry } from '../registry';
+import { apps } from '../screens';
 import { Link, links, useRoute } from '../router';
 
 const managers = { npm: 'npm install', pnpm: 'pnpm add', yarn: 'yarn add', bun: 'bun add' } as const;
@@ -60,10 +61,54 @@ function Overview() {
   );
 }
 
+/** One labelled variant, like Ant Design's examples: the demo, what it shows, and its code on request. */
+function DemoCard({ demo, slug }: { demo: Demo; slug: string }) {
+  const [code, setCode] = useState(false);
+  return (
+    <section className="variant-card" aria-labelledby={`${slug}-${demo.id}`}>
+      <div className="demo-preview">
+        <demo.Demo />
+      </div>
+      <div className="demo-meta">
+        <h3 id={`${slug}-${demo.id}`}>{demo.title}</h3>
+        <p>{demo.description}</p>
+        <LinkButton size="sm" iconLeft={<Code />} aria-expanded={code} onClick={() => setCode(!code)}>
+          {code ? 'Hide code' : 'Show code'}
+        </LinkButton>
+      </div>
+      {code && <CodeBlock code={demo.code} />}
+    </section>
+  );
+}
+
+/** Real screens from the example apps that use this component. */
+function UsedIn({ slug }: { slug: string }) {
+  const screens = apps.flatMap((a) => a.screens.filter((s) => s.components.includes(slug)).map((s) => ({ app: a, screen: s })));
+  if (!screens.length) return null;
+  const base = import.meta.env.BASE_URL;
+  return (
+    <section className="docs-section" aria-labelledby="used-in">
+      <h2 id="used-in">Used in real screens</h2>
+      <p>Where this component shows up in the example apps. Open one to see it full size, on desktop and mobile.</p>
+      <div className="used-grid">
+        {screens.slice(0, 6).map(({ app, screen }) => (
+          <Link key={screen.id} to={`/examples/${app.id}#${screen.id}`} className="used-card">
+            <img src={`${base}screens/${screen.id}-desktop.webp`} alt="" loading="lazy" width={screen.desktop[0]} height={screen.desktop[1]} />
+            <span className="used-name">{app.name}</span>
+            <span className="used-screen">{screen.name}</span>
+          </Link>
+        ))}
+      </div>
+      {screens.length > 6 && <p className="used-more">And {screens.length - 6} more in <Link to="/examples">Examples</Link>.</p>}
+    </section>
+  );
+}
+
 function Detail({ entry }: { entry: Entry }) {
   const [pm, setPm] = useState<Manager>('npm');
   const [tab, setTab] = useState('preview');
   const ex = exampleFor(entry.slug);
+  const demos = demosFor(entry.slug);
   const i = all.indexOf(entry);
   const prev = all[i - 1];
   const next = all[i + 1];
@@ -100,6 +145,19 @@ function Detail({ entry }: { entry: Entry }) {
           <Badge color="neutral">Example coming soon</Badge>
         </div>
       )}
+
+      {demos.length > 0 && (
+        <section className="docs-section" aria-labelledby="examples">
+          <h2 id="examples">Examples</h2>
+          <div className="demo-list">
+            {demos.map((d) => (
+              <DemoCard key={`${entry.slug}-${d.id}`} demo={d} slug={entry.slug} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <UsedIn slug={entry.slug} />
 
       <section className="docs-section" aria-labelledby="install">
         <h2 id="install">Installation</h2>

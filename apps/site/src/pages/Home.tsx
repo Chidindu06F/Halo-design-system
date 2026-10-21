@@ -19,7 +19,8 @@ import {
 } from '@halo-ds/react';
 import { ArrowRight, Code, FigmaLogo, Plugs } from '@phosphor-icons/react';
 import { CodeBlock } from '../CodeBlock';
-import { links, useRoute } from '../router';
+import { Link, links, useRoute } from '../router';
+import { apps } from '../screens';
 
 /* Brand colours people can try on the live examples. Purple is Halo's own, so it uses the real tokens.
    The others set the few variables a rebrand needs, with light and dark values (site.css picks by theme). */
@@ -242,6 +243,29 @@ export function Home() {
             <p>{f.text}</p>
           </div>
         ))}
+      </section>
+
+      <section className="showcase" aria-labelledby="showcase-title">
+        <div className="try-head">
+          <div>
+            <h2 id="showcase-title">See it in real screens</h2>
+            <p>Seven example apps, on desktop and mobile, with every component named.</p>
+          </div>
+          <Button variant="secondary" iconRight={<ArrowRight />} onClick={() => go('/examples')}>All examples</Button>
+        </div>
+        <div className="used-grid showcase-grid">
+          {(['saas', 'banking', 'healthcare'] as const).map((id) => {
+            const app = apps.find((a) => a.id === id)!;
+            const screen = app.screens[0]!;
+            return (
+              <Link key={id} to={`/examples/${id}`} className="used-card">
+                <img src={`${import.meta.env.BASE_URL}screens/${screen.id}-desktop.webp`} alt="" loading="lazy" width={screen.desktop[0]} height={screen.desktop[1]} />
+                <span className="used-screen">{app.name}</span>
+                <span className="used-name">{app.screens.length} screens</span>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
       <section className="cta">

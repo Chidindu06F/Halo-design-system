@@ -697,3 +697,303 @@ main {
     line-height: 40px;
   }
 }
+
+/* ---------- Component demos (labelled variants) ---------- */
+
+.demo-list {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+}
+
+.variant-card {
+  border-radius: var(--halo-radius-6);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+  overflow: hidden;
+}
+
+.demo-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  padding: 40px 24px;
+  overflow-x: auto;
+}
+
+.demo-meta {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--halo-border-primary);
+}
+
+.demo-meta h3 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.demo-meta p {
+  margin-bottom: 8px;
+  color: var(--halo-text-secondary);
+}
+
+.variant-card > .code {
+  margin: 0 16px 16px;
+}
+
+/* Layout helpers the demo code uses, so the copied code stays short */
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.demo-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.demo-panel {
+  padding: 20px;
+  border-radius: var(--halo-radius-6);
+  background: var(--halo-surface-primary);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+}
+
+.demo-grid-2,
+.demo-grid-3 {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+
+.demo-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.demo-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* ---------- Used in real screens ---------- */
+
+.used-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.used-card {
+  display: grid;
+  gap: 2px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.used-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  object-position: top left;
+  margin-bottom: 8px;
+  border-radius: var(--halo-radius-4);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+  outline: 1px solid var(--halo-border-secondary);
+  outline-offset: -1px;
+}
+
+.used-card:hover img {
+  outline-color: var(--halo-border-strong);
+}
+
+.used-card:focus-visible {
+  outline: none;
+}
+
+.used-card:focus-visible img {
+  outline: 2px solid var(--halo-border-focus);
+  outline-offset: 2px;
+}
+
+.used-name {
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--halo-text-secondary);
+}
+
+.used-screen {
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.used-more {
+  color: var(--halo-text-secondary);
+}
+
+/* ---------- Examples page ---------- */
+
+.examples-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.examples-bar [role='tablist'] {
+  overflow-x: auto;
+}
+
+.screens {
+  display: grid;
+  gap: 64px;
+}
+
+.screens-mobile {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px 24px;
+}
+
+.screen {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  scroll-margin-top: 96px;
+}
+
+.screen figcaption {
+  display: grid;
+  gap: 10px;
+}
+
+.screen h2 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--halo-surface-secondary);
+  color: var(--halo-text-primary);
+  font-size: 12px;
+  font-weight: var(--halo-font-weight-semibold);
+  text-decoration: none;
+}
+
+.chip:hover {
+  text-decoration: underline;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--halo-border-focus);
+  outline-offset: 2px;
+}
+
+.desktop-frame,
+.phone-frame {
+  border-radius: var(--halo-radius-6);
+  outline: 1px solid var(--halo-border-secondary);
+  outline-offset: -1px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.desktop-frame img,
+.phone-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.phone-frame {
+  width: 100%;
+  max-width: 340px;
+  height: 640px;
+  justify-self: center;
+  overflow-y: auto;
+  border-radius: 32px;
+  outline-width: 6px;
+  outline-offset: 0;
+  outline-color: var(--halo-surface-secondary);
+}
+
+.phone-frame:focus-visible {
+  outline-color: var(--halo-border-focus);
+}
+
+@media (max-width: 600px) {
+  .examples-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .screens {
+    gap: 40px;
+  }
+
+  .demo-preview {
+    padding: 32px 16px;
+  }
+
+  .demo-meta {
+    padding: 16px;
+  }
+}
+
+/* Keep wide content (code, tables, tab lists) scrolling inside its box instead of widening the page on phones */
+.hero,
+.docs-section,
+.screens:not(.screens-mobile),
+.demo-list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.code {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.hero .code {
+  width: 100%;
+  max-width: 520px;
+}
+
+.examples-bar > :first-child {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.variant-card {
+  min-width: 0;
+}
+
+.showcase {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px 0;
+}
+
+.showcase-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
