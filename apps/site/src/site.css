@@ -1031,7 +1031,7 @@ main {
 
 .figma-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 720px);
   gap: 48px;
   align-items: center;
   padding-top: 24px;
@@ -1296,5 +1296,83 @@ main {
   .figma-stats dd {
     font-size: 28px;
     line-height: 36px;
+  }
+}
+
+/* When to use what: a picker on the left, the component in a real screen on the right */
+.picker {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  margin-top: 8px;
+}
+
+.picker-side {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  position: sticky;
+  top: 96px;
+}
+
+.picker-side > :first-child {
+  width: 100%;
+}
+
+.picker-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.picker-view {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.picker-frame {
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  padding: 32px;
+  border-radius: var(--halo-radius-6);
+  background: var(--halo-surface-minimal);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+}
+
+.picker-frame img {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  border-radius: var(--halo-radius-5);
+}
+
+.picker-live {
+  width: 100%;
+  max-width: 560px;
+}
+
+.picker-view figcaption {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+@media (max-width: 960px) {
+  .picker {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .picker-side {
+    position: static;
+  }
+
+  .picker-frame {
+    min-height: 0;
+    padding: 16px;
   }
 }

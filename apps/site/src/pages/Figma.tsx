@@ -1,4 +1,5 @@
-import { Button } from '@halo-ds/react';
+import { useState } from 'react';
+import { Button, SelectField } from '@halo-ds/react';
 import {
   ArrowRight,
   ArrowSquareOut,
@@ -15,7 +16,7 @@ import {
   X,
 } from '@phosphor-icons/react';
 import { guideFor } from '../guide';
-import { all, groups } from '../registry';
+import { all, exampleFor } from '../registry';
 import type { Entry } from '../registry';
 import { Link, links, useRoute } from '../router';
 import { Sidebar } from './Components';
@@ -30,16 +31,52 @@ const stats = [
   { value: '287', label: 'Variables' },
 ];
 
+// Short on purpose: each line stays within three lines on the card
 const features = [
-  { icon: <Rows />, title: 'Auto layout everywhere', text: 'Every component and example screen is built with auto layout, so it resizes the way the code does. Nothing to nudge by hand.' },
-  { icon: <PuzzlePiece />, title: 'Slots', text: 'Cards, modals, drawers, accordions and more have slots. Drop your own content in without detaching, and keep getting updates.' },
-  { icon: <Shapes />, title: 'Every value is a variable', text: 'Colour, spacing, radius, type and layout grids all come from variables. Change the brand colour once and every component follows.' },
-  { icon: <Moon />, title: 'Light and dark', text: 'Switch a frame between light and dark mode. Every component is checked in both.' },
-  { icon: <Code />, title: 'Named like the code', text: 'Variant and property names match the React props, and Dev Mode shows the import line, so handoff needs no translation.' },
-  { icon: <BookOpenText />, title: 'A page of guidance per component', text: 'Anatomy, sizes, states, when to use it, do\'s and don\'ts, accessibility and the tokens it uses.' },
-  { icon: <Devices />, title: 'Seven example apps', text: 'About 200 desktop and mobile screens: SaaS, banking, a sales CRM, tax, creators, healthcare and payroll.' },
-  { icon: <Cube />, title: 'Assets included', text: 'Over 1,500 icons, illustrations, flags, company logos, emojis, awards and 90 ready-made avatar faces.' },
+  { icon: <Rows />, title: 'Auto layout everywhere', text: 'Every component and screen resizes the way the code does.' },
+  { icon: <PuzzlePiece />, title: 'Slots', text: 'Drop your own content into cards, modals and more without detaching.' },
+  { icon: <Shapes />, title: 'Every value is a variable', text: 'Colour, spacing, radius, type and grids. Change the brand once, everything follows.' },
+  { icon: <Moon />, title: 'Light and dark', text: 'Switch any frame between modes. Every component works in both.' },
+  { icon: <Code />, title: 'Named like the code', text: 'Variants and properties match the React props, so handoff needs no translation.' },
+  { icon: <BookOpenText />, title: 'Guidance per component', text: "Anatomy, states, when to use it, do's and don'ts and accessibility." },
+  { icon: <Devices />, title: 'Seven example apps', text: 'About 200 desktop and mobile screens, from banking to healthcare.' },
+  { icon: <Cube />, title: 'Assets included', text: 'Over 1,500 icons, plus illustrations, flags, logos and avatar faces.' },
 ];
+
+const withGuide = all.filter((e) => guideFor(e.slug));
+
+/** Pick a component, see it in a real UI, and read what it is for. */
+function Picker() {
+  const [slug, setSlug] = useState('textarea');
+  const entry = withGuide.find((e) => e.slug === slug)!;
+  const { guide, image } = guideFor(slug)!;
+  const Live = guide.example ? null : exampleFor(slug)?.Example;
+  return (
+    <div className="picker">
+      <div className="picker-side">
+        <SelectField
+          label="Component"
+          value={slug}
+          onValueChange={setSlug}
+          options={withGuide.map((e) => ({ value: e.slug, label: e.name }))}
+        />
+        <Link to={`/figma/${slug}`} className="picker-more">
+          Do's and don'ts for {entry.name} <ArrowRight aria-hidden="true" />
+        </Link>
+      </div>
+      <figure className="picker-view">
+        <div className="picker-frame">
+          {guide.example ? (
+            <img key={image} src={`${base}usage/${image}.webp`} alt={`${entry.name} in a real screen`} width={guide.example.width} height={guide.example.height} />
+          ) : (
+            Live && <div className="picker-live"><Live /></div>
+          )}
+        </div>
+        <figcaption>{guide.callout}</figcaption>
+      </figure>
+    </div>
+  );
+}
 
 function Overview() {
   return (
@@ -60,7 +97,6 @@ function Overview() {
             </Button>
           </div>
         </div>
-        <img className="figma-cover" src={`${base}figma/cover.webp`} alt="The cover of the Figma file" width={1600} height={900} />
       </header>
 
       <dl className="figma-stats">
@@ -85,41 +121,17 @@ function Overview() {
         </div>
       </section>
 
-      <section className="figma-section figma-docs" aria-labelledby="docs">
-        <div>
-          <h2 id="docs">Documented in the file</h2>
-          <p>
-            Each component has its own page in Figma, written for the people who use it: what it is for, how it is built, which variant to pick, and the mistakes to avoid. The same guidance is below, so you can check it before you open the file.
-          </p>
-        </div>
-        <img src={`${base}figma/doc-page.webp`} alt="The top of the Badge page in Figma: the intro and the anatomy" width={1400} height={1094} loading="lazy" />
-      </section>
-
       <section className="figma-section" id="guide" aria-labelledby="guide-title">
         <h2 id="guide-title">When to use what</h2>
-        <p className="lede">Pick a component to see it in context, the do's and don'ts, and how it compares with the ones that look like it.</p>
-        {groups.map((g) => (
-          <div key={g.name} className="guide-group">
-            <h3>{g.name}</h3>
-            <div className="guide-grid">
-              {g.items.filter((e) => guideFor(e.slug)).map((e) => (
-                <Link key={e.slug} to={`/figma/${e.slug}`} className="guide-card">
-                  <span className="guide-name">{e.name}</span>
-                  <span className="guide-callout">{guideFor(e.slug)!.guide.callout}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
+        <p className="lede">Choose a component to see where it belongs in a real screen.</p>
+        <Picker />
       </section>
     </div>
   );
 }
 
 function GuidePage({ entry }: { entry: Entry }) {
-  const found = guideFor(entry.slug)!;
-  const { guide, image } = found;
-  const withGuide = all.filter((e) => guideFor(e.slug));
+  const { guide, image } = guideFor(entry.slug)!;
   const i = withGuide.indexOf(entry);
   const prev = withGuide[i - 1];
   const next = withGuide[i + 1];
