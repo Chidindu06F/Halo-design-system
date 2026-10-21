@@ -21,27 +21,41 @@ import { ArrowRight, Code, FigmaLogo, Plugs } from '@phosphor-icons/react';
 import { CodeBlock } from '../CodeBlock';
 import { links, useRoute } from '../router';
 
-/* Brand colours people can try on the live examples. Each sets the few variables a rebrand needs. */
+/* Brand colours people can try on the live examples. Purple is Halo's own, so it uses the real tokens.
+   The others set the few variables a rebrand needs, with light and dark values (site.css picks by theme). */
 const brands = [
-  { name: 'Purple', main: '#CC1DD0', hover: '#B219B6', soft: '#FBEDFC', ring: '#F3C8F4', text: '#99169C' },
-  { name: 'Blue', main: '#2F6BFF', hover: '#1F5FE0', soft: '#EAF1FF', ring: '#C9DAFF', text: '#1A4CC2' },
-  { name: 'Green', main: '#178C4E', hover: '#11693A', soft: '#E8F7EF', ring: '#B9E6CE', text: '#11693A' },
-  { name: 'Orange', main: '#E2601B', hover: '#C24F12', soft: '#FFF2EA', ring: '#FFD3B8', text: '#A9450F' },
+  { name: 'Purple', main: '#CC1DD0' },
+  {
+    name: 'Blue', main: '#2F6BFF', hover: '#1F5FE0', ring: '#C9DAFF',
+    light: { soft: '#EAF1FF', tint: '#C9DAFF', text: '#1A4CC2' },
+    dark: { soft: '#14306E', tint: '#1C3F8F', text: '#C9DAFF' },
+  },
+  {
+    name: 'Green', main: '#178C4E', hover: '#11693A', ring: '#B9E6CE',
+    light: { soft: '#E8F7EF', tint: '#B9E6CE', text: '#11693A' },
+    dark: { soft: '#0E3D24', tint: '#13502F', text: '#B9E6CE' },
+  },
+  {
+    name: 'Orange', main: '#E2601B', hover: '#C24F12', ring: '#FFD3B8',
+    light: { soft: '#FFF2EA', tint: '#FFD3B8', text: '#8F3A0C' },
+    dark: { soft: '#5A2608', tint: '#73320C', text: '#FFD3B8' },
+  },
 ];
 
 const brandVars = (b: (typeof brands)[number]) =>
-  ({
-    '--halo-button-primary': b.main,
-    '--halo-button-primary-hover': b.hover,
-    '--halo-button-primary-pressed': b.hover,
-    '--halo-fill-brand': b.main,
-    '--halo-fill-brand-hover': b.hover,
-    '--halo-border-contrast': b.main,
-    '--halo-border-focus': b.ring,
-    '--halo-surface-brand': b.soft,
-    '--halo-surface-brand-contrast': b.hover,
-    '--halo-text-brand': b.text,
-  }) as CSSProperties;
+  (b.light
+    ? {
+        '--b-main': b.main,
+        '--b-hover': b.hover,
+        '--b-ring': b.ring,
+        '--b-soft-light': b.light.soft,
+        '--b-tint-light': b.light.tint,
+        '--b-text-light': b.light.text,
+        '--b-soft-dark': b.dark.soft,
+        '--b-tint-dark': b.dark.tint,
+        '--b-text-dark': b.dark.text,
+      }
+    : {}) as CSSProperties;
 
 function SignUp() {
   const { toast } = useToast();
@@ -205,7 +219,7 @@ export function Home() {
             ))}
           </div>
         </div>
-        <div className="demo-grid" style={brandVars(brand)}>
+        <div className="demo-grid" data-rebrand={brand.light ? '' : undefined} style={brandVars(brand)}>
           <SignUp />
           <div className="demo-col">
             <Numbers />

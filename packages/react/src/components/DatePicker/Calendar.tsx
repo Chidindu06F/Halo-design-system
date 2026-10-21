@@ -36,9 +36,9 @@ interface CalendarBase extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' |
   /** Something under the months, like Cancel and Apply buttons. */
   footer?: ReactNode;
   /**
-   * Arrows: the month name with back and forward arrows. Picker: the month name can be clicked
-   * to swap the days for months and years, to jump straight to a date far away, like a birthday.
-   * Picker needs one month on show. Figma: Header.
+   * Picker (the default): the month name can be clicked to swap the days for months and years,
+   * to jump straight to a date far away, like a birthday. Arrows: the month name is plain text,
+   * so the arrows are the only way to move. Two months side by side always use arrows. Figma: Header.
    */
   header?: 'arrows' | 'picker';
   /** Years people can jump to with the picker. Defaults to the min and max years, or 100 years back and 10 ahead. */
@@ -87,7 +87,7 @@ export function Calendar(props: CalendarProps) {
     defaultMonth,
     months = props.mode === 'range' ? 2 : 1,
     footer,
-    header = 'arrows',
+    header = 'picker',
     yearRange,
     className,
     classNames,

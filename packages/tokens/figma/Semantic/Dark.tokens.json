@@ -832,6 +832,46 @@
           "targetVariableSetName": "Primitives"
         }
       }
+    },
+    "link": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9529411764705882,
+          0.7843137254901961,
+          0.9568627450980393
+        ],
+        "alpha": 1,
+        "hex": "#F3C8F4"
+      },
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "colours/purple/200",
+          "targetVariableSetName": "Primitives"
+        }
+      },
+      "$description": "Text links and Link buttons. Bright purple on light backgrounds, a lighter purple in dark mode so it stays readable."
+    },
+    "link-destructive": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9725490196078431,
+          0.7529411764705882,
+          0.7725490196078432
+        ],
+        "alpha": 1,
+        "hex": "#F8C0C5"
+      },
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "colours/red/200",
+          "targetVariableSetName": "Primitives"
+        }
+      },
+      "$description": "Destructive Link buttons, like Remove. Lighter in dark mode so it stays readable."
     }
   },
   "border": {

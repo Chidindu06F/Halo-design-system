@@ -19,7 +19,7 @@
   line-height: 1;
   white-space: nowrap;
   vertical-align: middle;
-  /* Only Neutral and Brand set these; reset so they never inherit */
+  /* Only some colours set these; reset so they never inherit */
   --line: initial;
   --solid-bg: initial;
   --solid-fg: initial;
@@ -37,14 +37,16 @@
 .lg { --h: 28px; --pad: var(--halo-spacing-5); --gap: var(--halo-spacing-3); --fs: var(--halo-font-size-md); --icon: 16px; --dot: 8px; }
 
 /* ---------- Colours ---------- */
-/* --soft-bg and --soft-fg tint the badge, --strong is the solid fill, outline border and dot */
+/* --soft-bg and --soft-fg tint the badge, --strong is the solid fill, outline border and dot.
+   White text is too faint on the bright blue, green and orange fills, so their solid badges use dark text,
+   and solid Error sits on a deeper red so its white text stays readable. Same in light and dark mode. */
 
 .neutral { --soft-bg: var(--halo-surface-secondary); --soft-fg: var(--halo-text-contrast); --strong: var(--halo-text-contrast); --line: var(--halo-border-secondary); --solid-bg: var(--halo-surface-invert); --solid-fg: var(--halo-text-invert); }
 .brand { --soft-bg: var(--halo-surface-brand-secondary); --soft-fg: var(--halo-text-brand); --strong: var(--halo-fill-brand); --line: var(--halo-border-contrast); --solid-bg: var(--halo-fill-brand); --solid-fg: var(--halo-text-on-brand); }
-.information { --soft-bg: var(--halo-state-information-secondary); --soft-fg: var(--halo-state-information-contrast); --strong: var(--halo-state-information-primary); }
-.success { --soft-bg: var(--halo-state-success-secondary); --soft-fg: var(--halo-state-success-contrast); --strong: var(--halo-state-success-primary); }
-.warning { --soft-bg: var(--halo-state-warning-secondary); --soft-fg: var(--halo-state-warning-contrast); --strong: var(--halo-state-warning-primary); }
-.error { --soft-bg: var(--halo-state-error-secondary); --soft-fg: var(--halo-state-error-contrast); --strong: var(--halo-state-error-primary); }
+.information { --soft-bg: var(--halo-state-information-secondary); --soft-fg: var(--halo-state-information-contrast); --strong: var(--halo-state-information-primary); --solid-fg: var(--halo-color-black-900); }
+.success { --soft-bg: var(--halo-state-success-secondary); --soft-fg: var(--halo-state-success-contrast); --strong: var(--halo-state-success-primary); --solid-fg: var(--halo-color-black-900); }
+.warning { --soft-bg: var(--halo-state-warning-secondary); --soft-fg: var(--halo-state-warning-contrast); --strong: var(--halo-state-warning-primary); --solid-fg: var(--halo-color-black-900); }
+.error { --soft-bg: var(--halo-state-error-secondary); --soft-fg: var(--halo-state-error-contrast); --strong: var(--halo-state-error-primary); --solid-bg: var(--halo-color-red-400); }
 
 /* ---------- Styles ---------- */
 

@@ -33,11 +33,19 @@ export const Single: Story = {
   },
 };
 
-/** The month name is a button: click it to pick a month, or click the year to pick a year. */
+/** The month name is a button: click it to pick a month, or click the year to pick a year. This is the default. */
 export const MonthAndYearPicker: Story = {
   render: function Render() {
     const [d, setD] = useState<Date | null>(today);
-    return <Calendar value={d} onChange={setD} header="picker" style={{ width: 320 }} />;
+    return <Calendar value={d} onChange={setD} style={{ width: 320 }} />;
+  },
+};
+
+/** `header="arrows"` keeps the month name as plain text, for when people only ever pick dates close by. */
+export const ArrowsOnly: Story = {
+  render: function Render() {
+    const [d, setD] = useState<Date | null>(today);
+    return <Calendar value={d} onChange={setD} header="arrows" style={{ width: 320 }} />;
   },
 };
 

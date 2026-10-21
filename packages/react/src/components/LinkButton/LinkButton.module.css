@@ -1,7 +1,7 @@
 /* Values mirror the Link button component set in Figma (Button page). */
 
 .link {
-  --fg: var(--halo-button-primary);
+  --fg: var(--halo-text-link);
   --icon-size: 20px;
 
   display: inline-flex;
@@ -55,7 +55,7 @@
 /* ---------- Types ---------- */
 
 .destructive {
-  --fg: var(--halo-button-destructive);
+  --fg: var(--halo-text-link-destructive);
 }
 
 /* ---------- Sizes ---------- */

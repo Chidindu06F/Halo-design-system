@@ -138,7 +138,7 @@ export interface DatePickerProps extends PickerBase {
   value?: Date | null;
   defaultValue?: Date | null;
   onValueChange?: (date: Date | null) => void;
-  /** Picker makes the calendar's title a button that jumps to any month and year, for dates far away like a date of birth. Figma: Header. */
+  /** Picker (the default) makes the calendar's title a button that jumps to any month and year, for dates far away like a date of birth. Arrows leaves only the arrows. Figma: Header. */
   calendarHeader?: 'arrows' | 'picker';
   /** Years people can jump to with the picker. */
   yearRange?: [number, number];
@@ -279,7 +279,7 @@ export interface MultiDatePickerProps extends PickerBase {
   onValueChange?: (dates: Date[]) => void;
   /** The most days people can pick. */
   maxCount?: number;
-  /** Picker makes the calendar's title a button that jumps to any month and year. Figma: Header. */
+  /** Picker (the default) makes the calendar's title a button that jumps to any month and year. Arrows leaves only the arrows. Figma: Header. */
   calendarHeader?: 'arrows' | 'picker';
   yearRange?: [number, number];
 }

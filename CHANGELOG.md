@@ -18,6 +18,9 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### Changes
 
+- **Badge**: solid Information, Success and Warning badges now have dark text, and solid Error sits on a deeper red, so their labels are readable. White text on those bright fills was too faint.
+- **Link button**: now reads `text/link` and `text/link-destructive`, which turn lighter in dark mode. Before, purple and red links were hard to read on dark backgrounds.
+- **Calendar and DatePicker**: the month and year picker is now on by default. Click the month name to jump to any month, or the year to jump to any year, as well as using the arrows. Set `header="arrows"` (or `calendarHeader="arrows"` on DatePicker) to keep the old plain title. Calendars showing two months side by side still use arrows.
 - **Next.js**: the React package now starts with `'use client'`, so Halo components work in Next.js App Router pages without errors.
 - **Fields in forms**: Combobox, the date pickers and the colour input take a `name` and submit their values with the form, like the other fields. Date pickers send YYYY-MM-DD.
 - **Table extras**: `stickyHeader` with `maxHeight` keeps the header in view while rows scroll, and `stickyFirstColumn` keeps the first column in view on wide tables. `TableHeaderCell` takes a `filter` that opens from a funnel button. New `TableExpandToggle` and `TableExpandedRow` for rows that open to show details. `DataTable` wires these up: column `filters` (with an optional `onFilter`) and `expandable` with `rowExpandable`.
@@ -26,6 +29,7 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### Tokens
 
+- New `text/link` and `text/link-destructive` (`--halo-text-link*`) for Link buttons: the bright purple and red in light mode, lighter versions in dark mode.
 - New `fill/brand`, `fill/brand-hover` and `fill/disabled` (`--halo-fill-*`) for solid fills that aren't buttons: checkboxes, radios, switches, sliders, progress, spinners, the stepper, the active tab line and brand badges. These components no longer read the `button/*` tokens, so restyling buttons leaves them alone; to rebrand both, set `--halo-fill-brand` too (see Theming). Hover backgrounds in menus, lists, calendars and trees now read `surface/secondary`, and the Accordion's hover text reads `text/brand`.
 - `button/premium-start`, `button/premium-middle` and `button/premium-end` set the Premium gradient (`--halo-button-premium-*`).
 

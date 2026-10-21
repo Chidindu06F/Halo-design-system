@@ -305,6 +305,29 @@ main {
   background: var(--halo-surface-minimal);
 }
 
+/* A brand other than Purple, chosen with the swatches. Light values first, dark ones below. */
+.demo-grid[data-rebrand] {
+  --halo-button-primary: var(--b-main);
+  --halo-button-primary-hover: var(--b-hover);
+  --halo-button-primary-pressed: var(--b-hover);
+  --halo-fill-brand: var(--b-main);
+  --halo-fill-brand-hover: var(--b-hover);
+  --halo-border-contrast: var(--b-main);
+  --halo-border-focus: var(--b-ring);
+  --halo-surface-brand: var(--b-soft-light);
+  --halo-surface-brand-secondary: var(--b-tint-light);
+  --halo-surface-brand-contrast: var(--b-hover);
+  --halo-text-brand: var(--b-text-light);
+  --halo-text-link: var(--b-main);
+}
+
+[data-theme='dark'] .demo-grid[data-rebrand] {
+  --halo-surface-brand: var(--b-soft-dark);
+  --halo-surface-brand-secondary: var(--b-tint-dark);
+  --halo-text-brand: var(--b-text-dark);
+  --halo-text-link: var(--b-text-dark);
+}
+
 .demo-col {
   display: grid;
   gap: 20px;

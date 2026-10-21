@@ -14,6 +14,7 @@ export const blue = {
   '--halo-fill-brand': '#2F6BFF',
   '--halo-fill-brand-hover': '#1F5FE0',
   '--halo-text-brand': '#1A4CC2',
+  '--halo-text-link': '#2F6BFF',
   '--halo-border-contrast': '#2F6BFF',
   '--halo-border-focus': '#C9DAFF',
   '--halo-illustration-accent': '#D6E4FF',
@@ -72,7 +73,7 @@ There are two ways to do it.
 
 ## See it
 
-The same components, with Halo's purple on the left and a blue brand on the right. The right side only changes the fourteen brand variables listed below.
+The same components, with Halo's purple on the left and a blue brand on the right. The right side only changes the fifteen brand variables listed below.
 
 <div className="sb-unstyled" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24, margin: '24px 0' }}>
   <Sample title="Halo" />
@@ -96,7 +97,8 @@ Load your own CSS after Halo's, and set the brand variables on `:root`. Set them
   --halo-surface-brand-secondary: #c9daff;  /* icon circles, tinted areas */
   --halo-surface-brand-contrast: #1f5fe0;   /* selected page, active outlines */
   --halo-surface-brand-heavy-contrast: #123c99;
-  --halo-text-brand: #1a4cc2;               /* brand text and links */
+  --halo-text-brand: #1a4cc2;               /* brand text */
+  --halo-text-link: #2f6bff;                /* Link buttons */
   --halo-border-contrast: #2f6bff;          /* hovered fields */
   --halo-border-focus: #c9daff;             /* focus rings */
   --halo-illustration-accent: #d6e4ff;      /* illustration highlights */
@@ -109,6 +111,7 @@ Load your own CSS after Halo's, and set the brand variables on `:root`. Set them
   --halo-surface-brand: #10275c;
   --halo-surface-brand-secondary: #183a85;
   --halo-text-brand: #a9c4ff;
+  --halo-text-link: #a9c4ff;
   --halo-border-focus: #183a85;
   --halo-illustration-accent: #183a85;
   --halo-illustration-accent-strong: #a9c4ff;
