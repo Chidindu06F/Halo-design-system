@@ -1031,7 +1031,7 @@ main {
 
 .figma-hero {
   display: grid;
-  grid-template-columns: minmax(0, 720px);
+  grid-template-columns: minmax(0, 1fr);
   gap: 48px;
   align-items: center;
   padding-top: 24px;
@@ -1040,6 +1040,7 @@ main {
 .figma-hero-text {
   display: grid;
   gap: 16px;
+  max-width: 720px;
 }
 
 .figma-hero h1 {
@@ -1235,8 +1236,8 @@ main {
   box-shadow: inset 0 3px 0 var(--halo-state-error-primary), inset 0 0 0 1px var(--halo-border-secondary);
 }
 
-.dodont-card h3,
-.compare-card h3 {
+.dodont-card h4,
+.compare-card h4 {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1244,11 +1245,11 @@ main {
   font-weight: var(--halo-font-weight-semibold);
 }
 
-.dodont-do h3 svg {
+.dodont-do h4 svg {
   color: var(--halo-state-success-primary);
 }
 
-.dodont-dont h3 svg {
+.dodont-dont h4 svg {
   color: var(--halo-state-error-primary);
 }
 
@@ -1375,4 +1376,34 @@ main {
     min-height: 0;
     padding: 16px;
   }
+}
+
+/* The guide sits inside the Figma page, so its headings are one level down but keep their size */
+.guide-title {
+  font-family: var(--halo-font-family-label);
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+}
+
+.guide-h {
+  font-family: var(--halo-font-family-label);
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.figma-guide {
+  max-width: none;
+  margin: 16px 0 0;
+  padding: 32px 0 0;
+  border-top: 1px solid var(--halo-border-primary);
+}
+
+.figma-shot {
+  width: 100%;
+  height: auto;
+  margin-top: 48px;
+  border-radius: var(--halo-radius-6);
+  outline: 1px solid var(--halo-border-secondary);
+  outline-offset: -1px;
 }
