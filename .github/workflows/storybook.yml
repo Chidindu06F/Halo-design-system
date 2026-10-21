@@ -1,4 +1,4 @@
-name: Deploy Storybook
+name: Deploy site and Storybook
 
 on:
   push:
@@ -32,11 +32,18 @@ jobs:
 
       - run: pnpm build
 
+      # The website sits at the root and Storybook under /storybook
+      - name: Put the site and Storybook together
+        run: |
+          mkdir -p pages
+          cp -r apps/site/dist/. pages/
+          cp -r apps/docs/storybook-static pages/storybook
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: apps/docs/storybook-static
+          path: pages
 
   deploy:
     needs: build
