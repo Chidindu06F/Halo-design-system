@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import { SegmentedControl, Tab, TabList, Tabs } from '@halo-ds/react';
 import { DeviceMobile, Monitor } from '@phosphor-icons/react';
-import { all } from '../registry';
 import { apps } from '../screens';
 import type { Screen } from '../screens';
-import { Link, useRoute } from '../router';
-
-const nameOf = (slug: string) => all.find((e) => e.slug === slug)?.name ?? slug;
+import { useRoute } from '../router';
 
 function ScreenShot({ screen, device }: { screen: Screen; device: 'desktop' | 'mobile' }) {
   const src = `${import.meta.env.BASE_URL}screens/${screen.id}-${device}.webp`;
@@ -15,13 +12,6 @@ function ScreenShot({ screen, device }: { screen: Screen; device: 'desktop' | 'm
     <figure id={screen.id} className={`screen screen-${device}`}>
       <figcaption>
         <h2>{screen.name}</h2>
-        <ul className="chips" aria-label="Components on this screen">
-          {screen.components.map((c) => (
-            <li key={c}>
-              <Link to={`/components/${c}`} className="chip">{nameOf(c)}</Link>
-            </li>
-          ))}
-        </ul>
       </figcaption>
       {/* Phones scroll inside a fixed frame, so long screens don't stretch the page */}
       <div className={device === 'mobile' ? 'phone-frame' : 'desktop-frame'} tabIndex={device === 'mobile' ? 0 : undefined} aria-label={device === 'mobile' ? `${screen.name}, scroll to see the whole screen` : undefined}>

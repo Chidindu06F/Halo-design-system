@@ -140,3 +140,10 @@ export function demosFor(slug: string): Demo[] {
       };
     });
 }
+
+const thumbModules = import.meta.glob<{ default: ComponentType }>('./thumbs/*.tsx', { eager: true });
+
+/** What the overview card shows: a still "open" view for overlays, otherwise the main example. */
+export function thumbFor(slug: string): ComponentType | null {
+  return thumbModules[`./thumbs/${slug}.tsx`]?.default ?? exampleFor(slug)?.Example ?? null;
+}

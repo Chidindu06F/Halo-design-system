@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { Badge, Input, LinkButton, SegmentedControl, Tab, TabList, TabPanel, Tabs } from '@halo-ds/react';
 import { ArrowLeft, ArrowRight, Code, MagnifyingGlass } from '@phosphor-icons/react';
 import { CodeBlock } from '../CodeBlock';
-import { all, demosFor, exampleFor, groups } from '../registry';
+import { all, demosFor, exampleFor, groups, thumbFor } from '../registry';
 import type { Demo, Entry } from '../registry';
-import { apps } from '../screens';
 import { Link, links, useRoute } from '../router';
 
 const managers = { npm: 'npm install', pnpm: 'pnpm add', yarn: 'yarn add', bun: 'bun add' } as const;
@@ -36,6 +35,19 @@ function Sidebar({ current }: { current?: string }) {
   );
 }
 
+/** A card on the overview: the real component, shrunk and not clickable, with its name. */
+function Thumb({ entry }: { entry: Entry }) {
+  const Preview = thumbFor(entry.slug);
+  return (
+    <Link to={`/components/${entry.slug}`} className="overview-card">
+      <span className="overview-name">{entry.name}</span>
+      <div className="thumb" inert>
+        <div className="thumb-inner">{Preview && <Preview />}</div>
+      </div>
+    </Link>
+  );
+}
+
 function Overview() {
   return (
     <div className="docs-main">
@@ -49,16 +61,26 @@ function Overview() {
           <h2 id={`g-${g.name}`}>{g.name}</h2>
           <div className="overview-grid">
             {g.items.map((e) => (
-              <Link key={e.slug} to={`/components/${e.slug}`} className="overview-card">
-                <span className="overview-name">{e.name}</span>
-                <span className="overview-desc">{e.description}</span>
-              </Link>
+              <Thumb key={e.slug} entry={e} />
             ))}
           </div>
         </section>
       ))}
     </div>
   );
+}
+
+/** True when there is room for two columns of demos. */
+function useWide() {
+  const query = '(min-width: 1101px)';
+  const [wide, setWide] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setWide(mq.matches);
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  return wide;
 }
 
 /** One labelled variant, like Ant Design's examples: the demo, what it shows, and its code on request. */
@@ -81,34 +103,12 @@ function DemoCard({ demo, slug }: { demo: Demo; slug: string }) {
   );
 }
 
-/** Real screens from the example apps that use this component. */
-function UsedIn({ slug }: { slug: string }) {
-  const screens = apps.flatMap((a) => a.screens.filter((s) => s.components.includes(slug)).map((s) => ({ app: a, screen: s })));
-  if (!screens.length) return null;
-  const base = import.meta.env.BASE_URL;
-  return (
-    <section className="docs-section" aria-labelledby="used-in">
-      <h2 id="used-in">Used in real screens</h2>
-      <p>Where this component shows up in the example apps. Open one to see it full size, on desktop and mobile.</p>
-      <div className="used-grid">
-        {screens.slice(0, 6).map(({ app, screen }) => (
-          <Link key={screen.id} to={`/examples/${app.id}#${screen.id}`} className="used-card">
-            <img src={`${base}screens/${screen.id}-desktop.webp`} alt="" loading="lazy" width={screen.desktop[0]} height={screen.desktop[1]} />
-            <span className="used-name">{app.name}</span>
-            <span className="used-screen">{screen.name}</span>
-          </Link>
-        ))}
-      </div>
-      {screens.length > 6 && <p className="used-more">And {screens.length - 6} more in <Link to="/examples">Examples</Link>.</p>}
-    </section>
-  );
-}
-
 function Detail({ entry }: { entry: Entry }) {
   const [pm, setPm] = useState<Manager>('npm');
   const [tab, setTab] = useState('preview');
   const ex = exampleFor(entry.slug);
   const demos = demosFor(entry.slug);
+  const cols = useWide() ? 2 : 1;
   const i = all.indexOf(entry);
   const prev = all[i - 1];
   const next = all[i + 1];
@@ -149,15 +149,20 @@ function Detail({ entry }: { entry: Entry }) {
       {demos.length > 0 && (
         <section className="docs-section" aria-labelledby="examples">
           <h2 id="examples">Examples</h2>
-          <div className="demo-list">
-            {demos.map((d) => (
-              <DemoCard key={`${entry.slug}-${d.id}`} demo={d} slug={entry.slug} />
+          {/* Two columns on wide screens, filled alternately so short and tall demos pack without gaps */}
+          <div className="demo-columns">
+            {Array.from({ length: cols }, (_, col) => col).map((col) => (
+              <div key={col} className="demo-list">
+                {demos
+                  .filter((_, i) => i % cols === col)
+                  .map((d) => (
+                    <DemoCard key={`${entry.slug}-${d.id}`} demo={d} slug={entry.slug} />
+                  ))}
+              </div>
             ))}
           </div>
         </section>
       )}
-
-      <UsedIn slug={entry.slug} />
 
       <section className="docs-section" aria-labelledby="install">
         <h2 id="install">Installation</h2>
