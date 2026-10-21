@@ -1026,3 +1026,275 @@ main {
 .showcase-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
+
+/* ---------- Figma page ---------- */
+
+.figma-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: center;
+  padding-top: 24px;
+}
+
+.figma-hero-text {
+  display: grid;
+  gap: 16px;
+}
+
+.figma-hero h1 {
+  font-family: var(--halo-font-family-label);
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+}
+
+.figma-actions {
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.figma-cover {
+  width: 100%;
+  height: auto;
+  border-radius: var(--halo-radius-6);
+  outline: 1px solid var(--halo-border-secondary);
+  outline-offset: -1px;
+}
+
+.figma-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 56px 0 0;
+  border-block: 1px solid var(--halo-border-primary);
+}
+
+.figma-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  padding: 24px;
+}
+
+.figma-stats > div + div {
+  border-left: 1px solid var(--halo-border-primary);
+}
+
+.figma-stats dt {
+  color: var(--halo-text-secondary);
+}
+
+.figma-stats dd {
+  margin: 0;
+  font-family: var(--halo-font-family-label);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.figma-section {
+  display: grid;
+  gap: 16px;
+  margin-top: 80px;
+}
+
+.figma-section h2 {
+  font-family: var(--halo-font-family-label);
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 32px 24px;
+  margin-top: 8px;
+}
+
+.figma-docs {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.figma-docs p {
+  margin-top: 12px;
+  color: var(--halo-text-secondary);
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.figma-docs img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--halo-radius-6);
+  outline: 1px solid var(--halo-border-secondary);
+  outline-offset: -1px;
+}
+
+.guide-group {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.guide-group h3 {
+  color: var(--halo-text-secondary);
+  font-size: 14px;
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.guide-card {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 16px;
+  border-radius: var(--halo-radius-5);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+  color: inherit;
+  text-decoration: none;
+}
+
+.guide-card:hover {
+  box-shadow: inset 0 0 0 1px var(--halo-border-strong);
+}
+
+.guide-card:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary), 0 0 0 3px var(--halo-border-focus);
+}
+
+.guide-name {
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.guide-callout {
+  color: var(--halo-text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* A guide page */
+.guide-about {
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.guide-example {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  max-width: 640px;
+}
+
+.guide-example img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--halo-radius-6);
+  outline: 1px solid var(--halo-border-secondary);
+  outline-offset: -1px;
+}
+
+.guide-example figcaption {
+  color: var(--halo-text-secondary);
+}
+
+.dodont,
+.compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.dodont-card,
+.compare-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 20px 24px;
+  border-radius: var(--halo-radius-6);
+  box-shadow: inset 0 0 0 1px var(--halo-border-secondary);
+}
+
+/* A coloured line on top says which is which; the heading and icon say it too */
+.dodont-do {
+  box-shadow: inset 0 3px 0 var(--halo-state-success-primary), inset 0 0 0 1px var(--halo-border-secondary);
+}
+
+.dodont-dont {
+  box-shadow: inset 0 3px 0 var(--halo-state-error-primary), inset 0 0 0 1px var(--halo-border-secondary);
+}
+
+.dodont-card h3,
+.compare-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: var(--halo-font-weight-semibold);
+}
+
+.dodont-do h3 svg {
+  color: var(--halo-state-success-primary);
+}
+
+.dodont-dont h3 svg {
+  color: var(--halo-state-error-primary);
+}
+
+.dodont-card ul,
+.compare-card ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.compare-card p {
+  color: var(--halo-text-contrast);
+}
+
+@media (max-width: 960px) {
+  .figma-hero,
+  .figma-docs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .figma-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figma-stats > div:nth-child(3) {
+    border-left: 0;
+  }
+
+  .figma-stats > div:nth-child(n + 3) {
+    border-top: 1px solid var(--halo-border-primary);
+  }
+}
+
+@media (max-width: 600px) {
+  .figma-hero h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .figma-stats > div {
+    padding: 16px;
+  }
+
+  .figma-stats dd {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}

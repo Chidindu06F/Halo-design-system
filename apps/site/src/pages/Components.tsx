@@ -9,7 +9,8 @@ import { Link, links, useRoute } from '../router';
 const managers = { npm: 'npm install', pnpm: 'pnpm add', yarn: 'yarn add', bun: 'bun add' } as const;
 type Manager = keyof typeof managers;
 
-function Sidebar({ current }: { current?: string }) {
+/** The grouped component list. `base` picks where the links go: the component pages or the usage guide. */
+export function Sidebar({ current, base = '/components' }: { current?: string; base?: string }) {
   const [q, setQ] = useState('');
   const match = (e: Entry) => e.name.toLowerCase().includes(q.trim().toLowerCase());
   return (
@@ -23,7 +24,7 @@ function Sidebar({ current }: { current?: string }) {
             <div key={g.name} className="docs-group">
               <p className="docs-group-name">{g.name}</p>
               {items.map((e) => (
-                <Link key={e.slug} to={`/components/${e.slug}`} className="docs-link" aria-current={current === e.slug ? 'page' : undefined}>
+                <Link key={e.slug} to={`${base}/${e.slug}`} className="docs-link" aria-current={current === e.slug ? 'page' : undefined}>
                   {e.name}
                 </Link>
               ))}
@@ -122,8 +123,8 @@ function Detail({ entry }: { entry: Entry }) {
         <h1>{entry.name}</h1>
         <p className="lede">{entry.description}</p>
         <div className="head-links">
-          <a href={`${links.storybook}?path=/docs/${entry.storybook}`}>Props and more examples in Storybook</a>
-          <a href={links.figma}>Figma</a>
+          <Link to={`/figma/${entry.slug}`}>When to use it</Link>
+          <a href={`${links.storybook}?path=/docs/${entry.storybook}`}>Props in Storybook</a>
         </div>
       </header>
 

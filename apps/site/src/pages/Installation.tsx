@@ -140,7 +140,7 @@ export function Installation() {
           type="information"
           title="Designing in Figma?"
           description="The Figma library uses the same tokens and component names as the code, so designs and builds match."
-          actions={<a href={links.figma}>Get the Figma file</a>}
+          actions={<Link to="/figma">Get the Figma file</Link>}
         />
       </section>
     </div>

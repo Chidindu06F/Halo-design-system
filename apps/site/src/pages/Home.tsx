@@ -192,7 +192,7 @@ export function Home() {
         <div className="hero-actions">
           <Button size="lg" iconRight={<ArrowRight />} onClick={() => go('/installation')}>Get started</Button>
           <Button size="lg" variant="secondary" onClick={() => go('/components')}>Browse components</Button>
-          <Button size="lg" variant="ghost" iconLeft={<FigmaLogo />} onClick={() => window.open(links.figma, '_blank', 'noopener')}>Get the Figma file</Button>
+          <Button size="lg" variant="ghost" iconLeft={<FigmaLogo />} onClick={() => go('/figma')}>Get the Figma file</Button>
         </div>
         <div className="hero-install">
           <CodeBlock code="npm install @halo-ds/react @halo-ds/tokens" label="Copy install command" compact />
@@ -273,7 +273,7 @@ export function Home() {
         <p>Install the package, or grab the Figma file and start designing.</p>
         <div className="hero-actions">
           <Button iconRight={<ArrowRight />} onClick={() => go('/installation')}>Installation</Button>
-          <Button variant="secondary" iconLeft={<FigmaLogo />} onClick={() => window.open(links.figma, '_blank', 'noopener')}>Figma file</Button>
+          <Button variant="secondary" iconLeft={<FigmaLogo />} onClick={() => go('/figma')}>Figma file</Button>
         </div>
       </section>
     </>

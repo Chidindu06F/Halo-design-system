@@ -42,6 +42,7 @@ function useTheme() {
 const pages = [
   { to: '/components', label: 'Components' },
   { to: '/examples', label: 'Examples' },
+  { to: '/figma', label: 'Figma' },
   { to: '/installation', label: 'Installation' },
 ];
 
@@ -76,7 +77,6 @@ export function Layout({ children }: { children: ReactNode }) {
           </NavItem>
         ))}
         <NavItem href={links.storybook}>Storybook</NavItem>
-        <NavItem href={links.figma}>Figma</NavItem>
       </TopBar>
       <Drawer open={menu} onClose={() => setMenu(false)} side="left" size="sm" title={<Logo />}>
         <nav aria-label="Main" className="drawer-nav">
@@ -86,7 +86,6 @@ export function Layout({ children }: { children: ReactNode }) {
             </NavItem>
           ))}
           <NavItem href={links.storybook}>Storybook</NavItem>
-          <NavItem href={links.figma}>Figma</NavItem>
           <NavItem href={links.github}>GitHub</NavItem>
         </nav>
       </Drawer>
@@ -99,7 +98,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <a href={links.github}>GitHub</a>
             <a href={links.npm}>npm</a>
             <a href={links.storybook}>Storybook</a>
-            <a href={links.figma}>Figma</a>
+            <Link to="/figma">Figma</Link>
           </nav>
         </div>
       </footer>
