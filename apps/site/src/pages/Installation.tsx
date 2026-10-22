@@ -6,10 +6,9 @@ import { Link, links } from '../router';
 const managers = ['npm', 'pnpm', 'yarn', 'bun'] as const;
 type Manager = (typeof managers)[number];
 const add: Record<Manager, string> = { npm: 'npm install', pnpm: 'pnpm add', yarn: 'yarn add', bun: 'bun add' };
-const packages = '@halo-ds/react @halo-ds/tokens @fontsource/geist';
+const packages = '@halo-ds/react @fontsource/geist';
 
-const styles = `import '@halo-ds/tokens/css';
-import '@halo-ds/react/styles.css';
+const styles = `import '@halo-ds/react/styles.css';
 import '@fontsource/geist/400.css';
 import '@fontsource/geist/600.css';
 import '@fontsource/geist/700.css';`;

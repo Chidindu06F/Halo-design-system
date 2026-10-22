@@ -18,6 +18,7 @@ New work collects under **Unreleased** and goes live in Storybook straight away.
 
 ### Changes
 
+- **One install**: `@halo-ds/react/styles.css` now includes the design tokens, so React apps install `@halo-ds/react` and add one CSS import. `@halo-ds/tokens` still installs with it and still ships on its own, for non-React projects. Importing `@halo-ds/tokens/css` as well does no harm.
 - **Card**: anything in `media` now fills the 4:3 box, not only images, videos and SVGs. Before, a gradient or your own block left an empty band under it.
 - **Badge**: solid Information, Success and Warning badges now have dark text, and solid Error sits on a deeper red, so their labels are readable. White text on those bright fills was too faint.
 - **Link button**: now reads `text/link` and `text/link-destructive`, which turn lighter in dark mode. Before, purple and red links were hard to read on dark backgrounds.

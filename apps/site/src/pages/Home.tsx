@@ -254,7 +254,7 @@ export function Home() {
           <Button size="lg" variant="ghost" iconLeft={<FigmaLogo />} onClick={() => go('/figma')}>Get the Figma file</Button>
         </div>
         <div className="hero-install">
-          <CodeBlock code="npm install @halo-ds/react @halo-ds/tokens" label="Copy install command" compact />
+          <CodeBlock code="npm install @halo-ds/react" label="Copy install command" compact />
         </div>
       </section>
 

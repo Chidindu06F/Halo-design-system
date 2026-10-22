@@ -169,7 +169,7 @@ function Detail({ entry }: { entry: Entry }) {
         <h2 id="install">Installation</h2>
         <p>Every component comes in one package. Install it once.</p>
         <SegmentedControl aria-label="Package manager" size="sm" value={pm} onValueChange={(v) => setPm(v as Manager)} options={Object.keys(managers).map((m) => ({ value: m, label: m }))} />
-        <CodeBlock code={`${managers[pm]} @halo-ds/react @halo-ds/tokens`} label="Copy command" />
+        <CodeBlock code={`${managers[pm]} @halo-ds/react`} label="Copy command" />
         <p>
           First time? Add the styles once, as shown in <Link to="/installation">Installation</Link>.
         </p>
