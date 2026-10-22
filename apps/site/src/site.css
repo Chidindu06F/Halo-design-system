@@ -299,8 +299,8 @@ main {
 .demo-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  padding: 20px;
+  gap: 12px;
+  padding: 12px;
   border-radius: 28px;
   background: var(--halo-surface-minimal);
 }
@@ -329,13 +329,30 @@ main {
 }
 
 .demo-col {
-  display: grid;
-  gap: 20px;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* The last card in each column grows, so all three columns end on the same line */
+.demo-col > :last-child {
+  flex: 1;
 }
 
 .demo-card {
   height: auto;
+}
+
+/* Card content lines up on the left by default; in the demos everything fills the card */
+.demo-card > [data-part='content'] > * {
+  align-self: stretch;
+}
+
+.demo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .demo-form {
@@ -360,9 +377,12 @@ main {
   gap: 16px;
 }
 
-.demo-calendar {
-  display: flex;
-  justify-content: center;
+.demo-calendar [data-halo='calendar'] {
+  width: 100%;
+}
+
+.demo-calendar [data-halo='calendar'] table {
+  width: 100%;
 }
 
 .demo-people {
@@ -1400,10 +1420,104 @@ main {
 }
 
 .figma-shot {
-  width: 100%;
-  height: auto;
+  position: relative;
   margin-top: 48px;
   border-radius: var(--halo-radius-6);
   outline: 1px solid var(--halo-border-secondary);
   outline-offset: -1px;
+  overflow: hidden;
+}
+
+.figma-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Collaborator cursors, like teammates in the file. Positions are % of the screenshot. */
+.figma-cursor {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;
+  animation: 14s ease-in-out infinite alternate;
+}
+
+.figma-cursor svg {
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));
+}
+
+.figma-cursor-name {
+  margin: 14px 0 0 -2px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--c);
+  color: #fff;
+  font-size: 13px;
+  font-weight: var(--halo-font-weight-semibold);
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.figma-cursor-canvas {
+  left: 38%;
+  top: 30%;
+  animation-name: cursor-canvas;
+}
+
+.figma-cursor-layers {
+  left: 12%;
+  top: 74%;
+  animation-name: cursor-layers;
+  animation-duration: 11s;
+}
+
+.figma-cursor-panel {
+  left: 88%;
+  top: 34%;
+  animation-name: cursor-panel;
+  animation-duration: 9s;
+}
+
+@keyframes cursor-canvas {
+  0% { left: 38%; top: 30%; }
+  25% { left: 52%; top: 26%; }
+  50% { left: 46%; top: 55%; }
+  75% { left: 62%; top: 68%; }
+  100% { left: 41%; top: 82%; }
+}
+
+@keyframes cursor-layers {
+  0% { left: 12%; top: 74%; }
+  40% { left: 16%; top: 80%; }
+  70% { left: 13%; top: 66%; }
+  100% { left: 18%; top: 86%; }
+}
+
+@keyframes cursor-panel {
+  0% { left: 88%; top: 34%; }
+  50% { left: 92%; top: 44%; }
+  100% { left: 89%; top: 24%; }
+}
+
+/* On phones the names would cover the picture, so the cursors shrink */
+@media (max-width: 600px) {
+  .figma-cursor svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .figma-cursor-name {
+    margin-top: 8px;
+    padding: 0 5px;
+    font-size: 10px;
+    line-height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figma-cursor {
+    animation: none;
+  }
 }

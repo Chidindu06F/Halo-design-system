@@ -2,12 +2,15 @@ import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import {
   Avatar,
+  BarChart,
   Badge,
   Button,
   Calendar,
   Card,
   Checkbox,
+  FileItem,
   InputField,
+  RangeSlider,
   SegmentedControl,
   SelectField,
   Statistic,
@@ -15,6 +18,7 @@ import {
   Tab,
   TabList,
   Tabs,
+  Tag,
   useToast,
 } from '@halo-ds/react';
 import { ArrowRight, Code, FigmaLogo, Plugs } from '@phosphor-icons/react';
@@ -155,6 +159,61 @@ function Team() {
   );
 }
 
+function Uploads() {
+  return (
+    <Card className="demo-card">
+      <div className="demo-form">
+        <div>
+          <h3 className="demo-title">Uploads</h3>
+          <p className="demo-sub">Two of three files are done.</p>
+        </div>
+        <FileItem name="Brand guidelines.pdf" size={2_400_000} status="uploading" progress={64} onCancel={() => {}} />
+        <FileItem name="Cover image.png" size={840_000} status="complete" onRemove={() => {}} />
+        <FileItem name="Pitch deck.key" size={12_600_000} status="complete" onRemove={() => {}} />
+      </div>
+    </Card>
+  );
+}
+
+const visits = [
+  { day: 'Mon', visits: 320 },
+  { day: 'Tue', visits: 410 },
+  { day: 'Wed', visits: 380 },
+  { day: 'Thu', visits: 520 },
+  { day: 'Fri', visits: 490 },
+];
+
+function Visits() {
+  return (
+    <Card className="demo-card">
+      <div className="demo-form">
+        <div>
+          <h3 className="demo-title">Visits this week</h3>
+          <p className="demo-sub">2,120 in total, up 14% on last week.</p>
+        </div>
+        <BarChart label="Visits this week" data={visits} xKey="day" series={[{ key: 'visits', label: 'Visits' }]} height={230} />
+      </div>
+    </Card>
+  );
+}
+
+function Filters() {
+  const [tags, setTags] = useState(['Design', 'Remote', 'Full time']);
+  return (
+    <Card className="demo-card">
+      <div className="demo-form">
+        <h3 className="demo-title">Filters</h3>
+        <RangeSlider label="Salary" min={0} max={200} defaultValue={[60, 140]} formatValue={(v) => `$${v}k`} handleLabels={['Lowest salary', 'Highest salary']} />
+        <div className="demo-tags">
+          {tags.map((t) => (
+            <Tag key={t} onRemove={() => setTags(tags.filter((x) => x !== t))}>{t}</Tag>
+          ))}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 function PickDate() {
   const [date, setDate] = useState<Date | null>(new Date());
   return <Calendar value={date} onChange={setDate} />;
@@ -221,16 +280,21 @@ export function Home() {
           </div>
         </div>
         <div className="demo-grid" data-rebrand={brand.light ? '' : undefined} style={brandVars(brand)}>
-          <SignUp />
+          <div className="demo-col">
+            <SignUp />
+            <Uploads />
+          </div>
           <div className="demo-col">
             <Numbers />
             <Settings />
+            <Visits />
           </div>
           <div className="demo-col">
             <Card className="demo-card demo-calendar">
               <PickDate />
             </Card>
             <Team />
+            <Filters />
           </div>
         </div>
       </section>

@@ -1,18 +1,15 @@
 import { useEffect } from 'react';
+import type { CSSProperties } from 'react';
 import { Button } from '@halo-ds/react';
 import {
   ArrowRight,
   ArrowSquareOut,
-  BookOpenText,
   Check,
-  Code,
   Cube,
   Devices,
   FigmaLogo,
   Moon,
-  PuzzlePiece,
   Rows,
-  Shapes,
   X,
 } from '@phosphor-icons/react';
 import { guideFor } from '../guide';
@@ -31,19 +28,22 @@ const stats = [
   { value: '287', label: 'Variables' },
 ];
 
-// Short on purpose: each line stays within three lines on the card
+// Short on purpose: each description stays within three lines on the card
 const features = [
-  { icon: <Rows />, title: 'Auto layout everywhere', text: 'Every component and screen resizes the way the code does.' },
-  { icon: <PuzzlePiece />, title: 'Slots', text: 'Drop your own content into cards, modals and more without detaching.' },
-  { icon: <Shapes />, title: 'Every value is a variable', text: 'Colour, spacing, radius, type and grids. Change the brand once, everything follows.' },
+  { icon: <Rows />, title: 'Auto layout, slots and variables', text: 'Resizes like the code, takes your content without detaching, and every value is a variable.' },
   { icon: <Moon />, title: 'Light and dark', text: 'Switch any frame between modes. Every component works in both.' },
-  { icon: <Code />, title: 'Named like the code', text: 'Variants and properties match the React props, so handoff needs no translation.' },
-  { icon: <BookOpenText />, title: 'Guidance per component', text: "Anatomy, states, when to use it, do's and don'ts and accessibility." },
   { icon: <Devices />, title: 'Seven example apps', text: 'About 200 desktop and mobile screens, from banking to healthcare.' },
   { icon: <Cube />, title: 'Assets included', text: 'Over 1,500 icons, plus illustrations, flags, logos and avatar faces.' },
 ];
 
 const withGuide = all.filter((e) => guideFor(e.slug));
+
+// Each cursor drifts around one part of the screenshot: the canvas, the layers and the properties
+const cursors = [
+  { name: 'Amara', colour: '#1FA971', path: 'canvas' },
+  { name: 'Tunde', colour: '#F2603B', path: 'layers' },
+  { name: 'Lena', colour: '#2F6BFF', path: 'panel' },
+];
 
 function Overview({ entry }: { entry: Entry }) {
   return (
@@ -64,13 +64,25 @@ function Overview({ entry }: { entry: Entry }) {
             </Button>
           </div>
         </div>
-        <img
-          className="figma-shot"
-          src={`${base}figma/figma-ui.webp`}
-          alt="The Figma file open on a banking dashboard built from the components, with a Button selected and its properties in the right panel"
-          width={1920}
-          height={1034}
-        />
+        <div className="figma-shot">
+          <img
+            src={`${base}figma/figma-ui.webp`}
+            alt="The Figma file open on a banking dashboard built from the components, with a Button selected and its properties in the right panel"
+            width={1920}
+            height={1034}
+          />
+          {/* Teammates working in the file: decorative, so hidden from screen readers */}
+          <div aria-hidden="true">
+            {cursors.map((c) => (
+              <span key={c.name} className={`figma-cursor figma-cursor-${c.path}`} style={{ '--c': c.colour } as CSSProperties}>
+                <svg viewBox="0 0 16 16" width="18" height="18">
+                  <path d="M1 1l5.5 13.5 2-5.5 5.5-2z" fill="var(--c)" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+                </svg>
+                <span className="figma-cursor-name">{c.name}</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </header>
 
       <dl className="figma-stats">
